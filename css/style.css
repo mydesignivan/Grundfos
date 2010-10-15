@@ -1,0 +1,356 @@
+/*------------------------------------------------------------------------------
+ - ESTILO GENERAL
+ -----------------------------------------------------------------------------*/
+.trow{
+    float:left;
+    clear: both;
+    width: 100%;
+    margin: 7px 0 7px 0;
+}
+h3.title{
+    color:#90CCDD;
+    margin: 0 0 0 5px;
+}
+h1.title{
+    color:#0081AB;
+    font-size: 180%;
+    width: 525px;
+    background: url({BASE_URL}images/banda-titulos-container.png) no-repeat bottom left;
+    padding-bottom: 10px;
+}
+
+
+/*------------------------------------------------------------------------------
+ - ESTILO PARA MENSAJES DEL VALIDADOR
+ -----------------------------------------------------------------------------*/
+.valid-success{
+    background: transparent url({BASE_URL}img/icon_success.png) no-repeat left !important;
+    width: 16px;
+    height: 16px;
+    padding: 0 0 0 18px !important;
+    color: #264409 !important;
+    border: none !important;
+    font-size: 100% !important;
+    z-index: 100;
+}
+.valid-error{
+    background: #FBE3E4;
+    color: #8a1f11;
+    border: 2px solid #FBC2C4;
+    padding: 5px;
+    margin-left: 5px;
+    font-size: 90%;
+    font-weight: normal;
+    min-width: 180px;
+    max-width: 180px;
+    text-align: left;
+    z-index: 100;
+}
+.valid-highlight{border-style: dashed !important;}
+.valid-unhighlight{border-style: solid !important;}
+
+/*------------------------------------------------------------------------------
+ - ESTILOS PARA LINK
+ -----------------------------------------------------------------------------*/
+a.link-img{
+    color:#A62D38 !important;
+    font-size: 110%;
+}
+    a.link-img img{
+        position: relative;
+        top:3px;
+    }
+    a.link-img:hover{color:#581B23 !important;}
+
+.link-inherit, .link-inherit:link, .link-inherit:visited, .link-inherit:hover{
+    color: inherit;
+}
+/*------------------------------------------------------------------------------
+ - ESTILOS PARA LABEL
+ -----------------------------------------------------------------------------*/
+.label{
+    display: block;
+    float: left;
+    text-align: right;
+    margin-right: 10px;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+/*------------------------------------------------------------------------------
+ - ESTILOS PARA INPUT
+ -----------------------------------------------------------------------------*/
+.input-search{
+    float: left;
+    background: transparent url({BASE_URL}images/bg-input-search.png) no-repeat;
+    width: 131px;
+    height: 21px;
+    margin-right: 5px;
+}
+    .input-search input{
+        width: 120px;
+        border: none;
+        background: transparent;
+        padding: 2px 0 0 5px;
+    }
+
+/*------------------------------------------------------------------------------
+ - ESTILOS PARA TEXTAREA
+ -----------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+ - ESTILOS PARA SELECT
+ -----------------------------------------------------------------------------*/
+select{
+    
+}
+
+
+/*------------------------------------------------------------------------------
+ - ESTILOS PARA BUTTON
+ -----------------------------------------------------------------------------*/
+button{
+    background: transparent url({BASE_URL}images/button-small.png) no-repeat;
+    border: none;
+    width: 82px;
+    height: 36px;
+    color: #fff;
+}
+
+
+/*------------------------------------------------------------------------------
+ - ESTILO QUE ESTAN EN EL "HEADER"
+ -----------------------------------------------------------------------------*/
+.header-bg1{
+    background: url({BASE_URL}images/bg-header1.jpg) no-repeat;
+    width: 1360px;
+    height: 368px;
+    margin: 0 auto;
+    z-index: 0;
+}
+.header{
+    z-index: 100;
+    margin-top: -368px;
+}
+    .header .logo{
+        float: left;
+        display: block;
+        margin-top: 23px;
+    }
+    .header .cont-links{
+        float: right;
+        margin-top: 5px;
+    }
+        .header .cont-links .links{
+            background: url({BASE_URL}images/banda-menu-superior.png) no-repeat bottom center;
+            width: 347px;
+            padding-bottom: 8px;
+            color: #6DC0D5;
+        }
+            .header .cont-links .links a{
+                font-size: 75%;
+                color: #6DC0D5;
+                font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+            }
+            .header .cont-links .links a:hover, .header .cont-links .links a.current{
+                color: #fff;
+            }
+    .header .cont-search{
+        float: right;
+        clear: both;
+        margin: 40px -203px 0 0;
+        padding: 0 211px 8px 0;
+        border-bottom: 1px dashed #fff;
+    }
+
+/* BANNER
+ -----------------------------------------------------------------------------*/
+.banner{
+    position: relative;
+    clear: both;
+    width: 730px;
+    height: 205px;
+    margin: 136px auto 0 0;
+    font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+    /*border: 1px solid red;*/
+}
+
+
+/* MENU
+ -----------------------------------------------------------------------------*/
+.header .menu{
+    float: left;
+    clear: both;
+    background: url({BASE_URL}images/bg-menu.png) no-repeat;
+    width: 1360px;
+    height: 66px;
+    margin: -24px 0 0 -201px;
+}
+    .header .menu ul,.header .menu li{
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+    .header .menu ul.sf-menu{
+        margin: 20px 0 0 344px;
+        position: relative;
+    }
+    .header .menu ul.sf-menu >li{
+        position: relative;
+        display: inline;
+        float: left;
+        margin-right: 2px;
+    }
+        .header .menu ul.sf-menu li a{
+            display: block;
+            color: #fff;
+            font-size: 100%;
+            font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+            padding: 2px 20px 2px 20px;
+            text-align: center;
+        }
+        .header .menu ul.sf-menu >li a{
+            float: left;
+        }
+        .header .menu ul.sf-menu li a:hover, .header .menu ul.sf-menu li >a.current{
+            background-color: #0081AB;
+            visibility: inherit; /* fixes IE7 'sticky bug' */
+        }
+        .header .menu ul.sf-menu >li .line{
+            float: right;
+            background: url({BASE_URL}images/separador-menu.png) no-repeat;
+            width: 1px;
+            height: 33px;
+            margin-right: -2px;
+        }
+        .header .menu ul.sf-menu .sf-sub-indicator {
+            float: right;
+            background:	url({BASE_URL}images/icon-arrowmenu-down.png) no-repeat center;
+            width: 5px;
+            height: 3px;
+            text-indent: -999em;
+            margin: 10px 0 0 5px;
+            overflow: hidden;
+        }
+
+
+    /** Estilos para los submenus
+     *******************************************/
+        .header .menu ul.sf-menu ul{
+            position: absolute;
+            background-color: #0E3753;
+            z-index: 1100;
+            width: 230px;
+            left:0;
+            top:30px;
+        }
+        .header .menu ul.sf-menu ul ul{
+            left:232px;
+            top: 0;
+        }
+            .header .menu ul.sf-menu ul li{
+                position: relative;
+                display: list-item;
+                float: left;
+                width: 230px;
+                border-bottom: 1px dashed #fff;
+                background-color: #0E3753;
+            }
+                .header .menu ul.sf-menu ul li a{
+                    width: 190px;
+                    text-align: left;
+                }
+        .header .menu ul.sf-menu ul .sf-sub-indicator {
+            background:	url({BASE_URL}images/icon-arrowmenu-right.png) no-repeat center;
+        }
+
+
+/*------------------------------------------------------------------------------
+ - ESTILO QUE ESTAN EN EL "MAIN CONTAINER"
+ -----------------------------------------------------------------------------*/
+.main-container{
+    padding-bottom: 40px;
+    /*border: 1px solid red;*/
+}
+    .main-container .contents{
+        font-size: 75% !important;
+        font-family: Verdana, Arial, Helvetica, sans-serif !important;
+    }
+
+
+
+
+/* SIDEBAR
+ -----------------------------------------------------------------------------*/
+    .main-container .column-sidebar{
+    }
+
+/*------------------------------------------------------------------------------
+ - ESTILO QUE ESTAN EN EL "FOOTER"
+ -----------------------------------------------------------------------------*/
+.footer{
+    padding-top: 10px;
+    height: 110px;
+    text-align: center;
+    color: #fff;
+    font-size: 80%;
+    /*border: 1px solid red;*/
+}
+    .footer hr{
+        width: 600px;
+        background: #1E3D5C;
+        margin: 6px auto;
+    }
+
+/*------------------------------------------------------------------------------
+ - ESTILO PARA SEPARADORES
+ -----------------------------------------------------------------h------------*/
+.separator-v1{
+    background: transparent url({BASE_URL}images/separador-thumb.png) no-repeat right bottom;
+    height: 180px;
+}
+
+/*------------------------------------------------------------------------------
+ - ESTILO PARA TABLAS
+ -----------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------
+ - ESTILO PARA TABLA "CONTENT"
+ -----------------------------------------------------------------------------*/
+.table-contents .cell1{
+    width: 750px;
+}
+
+
+/*------------------------------------------------------------------------------
+ - ESTILO PARA LOGIN
+ -----------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+ - ESTILO PARA FORMULARIO "CONTACTO"
+ -----------------------------------------------------------------------------*/
+.form-contact {
+    margin-top: 20px;
+}
+.form-contact label{
+    width: 140px;
+    font-size: 75%;
+}
+.form-contact input{
+    width: 230px;
+}
+.form-contact select{
+    width: 240px;
+}
+.form-contact textarea{
+    width: 220px;
+    height: 80px;
+}
+.form-contact .input-code{
+    width: 70px;
+    text-align: center;
+}
+.form-contact .input-num{
+    width: 150px;
+}
