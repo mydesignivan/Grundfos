@@ -19,7 +19,6 @@ h1.title{
     padding-bottom: 10px;
 }
 
-
 /*------------------------------------------------------------------------------
  - ESTILO PARA MENSAJES DEL VALIDADOR
  -----------------------------------------------------------------------------*/
@@ -34,17 +33,18 @@ h1.title{
     z-index: 100;
 }
 .valid-error{
-    background: #FBE3E4;
-    color: #8a1f11;
-    border: 2px solid #FBC2C4;
-    padding: 5px;
-    margin-left: 5px;
+    background: #C8E6EE;
+    color: #002B45;
+    border: 2px solid #75BBD2;
+    padding: 3px;
+    margin-top: 5px;
     font-size: 90%;
     font-weight: normal;
     min-width: 180px;
     max-width: 180px;
     text-align: left;
     z-index: 100;
+    display: block;
 }
 .valid-highlight{border-style: dashed !important;}
 .valid-unhighlight{border-style: solid !important;}
@@ -56,11 +56,11 @@ a.link-img{
     color:#A62D38 !important;
     font-size: 110%;
 }
-    a.link-img img{
-        position: relative;
-        top:3px;
-    }
-    a.link-img:hover{color:#581B23 !important;}
+a.link-img img{
+    position: relative;
+    top:3px;
+}
+a.link-img:hover{color:#581B23 !important;}
 
 .link-inherit, .link-inherit:link, .link-inherit:visited, .link-inherit:hover{
     color: inherit;
@@ -87,34 +87,31 @@ a.link-img{
     height: 21px;
     margin-right: 5px;
 }
-    .input-search input{
-        width: 120px;
-        border: none;
-        background: transparent;
-        padding: 2px 0 0 5px;
-    }
+.input-search input{
+    width: 120px;
+    border: none;
+    background: transparent;
+    padding: 2px 0 0 5px;
+}
 
 /*------------------------------------------------------------------------------
  - ESTILOS PARA TEXTAREA
  -----------------------------------------------------------------------------*/
+textarea{font-size: inherit;}
 
 /*------------------------------------------------------------------------------
  - ESTILOS PARA SELECT
  -----------------------------------------------------------------------------*/
-select{
-    
-}
 
 
 /*------------------------------------------------------------------------------
  - ESTILOS PARA BUTTON
  -----------------------------------------------------------------------------*/
 button{
-    background: transparent url({BASE_URL}images/button-small.png) no-repeat;
-    border: none;
-    width: 82px;
-    height: 36px;
+    background-color: #0081AB;
     color: #fff;
+    border: 1px solid #57ACC8;
+    padding: 0 10px 0 10px;
 }
 
 
@@ -132,36 +129,36 @@ button{
     z-index: 100;
     margin-top: -368px;
 }
-    .header .logo{
-        float: left;
-        display: block;
-        margin-top: 23px;
-    }
-    .header .cont-links{
-        float: right;
-        margin-top: 5px;
-    }
-        .header .cont-links .links{
-            background: url({BASE_URL}images/banda-menu-superior.png) no-repeat bottom center;
-            width: 347px;
-            padding-bottom: 8px;
-            color: #6DC0D5;
-        }
-            .header .cont-links .links a{
-                font-size: 75%;
-                color: #6DC0D5;
-                font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-            }
-            .header .cont-links .links a:hover, .header .cont-links .links a.current{
-                color: #fff;
-            }
-    .header .cont-search{
-        float: right;
-        clear: both;
-        margin: 40px -203px 0 0;
-        padding: 0 211px 8px 0;
-        border-bottom: 1px dashed #fff;
-    }
+.header .logo{
+    float: left;
+    display: block;
+    margin-top: 23px;
+}
+.header .cont-links{
+    float: right;
+    margin-top: 5px;
+}
+.header .cont-links .links{
+    background: url({BASE_URL}images/banda-menu-superior.png) no-repeat bottom center;
+    width: 347px;
+    padding-bottom: 8px;
+    color: #6DC0D5;
+}
+.header .cont-links .links a{
+    font-size: 75%;
+    color: #6DC0D5;
+    font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+}
+.header .cont-links .links a:hover, .header .cont-links .links a.current{
+    color: #fff;
+}
+.header .cont-search{
+    float: right;
+    clear: both;
+    margin: 40px -203px 0 0;
+    padding: 0 211px 8px 0;
+    border-bottom: 1px dashed #fff;
+}
 
 /* BANNER
  -----------------------------------------------------------------------------*/
@@ -186,83 +183,83 @@ button{
     height: 66px;
     margin: -24px 0 0 -201px;
 }
-    .header .menu ul,.header .menu li{
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
-    }
-    .header .menu ul.sf-menu{
-        margin: 20px 0 0 344px;
-        position: relative;
-    }
-    .header .menu ul.sf-menu >li{
-        position: relative;
-        display: inline;
-        float: left;
-        margin-right: 2px;
-    }
-        .header .menu ul.sf-menu li a{
-            display: block;
-            color: #fff;
-            font-size: 100%;
-            font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-            padding: 2px 20px 2px 20px;
-            text-align: center;
-        }
-        .header .menu ul.sf-menu >li a{
-            float: left;
-        }
-        .header .menu ul.sf-menu li a:hover, .header .menu ul.sf-menu li >a.current{
-            background-color: #0081AB;
-            visibility: inherit; /* fixes IE7 'sticky bug' */
-        }
-        .header .menu ul.sf-menu >li .line{
-            float: right;
-            background: url({BASE_URL}images/separador-menu.png) no-repeat;
-            width: 1px;
-            height: 33px;
-            margin-right: -2px;
-        }
-        .header .menu ul.sf-menu .sf-sub-indicator {
-            float: right;
-            background:	url({BASE_URL}images/icon-arrowmenu-down.png) no-repeat center;
-            width: 5px;
-            height: 3px;
-            text-indent: -999em;
-            margin: 10px 0 0 5px;
-            overflow: hidden;
-        }
+.header .menu ul,.header .menu li{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.header .menu ul.sf-menu{
+    margin: 20px 0 0 344px;
+    position: relative;
+}
+.header .menu ul.sf-menu >li{
+    position: relative;
+    display: inline;
+    float: left;
+    margin-right: 2px;
+}
+.header .menu ul.sf-menu li a{
+    display: block;
+    color: #fff;
+    font-size: 100%;
+    font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+    padding: 2px 20px 2px 20px;
+    text-align: center;
+}
+.header .menu ul.sf-menu >li a{
+    float: left;
+}
+.header .menu ul.sf-menu li a:hover, .header .menu ul.sf-menu li >a.current{
+    background-color: #0081AB;
+    visibility: inherit; /* fixes IE7 'sticky bug' */
+}
+.header .menu ul.sf-menu >li .line{
+    float: right;
+    background: url({BASE_URL}images/separador-menu.png) no-repeat;
+    width: 1px;
+    height: 33px;
+    margin-right: -2px;
+}
+.header .menu ul.sf-menu .sf-sub-indicator {
+    float: right;
+    background:	url({BASE_URL}images/icon-arrowmenu-down.png) no-repeat center;
+    width: 5px;
+    height: 3px;
+    text-indent: -999em;
+    margin: 10px 0 0 5px;
+    overflow: hidden;
+}
 
 
-    /** Estilos para los submenus
-     *******************************************/
-        .header .menu ul.sf-menu ul{
-            position: absolute;
-            background-color: #0E3753;
-            z-index: 1100;
-            width: 230px;
-            left:0;
-            top:30px;
-        }
-        .header .menu ul.sf-menu ul ul{
-            left:232px;
-            top: 0;
-        }
-            .header .menu ul.sf-menu ul li{
-                position: relative;
-                display: list-item;
-                float: left;
-                width: 230px;
-                border-bottom: 1px dashed #fff;
-                background-color: #0E3753;
-            }
-                .header .menu ul.sf-menu ul li a{
-                    width: 190px;
-                    text-align: left;
-                }
-        .header .menu ul.sf-menu ul .sf-sub-indicator {
-            background:	url({BASE_URL}images/icon-arrowmenu-right.png) no-repeat center;
-        }
+/** Estilos para los submenus
+ *******************************************/
+.header .menu ul.sf-menu ul{
+    position: absolute;
+    background-color: #0E3753;
+    z-index: 1100;
+    width: 230px;
+    left:0;
+    top:30px;
+}
+.header .menu ul.sf-menu ul ul{
+    left:232px;
+    top: 0;
+}
+.header .menu ul.sf-menu ul li{
+    position: relative;
+    display: list-item;
+    float: left;
+    width: 230px;
+    border-bottom: 1px dashed #fff;
+    background-color: #0E3753;
+}
+.header .menu ul.sf-menu ul li a{
+    width: 190px;
+    text-align: left;
+}
+.header .menu ul.sf-menu ul .sf-sub-indicator {
+    background:	url({BASE_URL}images/icon-arrowmenu-right.png) no-repeat center;
+}
 
 
 /*------------------------------------------------------------------------------
@@ -272,18 +269,18 @@ button{
     padding-bottom: 40px;
     /*border: 1px solid red;*/
 }
-    .main-container .contents{
-        font-size: 75% !important;
-        font-family: Verdana, Arial, Helvetica, sans-serif !important;
-    }
+.main-container .contents{
+    font-size: 75% !important;
+    font-family: Verdana, Arial, Helvetica, sans-serif !important;
+}
 
 
 
 
 /* SIDEBAR
  -----------------------------------------------------------------------------*/
-    .main-container .column-sidebar{
-    }
+.main-container .column-sidebar{
+}
 
 /*------------------------------------------------------------------------------
  - ESTILO QUE ESTAN EN EL "FOOTER"
@@ -296,11 +293,11 @@ button{
     font-size: 80%;
     /*border: 1px solid red;*/
 }
-    .footer hr{
-        width: 600px;
-        background: #1E3D5C;
-        margin: 6px auto;
-    }
+.footer hr{
+    width: 600px;
+    background: #1E3D5C;
+    margin: 6px auto;
+}
 
 /*------------------------------------------------------------------------------
  - ESTILO PARA SEPARADORES
@@ -308,6 +305,16 @@ button{
 .separator-v1{
     background: transparent url({BASE_URL}images/separador-thumb.png) no-repeat right bottom;
     height: 180px;
+}
+.separator-h1{
+    clear: both;
+    float: left;
+    position: relative;
+    display: block;
+    margin: 10px 0 10px 0;
+    width: 600px;
+    height: 1px;
+    border-bottom: 1px dashed #666;
 }
 
 /*------------------------------------------------------------------------------
@@ -346,6 +353,7 @@ button{
 .form-contact textarea{
     width: 220px;
     height: 80px;
+    font-size: 80%;
 }
 .form-contact .input-code{
     width: 70px;
@@ -354,3 +362,45 @@ button{
 .form-contact .input-num{
     width: 150px;
 }
+
+/*------------------------------------------------------------------------------
+ - ESTILO PARA FORMULARIO "CONTACTO"
+ -----------------------------------------------------------------------------*/
+.form-cv{
+    color:#548DA2;
+    font-size: 80% !important;
+    display: none;
+}
+.form-cv label{
+    width: 100px;
+}
+.form-cv input{
+    width: 295px;
+}
+.form-cv textarea{
+    width: 284px;
+    height: 50px;
+}
+.form-cv .top, .form-cv .middle, .form-cv .bottom{
+    float: left;
+    clear: left;
+    width: 450px;
+}
+.form-cv .top{
+    background: url({BASE_URL}images/form-top.png) no-repeat;
+    height: 12px;
+ }
+.form-cv .bottom{
+    background: url({BASE_URL}images/form-bottom.png) no-repeat;
+    height: 12px;
+}
+.form-cv .middle{
+    background: url({BASE_URL}images/form-middle.png) repeat-y;
+    width: 430px;
+    height: auto;
+    padding: 0 10px 0 10px;
+}
+.form-cv .error{
+    margin-top: 5px;
+}
+

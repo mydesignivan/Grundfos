@@ -4,7 +4,7 @@
 <div class="span-11 fright last">
     <div class="cont-links">
         <div class="links">
-            -&nbsp;<a href="">TRABAJE CON NOSOTROS</a>&nbsp;-&nbsp;<a href="<?=site_url('/contacto/')?>" <?php if( $this->uri->segment(1)=="contacto" ) echo 'class="current"'?>>CONTACTO</a>&nbsp;-&nbsp;<a href="<?=site_url('/donde-estamos/')?>">DONDE ESTAMOS</a>&nbsp;
+            -&nbsp;<a href="javascript:void(CV.open())">TRABAJE CON NOSOTROS</a>&nbsp;-&nbsp;<a href="<?=site_url('/contacto/')?>" <?php if( $this->uri->segment(1)=="contacto" ) echo 'class="current"'?>>CONTACTO</a>&nbsp;-&nbsp;<a href="<?=site_url('/donde-estamos/')?>">DONDE ESTAMOS</a>&nbsp;
         </div>
     </div>
     <div class="cont-search">

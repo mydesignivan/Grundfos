@@ -8,11 +8,11 @@
     <meta name="description" content="<?=META_DESCRIPTION_GLOBAL . @$tlp_meta_description;?>" />
     <meta name="keywords" content="<?=META_KEYWORDS_GLOBAL . @$tlp_meta_keywords;?>" />
     <meta name="robots" content="index,follow" />
-    <link href="img/favicon.ico" rel="stylesheet icon" type="image/ico" />
+    <link href="images/favicon.ico" rel="stylesheet icon" type="image/ico" />
 <?php
     if( isset($tlp_script) && !empty($tlp_script) ) $tlp_script = '/'.implode('/', $tlp_script);
     //INCLUYE LOS SCRIPT CSS
-    echo '<link rel="stylesheet" href="'.site_url('/load/css/initializer'.@$tlp_script).'" type="text/css" media="screen, projection" />'.chr(13);
+    echo '<link rel="stylesheet" href="'.site_url('/load/css/initializer/plugins_simplemodal'.@$tlp_script).'" type="text/css" media="screen, projection" />'.chr(13);
 ?>
     <!--[if lt IE 8]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"/><![endif]-->
     <!--[if IE 6]>
@@ -21,7 +21,7 @@
     <!--[if IE 7]>
     <link href="css/style_ie7.css" rel="stylesheet" type="text/css" />
     <![endif]-->
-    <script type="text/javascript" src="<?=site_url("load/js/initializer")?>"></script>
+    <script type="text/javascript" src="<?=site_url("load/js/initializer/plugins_simplemodal")?>"></script>
 <?php
     //INCLUYE LOS SCRIPT JS
     if( isset($tlp_script) ) echo '<script type="text/javascript" src="'. site_url('load/js'.@$tlp_script).'"></script>'.chr(13);

@@ -38,6 +38,9 @@ class Index extends Controller {
 
     /* AJAX FUNCTIONS
      **************************************************************************/
+    public function ajax_show_formcv(){
+        $this->load->view('frontpage/ajax/cv_view');
+    }
 
 
     /* PRIVATE FUNCTIONS

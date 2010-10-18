@@ -82,7 +82,7 @@ p img.right { float: right; margin: 1.5em 0 1.5em 1.5em; }
 
 a:focus, 
 a:hover     { color: #646567; }
-a           { color: #646567; text-decoration: none; }
+a           { color: #48A5C3; text-decoration: none; }
 
 blockquote  { margin: 1.5em; color: #666; font-style: italic; }
 strong      { font-weight: bold; }
@@ -469,7 +469,7 @@ form.inline p { margin-bottom:0; }
 
 .error,
 .notice, 
-.success    { padding: .8em; margin-bottom: 1em; border: 2px solid #ddd; }
+.success    { padding: 3px; margin-bottom: 1em; border: 2px solid #ddd; font-size:80%;}
 
 .error      { background: #FBE3E4; color: #8a1f11; border-color: #FBC2C4; }
 .notice     { background: #FFF6BF; color: #514721; border-color: #FFD324; }

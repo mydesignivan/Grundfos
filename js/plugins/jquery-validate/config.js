@@ -1,16 +1,5 @@
 // VALORES POR DEFECTO
 var jQueryValidatorOptDef = {
-    errorPlacement: function(error, element) {
-        var a=$('#txtPhoneCode');
-        var left = -190;
-        var top = element.attr('id')=="txtConsult" ? element.offset().top-145 : element.offset().top-160;
-        error.css({
-            position : 'absolute',
-            left : left,
-            top  : top
-        })
-        element.parent().append(error);
-    },
     highlight : function(element){
         $(element).removeClass('valid-unhighlight').addClass('valid-highlight');
     },

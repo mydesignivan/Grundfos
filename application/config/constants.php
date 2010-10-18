@@ -61,16 +61,21 @@ define('ERR_UPLOAD_FILETYPE', 'El tipo de archivo es incompatible.');
 | EMAIL FORM CONTACTO
 |--------------------------------------------------------------------------
 */
-$msg = '<b>Nombre:</b> {name}<br />
-<b>Telefono:</b> {phone}<br />
-<b>E-mail:</b> {email}<br />
-<b>IP:</b> {ip}<br />
-<b>Sistema Operativo:</b> {so}<br />
-<b>Navegador:</b> {browser}<br />
-<b>Consulta:</b><hr color="#000000" />{message}';
-//define('EMAIL_CONTACT_TO', 'info@mydesign.com.ar, basaezj@mydesign.com.ar');
-define('EMAIL_CONTACT_TO', 'ivan@mydesign.com.ar');
-define('EMAIL_CONTACT_SUBJECT', 'MyDesign - Formulario de Contacto');
+$msg = '
+    <b>Compa&ntilde;&iacute;a:</b> {company}<br />
+    <b>Nombre:</b> {name}<br />
+    <b>Direcci&oacute;n:</b> {address}<br />
+    <b>Ciudad:</b> {city}<br />
+    <b>C&oacute;digo Postal:</b> {postcode}<br />fax
+    <b>Pa&iacute;s:</b> {country}<br />
+    <b>Provincia:</b> {state}<br />
+    <b>E-Mail:</b> {email}<br />
+    <b>Telefono:</b> {phone}<br />
+    <b>Fax:</b> {fax}<br />
+    <b>Tema:</b> {theme}
+    <hr color="#666666" />{message}
+';
+define('EMAIL_CONTACT_SUBJECT', 'Formulario de Contacto');
 define('EMAIL_CONTACT_MESSAGE', $msg);
 
 /*
@@ -96,14 +101,14 @@ define('IMAGESIZE_HEIGHT_SIDEBAR', 260);
 | TITULOS DE CADA SECCION
 |--------------------------------------------------------------------------
 */
-define('TITLE_GLOBAL', 'Grundfos - '); // Titulo para todas las secciones
+define('TITLE_GLOBAL', 'Bottino Hnos Subfactory Grundfos'); // Titulo para todas las secciones
 define('TITLE_INDEX', '');
-define('TITLE_EMPRESA', '');
-define('TITLE_PRODUCTOS', '');
-define('TITLE_SERVICIOS', '');
-define('TITLE_TESTIMONIALES', '');
-define('TITLE_CONTACTO', '');
-define('TITLE_DONDESTAMOS', '');
+define('TITLE_EMPRESA', ' - Empresa');
+define('TITLE_PRODUCTOS', ' - Productos');
+define('TITLE_SERVICIOS', ' - Servicios');
+define('TITLE_TESTIMONIALES', ' - Testimoniales');
+define('TITLE_CONTACTO', ' - Contacto');
+define('TITLE_DONDESTAMOS', ' Donde Estamos');
 
 
 
