@@ -511,7 +511,8 @@ table tbody td{
 /*------------------------------------------------------------------------------
  - ESTILO PARA FORMULARIO "SOLICITE CAPACITACION"
  -----------------------------------------------------------------------------*/
-.form-solcap{
+.form-solcap {
+    margin-top: 20px;
     font-size: 140%;
 }
 .form-solcap label{
@@ -528,4 +529,19 @@ table tbody td{
     width: 220px;
     height: 80px;
     font-size: 80%;
+}
+.form-solcap .input-code{
+    width: 70px;
+    text-align: center;
+}
+.form-solcap .input-num{
+    width: 150px;
+}
+
+/*------------------------------------------------------------------------------
+ - ESTILO PARA FORMULARIO "noticias"
+ -----------------------------------------------------------------------------*/
+.noticias .vermas a{
+
+
 }

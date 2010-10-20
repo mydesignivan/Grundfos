@@ -7,6 +7,8 @@ class Index extends Controller {
         parent::Controller();
 
         $this->load->model('contents_model');
+        $this->load->model('lists_model');
+        $this->load->helpers('form');
         $this->_data=array(
             'listMenu'  =>  $this->contents_model->get_menu()
         );
@@ -31,7 +33,9 @@ class Index extends Controller {
             $tlp_script[] = 'plugins_adgallery';
         }
         if( strpos($content['content'], '{solicitecapacitacion}') ){
-            
+            $tlp_script = array_merge($tlp_script, array('plugins_easyslider', 'plugins_validator','plugins_formatnumber', 'class_solcapacitacion'));
+            $cboCountry =  array('listCountry' => $this->lists_model->get_country(array(''=>'Seleccione un pa&iacute;s')));
+            $this->_data = array_merge($this->_data, $cboCountry);
         }
 
         if( count($tlp_script)>0 ) $this->_data['tlp_script'] = $tlp_script;
@@ -72,7 +76,7 @@ class Index extends Controller {
             $message = str_replace('{theme}', $this->input->post('txtTheme'), $message);
             $message = str_replace('{message}', nl2br($this->input->post('txtMessage')), $message);
 
-            //die($message);
+            die($message);
 
             //$datauser = $this->users_model->get_info(array('username'=>'mydesignadmin'));
             $datauser = $this->users_model->get_info(array('username'=>'admin'));

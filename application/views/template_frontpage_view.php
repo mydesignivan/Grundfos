@@ -43,7 +43,7 @@
         <div class="clear span-24 last main-container">
         <?php
             require($tlp_section);
-            if( isset($content['childs']) ) require('includes/sidebar_inc.php');
+            if( isset($content['childs']) ||  $this->uri->segment(2)=="noticias") require('includes/sidebar_inc.php');
         ?>
         </div>
         <div class="clear span-24 last footer"> 

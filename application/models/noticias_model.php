@@ -11,7 +11,7 @@ class noticias_model extends Model {
      **************************************************************************/
     public function get_list_front(){
         $this->db->order_by('order', 'asc');
-        return $this->db->get_where(TBL_TESTIMONIALES)->result_array();
+        return $this->db->get_where(TBL_NOTICIAS)->result_array();
     }
 
     /* PRIVATE FUNCTIONS

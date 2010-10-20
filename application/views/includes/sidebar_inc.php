@@ -1,5 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');?>
 <div class="sidebar">
+    <? if ($this->uri->segment(2)!="noticias"){?>
     <ul class="menu-sidebar">
 <?php
     $segs = $this->uri->segment_array();
@@ -10,6 +11,7 @@
         <li><a href="<?=site_url(implode('/', $segs).'/'.$row['reference'])?>" <?=$class?>><?=$row['title']?></a></li>
     <?php }?>
     </ul>
+    <? }?>
 
 <?php if( isset($content['gallery']) ){
 if( count($content['gallery'])>1 ){?>

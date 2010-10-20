@@ -47,6 +47,7 @@ define('TBL_CONTENTS',                    'contents');
 define('TBL_LIST_COUNTRY',                'list_country');
 define('TBL_LIST_STATES',                 'list_states');
 define('TBL_TESTIMONIALES',               'testimoniales');
+define('TBL_NOTICIAS',                    'noticias');
 define('TBL_GALLERY_CONTENTS',            'gallery_contents');
 
 /*
@@ -128,6 +129,7 @@ define('TITLE_SERVICIOS', ' - Servicios');
 define('TITLE_TESTIMONIALES', ' - Testimoniales');
 define('TITLE_CONTACTO', ' - Contacto');
 define('TITLE_DONDESTAMOS', ' Donde Estamos');
+define('TITLE_NOTICIAS', ' Noticias');
 
 
 
@@ -144,6 +146,7 @@ define('META_KEYWORDS_SERVICIOS', '');
 define('META_KEYWORDS_TESTIMONIALES', '');
 define('META_KEYWORDS_CONTACTO', '');
 define('META_KEYWORDS_DONDESTAMOS', '');
+define('META_KEYWORDS_NOTICIAS', '');
 
 define('META_DESCRIPTION_GLOBAL', '');
 define('META_DESCRIPTION_INDEX', '');
@@ -153,6 +156,7 @@ define('META_DESCRIPTION_SERVICIOS', '');
 define('META_DESCRIPTION_TESTIMONIALES', '');
 define('META_DESCRIPTION_CONTACTO', '');
 define('META_DESCRIPTION_DONDESTAMOS', '');
+define('META_DESCRIPTION_NOTICIAS', '');
 
 /*
 |--------------------------------------------------------------------------
