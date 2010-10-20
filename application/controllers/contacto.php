@@ -9,7 +9,7 @@ class Contacto extends Controller {
         $this->load->model('contents_model');
         $this->load->model('lists_model');
         $this->_data=array(
-            'listMenu'  =>  $this->contents_model->get_menu()
+            'listMenu'    => $this->contents_model->get_menu()
         );
     }
 
@@ -29,8 +29,7 @@ class Contacto extends Controller {
             'tlp_meta_description' => META_DESCRIPTION_CONTACTO,
             'tlp_meta_keywords'    => META_KEYWORDS_CONTACTO,
             'tlp_section'          => 'frontpage/contact_view.php',
-            'tlp_script'           => array('plugins_validator', 'plugins_formatnumber', 'class_account'),
-            'content'              => $this->contents_model->get_content($ref),
+            'tlp_script'           => array('plugins_easyslider', 'plugins_validator','plugins_formatnumber', 'class_account'),
             'listCountry'          => $this->lists_model->get_country(array(''=>'Seleccione un pa&iacute;s'))
         ));
         $this->load->view('template_frontpage_view', $data);

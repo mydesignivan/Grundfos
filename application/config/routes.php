@@ -44,7 +44,15 @@ $route['default_controller'] = "index";
 $route['scaffolding_trigger'] = "";
 $route['home'] = "index";
 $route['servicios'] = "index/index/servicios";
-$route['testimoniales'] = "index/index/testimoniales";
+$route['donde-estamos'] = "index/index/donde-estamos";
+
+$route['empresa/:any'] = "index/index/$1";
+$route['empresa/noticias'] = "noticias";
+$route['empresa/noticias/:any'] = "noticias/$1";
+
+//$route['(load|testimoniales|contacto)'] = "index/index/$1";
+
+
 
 
 /* End of file routes.php */

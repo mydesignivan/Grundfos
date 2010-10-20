@@ -1,7 +1,8 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');?>
 
 <div class="contents">
-<?=$content?>
+    <h1 class="title">Contacto</h1>
+    <p>Para cualquier pregunta urgente o espec&iacute;fica de productos, por favor contacte con la oficina de <b>Bottino Hermanos Subfactory Grundfos</b></p>
 </div>
 
 <?php if( $this->session->flashdata('status_sendmail')=="ok" ){?>

@@ -1,5 +1,21 @@
 $(function(){
-    
+    var slider = $("#slider");
+    if( slider.length>0 ){
+        slider.easySlider({
+            prevText : '<img src="images/icon-arrow-left.png" alt="Prev" width="35" height="53" />',
+            nextText : '<img src="images/icon-arrow-right.png" alt="Next" width="35" height="53" />'
+        });   
+    }
+    var gallery = $('#gallery');
+    if( gallery.length>0 ){
+        gallery.adGallery({
+            width : 300,
+            display_next_and_prev : false,
+            loader_image: 'images/loader.gif',
+            effect : 'fade'
+        });
+    }
+
 });
 
 var CV = {
@@ -23,6 +39,7 @@ var CV = {
                 dialog.container.animate({height : dialog.data.height()+'px'}, 500);
                 $('#btnCancel').click(function(){$.modal.close();});
                 dialog.data.find('form').bind('submit', CV._on_submit);
+                $('#iframeUpload').bind('load', CV._on_load);
             });
 	});
     },
@@ -52,14 +69,38 @@ var CV = {
                 }
             }
         });
+        CV._show_message(status,msg.substr(0, msg.length-6));
+        if( status ) $('#iframeUpload').attr('src', '');
+        return status;
+    },
+    _on_load : function(){
+        if( this.src=="about:blank" ) return false;
+
+        var content = this.contentDocument || this.contentWindow.document;
+            content = content.body.innerHTML;
+
+        switch(content){
+            case "notupload": CV._show_message(false, 'El archivo no puede superar los 2Mb.'); break;
+            case "send": CV._show_message2('<img src="images/icon-success.png" alt="" width="32" height="32" /> El email ha sido enviado con &eacute;xito.'); break;
+            case "notsend": CV._show_message2('<img src="images/icon-error.png" alt="" width="32" height="32" /> El email no ha podido ser enviado.'); break;
+            default: alert("ERROR AJAX:\n\n"+content);
+        }
+        return false;
+    },
+
+    _show_message : function(status, msg){
         var conterror = $('#simplemodal-data').find('.error');
         if( !status ){
-            conterror.html(msg.substr(0, msg.length-6)).show();
+            conterror.html(msg).show();
             $('#simplemodal-container').css('height', $('#simplemodal-data').height()+"px");
         }else conterror.hide();
+    },
 
-
-
-        return false;
+    _show_message2 : function(msg){
+        $('#simplemodal-data .middle').html('<div class="msg-request">'+msg+'</div>');
+        $('#simplemodal-container').css('top', '50%').animate({
+            height : $('#simplemodal-data').height()
+        }, 500);
+        setTimeout(function(){$.modal.close();}, 3000);
     }
 }

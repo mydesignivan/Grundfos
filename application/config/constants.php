@@ -44,8 +44,10 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',	'x+b');
 */
 define('TBL_USERS',                       'users');
 define('TBL_CONTENTS',                    'contents');
-define('TBL_LIST_COUNTRY',                 'list_country');
+define('TBL_LIST_COUNTRY',                'list_country');
 define('TBL_LIST_STATES',                 'list_states');
+define('TBL_TESTIMONIALES',               'testimoniales');
+define('TBL_GALLERY_CONTENTS',            'gallery_contents');
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +82,21 @@ define('EMAIL_CONTACT_MESSAGE', $msg);
 
 /*
 |--------------------------------------------------------------------------
+| EMAIL FORM CV
+|--------------------------------------------------------------------------
+*/
+$msg = '
+    <b>Nombre:</b> {name}<br />
+    <b>E-Mail:</b> {email}<br />
+    <b>Comentario:</b> {email}<br />
+    {comment}
+';
+define('EMAIL_CV_SUBJECT', 'Grundfos - Curriculum Vitae');
+define('EMAIL_CV_TO', 'iwmattoni@gmail.com');
+define('EMAIL_CV_MESSAGE', $msg);
+
+/*
+|--------------------------------------------------------------------------
 | UPLOAD FILE
 |--------------------------------------------------------------------------
 */
@@ -87,7 +104,9 @@ define('UPLOAD_FILETYPE', 'gif|jpg|png');
 define('UPLOAD_MAXSIZE', 2048); //Expresado en Kylobytes
 
 define('UPLOAD_PATH_PRODUCTS', './uploads/thumbs/');
-define('UPLOAD_PATH_SIDEBAR', './uploads/gallery/');
+define('UPLOAD_PATH_SIDEBAR', './uploads/sidebar/');
+define('UPLOAD_PATH_CV', './uploads/cv/');
+
 define('IMAGESIZE_WIDTH_THUMB_PRODUCTS', 320);
 define('IMAGESIZE_HEIGHT_THUMB_PRODUCTS', 260);
 define('IMAGESIZE_WIDTH_FULL_PRODUCTS', 320);

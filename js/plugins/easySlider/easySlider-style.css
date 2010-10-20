@@ -1,0 +1,29 @@
+#slider ul, #slider li{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+#slider, #slider li{
+    width:675px;
+    height:195px;
+    overflow:hidden;
+    background-color: transparent;
+}
+span#prevBtn, span#nextBtn{
+    position: absolute;
+    width: 35px;
+    height: 53px;
+    top: 35%;
+    z-index: 1000;
+}
+span#prevBtn a, span#nextBtn a{
+    display: block;
+    width: 35px;
+    height: 53px;
+}
+span#prevBtn{
+    left: 0;
+}
+span#nextBtn{
+    left: 647px;
+}

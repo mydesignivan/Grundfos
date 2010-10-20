@@ -10,6 +10,8 @@
     <meta name="robots" content="index,follow" />
     <link href="images/favicon.ico" rel="stylesheet icon" type="image/ico" />
 <?php
+    $class_num_header = isset($tlp_script) && in_array('plugins_easyslider', $tlp_script) ? 1 : 2;
+    
     if( isset($tlp_script) && !empty($tlp_script) ) $tlp_script = '/'.implode('/', $tlp_script);
     //INCLUYE LOS SCRIPT CSS
     echo '<link rel="stylesheet" href="'.site_url('/load/css/initializer/plugins_simplemodal'.@$tlp_script).'" type="text/css" media="screen, projection" />'.chr(13);
@@ -33,13 +35,16 @@
     <![endif]-->
 </head>
 <body>
-    <div class="header-bg1"></div>
+    <div class="header-bg<?=$class_num_header?>"></div>
     <div class="container">
-        <div class="span-24 last header"> 
+        <div class="span-24 last header<?=$class_num_header?>"> 
         <?php require('includes/header_inc.php')?>
         </div>
-        <div class="clear span-24 last main-container"> 
-        <?php require($tlp_section)?>
+        <div class="clear span-24 last main-container">
+        <?php
+            require($tlp_section);
+            if( isset($content['childs']) ) require('includes/sidebar_inc.php');
+        ?>
         </div>
         <div class="clear span-24 last footer"> 
         <?php require('includes/footer_inc.php')?>

@@ -18,6 +18,17 @@ h1.title{
     background: url({BASE_URL}images/banda-titulos-container.png) no-repeat bottom left;
     padding-bottom: 10px;
 }
+h1.title2{
+    color:#074B87;
+    font-size: 170%;
+    width: 584px;
+    background: url({BASE_URL}images/banda-slider.png) no-repeat bottom left;
+    padding: 0 0 23px 45px;
+    margin: 30px 0 0 20px;
+}
+
+.color1{color: #48A5C3 !important}
+.italic{font-style: italic !important}
 
 /*------------------------------------------------------------------------------
  - ESTILO PARA MENSAJES DEL VALIDADOR
@@ -113,7 +124,13 @@ button{
     border: 1px solid #57ACC8;
     padding: 0 10px 0 10px;
 }
-
+button.button-vermas{
+    background: transparent url({BASE_URL}images/button-small.png) no-repeat;
+    width: 82px;
+    height: 36px;
+    border: none;
+    font-size: 80%;
+}
 
 /*------------------------------------------------------------------------------
  - ESTILO QUE ESTAN EN EL "HEADER"
@@ -125,34 +142,48 @@ button{
     margin: 0 auto;
     z-index: 0;
 }
-.header{
-    z-index: 100;
-    margin-top: -368px;
+.header-bg2{
+    background: url({BASE_URL}images/bg-header2.jpg) no-repeat;
+    width: 1360px;
+    height: 157px;
+    margin: 0 auto;
+    z-index: 0;
 }
-.header .logo{
+.header1, .header2{
+    z-index: 100;
+}
+.header1{margin-top: -368px;}
+.header2{margin-top: -141px;}
+.header1 .logo, .header2 .logo{
     float: left;
     display: block;
-    margin-top: 23px;
 }
-.header .cont-links{
+.header1 .logo{margin-top: 23px;}
+.header2 .logo{margin-top: 0;}
+.header1 .cont-links, .header2 .cont-links{
     float: right;
+}
+.header1 .cont-links{
     margin-top: 5px;
 }
-.header .cont-links .links{
+.header2 .cont-links{
+    margin-top: -11px;
+}
+.header1 .cont-links .links, .header2 .cont-links .links{
     background: url({BASE_URL}images/banda-menu-superior.png) no-repeat bottom center;
     width: 347px;
     padding-bottom: 8px;
     color: #6DC0D5;
 }
-.header .cont-links .links a{
+.header1 .cont-links .links a, .header2 .cont-links .links a{
     font-size: 75%;
     color: #6DC0D5;
     font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
 }
-.header .cont-links .links a:hover, .header .cont-links .links a.current{
+.header1 .cont-links .links a:hover, .header2 .cont-links .links a.current{
     color: #fff;
 }
-.header .cont-search{
+.header1 .cont-search, .header2 .cont-search{
     float: right;
     clear: both;
     margin: 40px -203px 0 0;
@@ -165,40 +196,63 @@ button{
 .banner{
     position: relative;
     clear: both;
-    width: 730px;
-    height: 205px;
-    margin: 136px auto 0 0;
+    width: 675px;
+    height: 195px;
+    margin: 136px auto 0 auto;
     font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
     /*border: 1px solid red;*/
 }
+    .banner p.text{
+        float: left;
+        font-size: 90%;
+        color: #fff;
+        width: 350px;
+        margin-left: 65px;
+    }
+    .banner img.image{
+        float: right;
+        margin: -79px 21px;
+        /*border: 1px solid red;*/
+    }
+    .banner .button-vermas{
+        clear: both;
+        display: block;
+        margin:0 auto;
+    }
 
 
 /* MENU
  -----------------------------------------------------------------------------*/
-.header .menu{
+.menu{
     float: left;
     clear: both;
     background: url({BASE_URL}images/bg-menu.png) no-repeat;
     width: 1360px;
     height: 66px;
-    margin: -24px 0 0 -201px;
 }
-.header .menu ul,.header .menu li{
+.header1 .menu{
+    margin: -14px 0 20px -201px;
+}
+.header2 .menu{
+    margin: 9px 0 20px -201px;
+}
+
+.menu ul, .menu li{
     margin: 0;
     padding: 0;
     list-style-type: none;
 }
-.header .menu ul.sf-menu{
+.menu ul.sf-menu{
     margin: 20px 0 0 344px;
     position: relative;
 }
-.header .menu ul.sf-menu >li{
+.menu ul.sf-menu >li{
     position: relative;
     display: inline;
     float: left;
     margin-right: 2px;
 }
-.header .menu ul.sf-menu li a{
+.menu ul.sf-menu li a{
     display: block;
     color: #fff;
     font-size: 100%;
@@ -206,21 +260,21 @@ button{
     padding: 2px 20px 2px 20px;
     text-align: center;
 }
-.header .menu ul.sf-menu >li a{
+.menu ul.sf-menu >li a{
     float: left;
 }
-.header .menu ul.sf-menu li a:hover, .header .menu ul.sf-menu li >a.current{
+.menu ul.sf-menu li a:hover, .menu ul.sf-menu li >a.current{
     background-color: #0081AB;
     visibility: inherit; /* fixes IE7 'sticky bug' */
 }
-.header .menu ul.sf-menu >li .line{
+.menu ul.sf-menu >li .line{
     float: right;
     background: url({BASE_URL}images/separador-menu.png) no-repeat;
     width: 1px;
     height: 33px;
     margin-right: -2px;
 }
-.header .menu ul.sf-menu .sf-sub-indicator {
+.menu ul.sf-menu .sf-sub-indicator {
     float: right;
     background:	url({BASE_URL}images/icon-arrowmenu-down.png) no-repeat center;
     width: 5px;
@@ -233,7 +287,7 @@ button{
 
 /** Estilos para los submenus
  *******************************************/
-.header .menu ul.sf-menu ul{
+.menu ul.sf-menu ul{
     position: absolute;
     background-color: #0E3753;
     z-index: 1100;
@@ -241,11 +295,11 @@ button{
     left:0;
     top:30px;
 }
-.header .menu ul.sf-menu ul ul{
+.menu ul.sf-menu ul ul{
     left:232px;
     top: 0;
 }
-.header .menu ul.sf-menu ul li{
+.menu ul.sf-menu ul li{
     position: relative;
     display: list-item;
     float: left;
@@ -253,11 +307,11 @@ button{
     border-bottom: 1px dashed #fff;
     background-color: #0E3753;
 }
-.header .menu ul.sf-menu ul li a{
+.menu ul.sf-menu ul li a{
     width: 190px;
     text-align: left;
 }
-.header .menu ul.sf-menu ul .sf-sub-indicator {
+.menu ul.sf-menu ul .sf-sub-indicator {
     background:	url({BASE_URL}images/icon-arrowmenu-right.png) no-repeat center;
 }
 
@@ -273,14 +327,39 @@ button{
     font-size: 75% !important;
     font-family: Verdana, Arial, Helvetica, sans-serif !important;
 }
-
-
-
+.main-container .contents-width{
+    float: left;
+    width: 638px;
+}
 
 /* SIDEBAR
  -----------------------------------------------------------------------------*/
-.main-container .column-sidebar{
+.main-container .sidebar{
+    float: right;
+    width: 300px;
+    padding-top: 30px;
 }
+    .main-container .sidebar ul.menu-sidebar, .main-container .sidebar ul.menu-sidebar li{
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+        .main-container .sidebar ul.menu-sidebar{
+            margin-bottom: 20px;
+        }
+        .main-container .sidebar ul.menu-sidebar li{
+            display: list-item;
+            margin-bottom: 2px;
+            border-bottom: 1px dashed #42B4CC;
+        }
+            .main-container .sidebar ul.menu-sidebar li a{
+                font-size: 80%;
+                color: #2A96B9;
+            }
+            .main-container .sidebar ul.menu-sidebar li a.current,
+            .main-container .sidebar ul.menu-sidebar li a:hover{
+                color: #3B5C72 !important;
+            }
 
 /*------------------------------------------------------------------------------
  - ESTILO QUE ESTAN EN EL "FOOTER"
@@ -306,21 +385,38 @@ button{
     background: transparent url({BASE_URL}images/separador-thumb.png) no-repeat right bottom;
     height: 180px;
 }
-.separator-h1{
+.separator-h1, .separator-h2{
     clear: both;
     float: left;
     position: relative;
     display: block;
-    margin: 10px 0 10px 0;
-    width: 600px;
+    width: 100%;
     height: 1px;
     border-bottom: 1px dashed #666;
+}
+.separator-h1{
+    margin: 50px 0 10px 0;
+    width: 650px;
+}
+.separator-h2{
+    margin: 10px 0 10px 0;
 }
 
 /*------------------------------------------------------------------------------
  - ESTILO PARA TABLAS
  -----------------------------------------------------------------------------*/
+table{
+    background-color: #C8E6EE;
+    color:#30556E;
+}
+table thead{
+    background-color: #42B4CC;
+    color: #fff;
 
+}
+table tbody td{
+    border: 1px solid #8CCDE0;
+}
 
 /*------------------------------------------------------------------------------
  - ESTILO PARA TABLA "CONTENT"
@@ -403,4 +499,33 @@ button{
 .form-cv .error{
     margin-top: 5px;
 }
+.form-cv .msg-request{
+    font-size: 110%;
+    text-align: center;
+}
+.form-cv .msg-request img{
+    position: relative;
+    top:5px;
+}
 
+/*------------------------------------------------------------------------------
+ - ESTILO PARA FORMULARIO "SOLICITE CAPACITACION"
+ -----------------------------------------------------------------------------*/
+.form-solcap{
+    font-size: 140%;
+}
+.form-solcap label{
+    width: 140px;
+    font-size: 75%;
+}
+.form-solcap input{
+    width: 230px;
+}
+.form-solcap select{
+    width: 240px;
+}
+.form-solcap textarea{
+    width: 220px;
+    height: 80px;
+    font-size: 80%;
+}
