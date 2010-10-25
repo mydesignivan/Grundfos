@@ -21,7 +21,7 @@
     <link href="css/style_ie6.css" rel="stylesheet" type="text/css" />
     <![endif]-->
     <!--[if IE 7]>
-    <link href="css/style_ie7.css" rel="stylesheet" type="text/css" />
+    <link href="css/styleIE7.css" rel="stylesheet" type="text/css" />
     <![endif]-->
     <script type="text/javascript" src="<?=site_url("load/js/initializer/plugins_simplemodal")?>"></script>
 <?php
@@ -43,7 +43,8 @@
         <div class="clear span-24 last main-container">
         <?php
             require($tlp_section);
-            if( isset($content['childs']) ||  $this->uri->segment(2)=="noticias") require('includes/sidebar_inc.php');
+            if( isset($content['childs']) || isset($content['gallery']) ) require('includes/sidebar_inc.php');
+            if( $this->uri->segment(1)=="productos" && isset($info['childs']) ) require('includes/sidebar_products_inc.php');
         ?>
         </div>
         <div class="clear span-24 last footer"> 

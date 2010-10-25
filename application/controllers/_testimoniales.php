@@ -25,7 +25,6 @@ class Testimoniales extends Controller {
 
         $data = array_merge($this->_data, array(
             'tlp_title'            => TITLE_TESTIMONIALES,
-            'tlp_title_section'    => 'Testimoniales',
             'tlp_meta_description' => META_DESCRIPTION_TESTIMONIALES,
             'tlp_meta_keywords'    => META_KEYWORDS_TESTIMONIALES,
             'tlp_section'          => 'frontpage/testimoniales_view.php',

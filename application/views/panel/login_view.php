@@ -1,7 +1,8 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');?>
 <div class="contlogin">
-    <div class="form">
-        <form action="<?=site_url('/jpanel/index/login/')?>" method="post" enctype="application/x-www-form-urlencoded">
+    <fieldset>
+        <legend>Acceder al Sistema</legend>
+        <form action="<?=site_url('/panel/index/login/')?>" method="post" enctype="application/x-www-form-urlencoded">
             <div class="trow">
                 <label for="txtUser" class="label">Usuario</label>
                 <input type="text" name="txtUser" id="txtUser" />
@@ -15,5 +16,5 @@
             <div class="clear error align-center"><?=$this->session->flashdata('message_login')?></div>
             <?php }?>
         </form>
-    </div>
+    </fieldset>
 </div>

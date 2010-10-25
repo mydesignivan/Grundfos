@@ -47,8 +47,11 @@ $route['servicios'] = "index/index/servicios";
 $route['donde-estamos'] = "index/index/donde-estamos";
 
 $route['empresa/:any'] = "index/index/$1";
-$route['empresa/noticias'] = "noticias";
-$route['empresa/noticias/:any'] = "noticias/$1";
+$route['testimoniales'] = "index/index/testimoniales";
+
+$route['productos/leermas/:any'] = "productos/leermas/$1";
+$route['productos/search'] = "productos/search";
+$route['productos/:any'] = "productos/index/$1";
 
 //$route['(load|testimoniales|contacto)'] = "index/index/$1";
 

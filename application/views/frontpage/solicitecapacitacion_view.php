@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="trow">
-            <label class="label" for="txtTema">Tema</label>
+            <label class="label" for="txtTheme">Tema</label>
             <div class="fleft"><input type="text" name="txtTheme" id="txtTheme" /></div>
         </div>
         <div class="trow">
@@ -59,5 +59,6 @@
         </div>
 
     <div class="trow align-center"><button type="submit">Enviar</button></div>
+    <input type="hidden" name="redirect" value="<?=$this->uri->uri_string()?>" />
 </form>
 

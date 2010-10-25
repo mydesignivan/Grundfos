@@ -42,7 +42,6 @@ class Index extends Controller {
 
         $data = array_merge($this->_data, array(
             'tlp_title'            => $params['title'],
-            'tlp_title_section'    => $params['title_section'],
             'tlp_meta_description' => $params['meta_description'],
             'tlp_meta_keywords'    => $params['meta_keywords'],
             'tlp_section'          => 'frontpage/contents_view.php',
@@ -62,7 +61,7 @@ class Index extends Controller {
             $fax = $this->input->post('txtFaxNum');
             if( $this->input->post('txtFaxCode')!='' ) $fax = $this->input->post('txtFaxCode')." - ".$fax;
 
-            $message = EMAIL_CONTACT_MESSAGE;
+            $message = EMAIL_SOLCAP_MESSAGE;
             $message = str_replace('{company}', $this->input->post('txtCompany'), $message);
             $message = str_replace('{name}', $this->input->post('txtName'), $message);
             $message = str_replace('{address}', $this->input->post('txtAddress'), $message);
@@ -76,7 +75,7 @@ class Index extends Controller {
             $message = str_replace('{theme}', $this->input->post('txtTheme'), $message);
             $message = str_replace('{message}', nl2br($this->input->post('txtMessage')), $message);
 
-            die($message);
+            //die($message);
 
             //$datauser = $this->users_model->get_info(array('username'=>'mydesignadmin'));
             $datauser = $this->users_model->get_info(array('username'=>'admin'));
@@ -84,12 +83,12 @@ class Index extends Controller {
 
             $this->email->from($this->input->post('txtEmail'), $this->input->post('txtName'));
             $this->email->to($to);
-            $this->email->subject(EMAIL_CONTACT_SUBJECT);
+            $this->email->subject(EMAIL_SOLCAP_SUBJECT);
             $this->email->message($message);
             $status = $this->email->send();
             $this->session->set_flashdata('status_sendmail', $status ? "ok" : "error");
 
-            redirect('/contacto/');
+            redirect($this->input->post('redirect'));
         }
     }
 
@@ -131,13 +130,36 @@ class Index extends Controller {
      **************************************************************************/
     private function _get_params($ref){
          switch($ref){
-             case 'empresa': default:
+             default:
                  return array(
-                     'reference'        => "home",
-                     'title_section'    => '',
                      'title'            => TITLE_INDEX,
                      'meta_description' => META_DESCRIPTION_INDEX,
-                     'meta_keywords'    => META_KEYWORDS_INDEX
+                     'meta_keywords'    => META_KEYWORDS_INDEX,
+                     'reference'        => 'home'
+                 );
+             break;
+             case 'empresa':
+                 return array(
+                     'title'            => TITLE_EMPRESA,
+                     'meta_description' => META_DESCRIPTION_EMPRESA,
+                     'meta_keywords'    => META_KEYWORDS_EMPRESA,
+                     'reference'        => 'empresa'
+                 );
+             break;
+             case 'servicios':
+                 return array(
+                     'title'            => TITLE_SERVICIOS,
+                     'meta_description' => META_DESCRIPTION_SERVICIOS,
+                     'meta_keywords'    => META_KEYWORDS_SERVICIOS,
+                     'reference'        => 'servicios'
+                 );
+             break;
+             case 'donde-estamos':
+                 return array(
+                     'title'            => TITLE_DONDESTAMOS,
+                     'meta_description' => META_DESCRIPTION_DONDESTAMOS,
+                     'meta_keywords'    => META_KEYWORDS_DONDESTAMOS,
+                     'reference'        => 'Donde estamos'
                  );
              break;
          }

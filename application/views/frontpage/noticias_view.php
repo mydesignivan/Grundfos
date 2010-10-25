@@ -13,7 +13,7 @@
             <?=$row['cuerpo']?>
         </p>
         <div class="prepend-top">
-            <p align="right"><a class="italic" href=""><b>Leer m&aacute;s</b></a></p>
+            <p align="right"><a class="italic" href=""><b>Leer m&aacute;s</b></a>&nbsp;&nbsp;&nbsp;</p>
         </div>
         <div class="separator-h2"></div>
     <? }?>

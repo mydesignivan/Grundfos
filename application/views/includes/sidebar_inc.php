@@ -1,17 +1,19 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');?>
 <div class="sidebar">
-    <? if ($this->uri->segment(2)!="noticias"){?>
+<?php if( isset($content['childs']) ) {?>
     <ul class="menu-sidebar">
 <?php
     $segs = $this->uri->segment_array();
     $lastSeg = $segs[count($segs)];
+    if( $content['lastchild'] ) array_pop($segs);
+    $baseurl = implode('/', $segs);
     foreach( $content['childs'] as $row ){
         $class = $row['reference']==$lastSeg ? 'class="current"' : '';
 ?>
-        <li><a href="<?=site_url(implode('/', $segs).'/'.$row['reference'])?>" <?=$class?>><?=$row['title']?></a></li>
+        <li><a href="<?=site_url($baseurl.'/'.$row['reference'])?>" <?=$class?>><?=$row['title']?></a></li>
     <?php }?>
     </ul>
-    <? }?>
+<?php }?>
 
 <?php if( isset($content['gallery']) ){
 if( count($content['gallery'])>1 ){?>
@@ -24,7 +26,7 @@ if( count($content['gallery'])>1 ){?>
             <?php
             $n=-1;
             foreach( $content['gallery'] as $row ){$n++;?>
-                    <li><a href="<?=UPLOAD_PATH_SIDEBAR.$row['image']?>"><img src="<?=UPLOAD_PATH_SIDEBAR.$row['thumb']?>" alt="<?=$row['thumb']?>" width="<?=$row['width']?>" height="<?=$row['height']?>" class="image<?=$n?>" /></a></li>
+                    <li><a href="<?=UPLOAD_PATH_SIDEBAR.$row['image']?>"><img src="<?=UPLOAD_PATH_SIDEBAR.$row['thumb']?>" alt="<?=$row['thumb']?>" class="image<?=$n?>" /></a></li>
             <?php }?>
                 </ul>
             </div>
@@ -34,7 +36,7 @@ if( count($content['gallery'])>1 ){?>
 <?php }else{
     $row = $content['gallery'][0];
 ?>
-    <img src="<?=UPLOAD_PATH_SIDEBAR.$row['image']?>" alt="<?=$row['image']?>" width="300" height="213" />
+    <img src="<?=UPLOAD_PATH_SIDEBAR.$row['image']?>" alt="<?=$row['image']?>" width="<?=$row['width']?>" height="<?=$row['height']?>" />
 <?php }
 }?>
 

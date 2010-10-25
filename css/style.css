@@ -8,7 +8,7 @@
     margin: 7px 0 7px 0;
 }
 h3.title{
-    color:#90CCDD;
+    color:#2C99C2;
     margin: 0 0 0 5px;
 }
 h1.title{
@@ -26,9 +26,21 @@ h1.title2{
     padding: 0 0 23px 45px;
     margin: 30px 0 0 20px;
 }
+h1.title3{
+    color:#007FA5;
+    font-size: 170%;
+    width: 412px;
+    background: url({BASE_URL}images/banda-trabaje-con-nosotros.png) no-repeat bottom left;
+    padding-bottom: 8px;
+    margin: 10px 0 10px 0;
+}
 
 .color1{color: #48A5C3 !important}
 .italic{font-style: italic !important}
+.framethumb{
+    padding: 2px;
+    border: 2px solid #5A5A5C;
+}
 
 /*------------------------------------------------------------------------------
  - ESTILO PARA MENSAJES DEL VALIDADOR
@@ -124,13 +136,18 @@ button{
     border: 1px solid #57ACC8;
     padding: 0 10px 0 10px;
 }
-button.button-vermas{
+.button-vermas{
+    display: block;
     background: transparent url({BASE_URL}images/button-small.png) no-repeat;
     width: 82px;
-    height: 36px;
+    height: 29px;
+    padding-top: 7px;
     border: none;
     font-size: 80%;
+    color: #fff;
+    text-align: center;
 }
+.button-vermas:hover, .button-vermas:link{color: #fff;}
 
 /*------------------------------------------------------------------------------
  - ESTILO QUE ESTAN EN EL "HEADER"
@@ -171,7 +188,7 @@ button.button-vermas{
 }
 .header1 .cont-links .links, .header2 .cont-links .links{
     background: url({BASE_URL}images/banda-menu-superior.png) no-repeat bottom center;
-    width: 347px;
+    width: 351px;
     padding-bottom: 8px;
     color: #6DC0D5;
 }
@@ -180,7 +197,8 @@ button.button-vermas{
     color: #6DC0D5;
     font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
 }
-.header1 .cont-links .links a:hover, .header2 .cont-links .links a.current{
+.header1 .cont-links .links a:hover, .header2 .cont-links .links a:hover,
+.header1 .cont-links .links a.current, .header2 .cont-links .links a.current{
     color: #fff;
 }
 .header1 .cont-search, .header2 .cont-search{
@@ -231,7 +249,7 @@ button.button-vermas{
     height: 66px;
 }
 .header1 .menu{
-    margin: -14px 0 20px -201px;
+    margin: -16px 0 20px -205px;
 }
 .header2 .menu{
     margin: 9px 0 20px -201px;
@@ -243,7 +261,7 @@ button.button-vermas{
     list-style-type: none;
 }
 .menu ul.sf-menu{
-    margin: 20px 0 0 344px;
+    margin: 20px 0 0 400px;
     position: relative;
 }
 .menu ul.sf-menu >li{
@@ -268,18 +286,16 @@ button.button-vermas{
     visibility: inherit; /* fixes IE7 'sticky bug' */
 }
 .menu ul.sf-menu >li .line{
-    float: right;
     background: url({BASE_URL}images/separador-menu.png) no-repeat;
     width: 1px;
     height: 33px;
     margin-right: -2px;
 }
 .menu ul.sf-menu .sf-sub-indicator {
-    float: right;
+    /*float: right;*/
     background:	url({BASE_URL}images/icon-arrowmenu-down.png) no-repeat center;
     width: 5px;
     height: 3px;
-    text-indent: -999em;
     margin: 10px 0 0 5px;
     overflow: hidden;
 }
@@ -425,11 +441,6 @@ table tbody td{
     width: 750px;
 }
 
-
-/*------------------------------------------------------------------------------
- - ESTILO PARA LOGIN
- -----------------------------------------------------------------------------*/
-
 /*------------------------------------------------------------------------------
  - ESTILO PARA FORMULARIO "CONTACTO"
  -----------------------------------------------------------------------------*/
@@ -463,7 +474,7 @@ table tbody td{
  - ESTILO PARA FORMULARIO "CONTACTO"
  -----------------------------------------------------------------------------*/
 .form-cv{
-    color:#548DA2;
+    color:#5D94A8;
     font-size: 80% !important;
     display: none;
 }
@@ -539,9 +550,58 @@ table tbody td{
 }
 
 /*------------------------------------------------------------------------------
- - ESTILO PARA FORMULARIO "noticias"
+ - ESTILO PARA LA SECCION PRODUCTOS
  -----------------------------------------------------------------------------*/
-.noticias .vermas a{
-
-
+.product-col{
+    float: left;
+    position: relative;
+    background: url({BASE_URL}images/separador-product.png) no-repeat right top;
+    width: 160px;
+    height: 260px;
+    padding-right: 10px;
+    margin-right: 20px;
 }
+    .product-col h3{
+        color:#42B4CC;
+        font-size: 150%;
+        font-weight: bold;
+        margin-top: 8px;
+    }
+    .product-col a{
+        position: absolute;
+        left: 66px;
+        top:210px;
+        width: 80px;
+        height: 22px;
+        background-color: #074A87;
+        color:#fff;
+        border: 1px solid #D8E3EC;
+        display: block;
+        font-style: italic;
+        text-align: center;
+    }
+    
+/*------------------------------------------------------------------------------
+ - ESTILO PARA LOGIN
+ -----------------------------------------------------------------------------*/
+.contlogin{
+    width: 300px;
+    margin: 0 auto;
+    font-size: 90%;
+}
+    .contlogin fieldset{
+        float: left;
+        width: 300px;
+        height: auto;
+        padding: 5px;
+    }
+        .contlogin fieldset legend{
+            font-size: 100%;
+            margin-left: 10px;
+        }
+    .contlogin input{
+        width: 140px;
+    }
+    .contlogin label{
+        width: 100px;
+    }

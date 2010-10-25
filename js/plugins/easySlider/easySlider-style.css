@@ -1,3 +1,7 @@
+#slider{
+    position: relative;
+    overflow: hidden;
+}
 #slider ul, #slider li{
     margin:0;
     padding:0;

@@ -68,7 +68,7 @@
             </div>
         </div>
         <div class="trow">
-            <label class="label" for="txtTema">Tema</label>
+            <label class="label" for="txtTheme">Tema</label>
             <div class="fleft"><input type="text" name="txtTheme" id="txtTheme" /></div>
         </div>
         <div class="trow">

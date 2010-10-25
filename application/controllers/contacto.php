@@ -25,7 +25,6 @@ class Contacto extends Controller {
 
         $data = array_merge($this->_data, array(
             'tlp_title'            => TITLE_CONTACTO,
-            'tlp_title_section'    => 'Contacto',
             'tlp_meta_description' => META_DESCRIPTION_CONTACTO,
             'tlp_meta_keywords'    => META_KEYWORDS_CONTACTO,
             'tlp_section'          => 'frontpage/contact_view.php',

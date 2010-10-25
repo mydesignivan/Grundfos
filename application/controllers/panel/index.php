@@ -6,10 +6,15 @@ class Index extends Controller {
     function __construct(){
         parent::Controller();
         $this->load->library("simplelogin");
+        $this->load->model('contents_model');
+        $this->_data=array(
+            'listMenu'  =>  $this->contents_model->get_menu()
+        );
     }
 
     /* PRIVATE PROPERTIES
      **************************************************************************/
+    private $_data;
 
     /* PUBLIC FUNCTIONS
      **************************************************************************/
@@ -17,13 +22,12 @@ class Index extends Controller {
         //echo $this->encpss->encode('nosuwi08PO');
         
         if( $this->session->userdata('logged_in') ) {
-            redirect('/jpanel/services/');
+            redirect('/panel/myaccount/');
         }else{
-            $data = array(
+            $data = array_merge($this->_data, array(
                 'tlp_section'        =>  'panel/login_view.php',
-                'tlp_title'          =>  TITLE_INDEX_PANEL,
-                'tlp_title_section'  => "Acceder al Sistema"
-            );
+                'tlp_title'          =>  TITLE_INDEX
+            ));
             $this->load->view('template_frontpage_view', $data);
         }
     }
@@ -37,10 +41,10 @@ class Index extends Controller {
                     $message = "El usuario y/o password son incorrectos.";
                 }
                 $this->session->set_flashdata('message_login', $message);
-                redirect('/jpanel/');
+                redirect('/panel/');
 
             }else{
-                redirect('/jpanel/services/');
+                redirect('/panel/myaccount/');
             }
         }
     }

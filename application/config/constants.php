@@ -49,6 +49,8 @@ define('TBL_LIST_STATES',                 'list_states');
 define('TBL_TESTIMONIALES',               'testimoniales');
 define('TBL_NOTICIAS',                    'noticias');
 define('TBL_GALLERY_CONTENTS',            'gallery_contents');
+define('TBL_CATEGORIES',                  'categories');
+define('TBL_PRODUCTS',                    'products');
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +85,28 @@ define('EMAIL_CONTACT_MESSAGE', $msg);
 
 /*
 |--------------------------------------------------------------------------
+| EMAIL FORM SOLICITE CAPACITACION
+|--------------------------------------------------------------------------
+*/
+$msg = '
+    <b>Compa&ntilde;&iacute;a:</b> {company}<br />
+    <b>Nombre:</b> {name}<br />
+    <b>Direcci&oacute;n:</b> {address}<br />
+    <b>Ciudad:</b> {city}<br />
+    <b>C&oacute;digo Postal:</b> {postcode}<br />fax
+    <b>Pa&iacute;s:</b> {country}<br />
+    <b>Provincia:</b> {state}<br />
+    <b>E-Mail:</b> {email}<br />
+    <b>Telefono:</b> {phone}<br />
+    <b>Fax:</b> {fax}<br />
+    <b>Tema:</b> {theme}
+    <hr color="#666666" />{message}
+';
+define('EMAIL_SOLCAP_SUBJECT', 'Solicitud de capacitación');
+define('EMAIL_SOLCAP_MESSAGE', $msg);
+
+/*
+|--------------------------------------------------------------------------
 | EMAIL FORM CV
 |--------------------------------------------------------------------------
 */
@@ -104,7 +128,7 @@ define('EMAIL_CV_MESSAGE', $msg);
 define('UPLOAD_FILETYPE', 'gif|jpg|png');
 define('UPLOAD_MAXSIZE', 2048); //Expresado en Kylobytes
 
-define('UPLOAD_PATH_PRODUCTS', './uploads/thumbs/');
+define('UPLOAD_PATH_PRODUCTS', './uploads/products/');
 define('UPLOAD_PATH_SIDEBAR', './uploads/sidebar/');
 define('UPLOAD_PATH_CV', './uploads/cv/');
 

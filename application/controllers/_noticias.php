@@ -9,8 +9,7 @@ class Noticias extends Controller {
         $this->load->model('contents_model');
         $this->load->model('noticias_model');
         $this->_data=array(
-            'listMenu'  =>  $this->contents_model->get_menu(),
-            'tlp_script'  => array('plugins_easyslider')
+            'listMenu'  =>  $this->contents_model->get_menu()
         );
     }
 

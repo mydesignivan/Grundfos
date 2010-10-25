@@ -1,5 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');?>
-<h1 class="title">Trabaje con Nosotros</h1>
+<h1 class="title3">Trabaje con Nosotros</h1>
 <p>Para trabajar o representar a Bottino Hnos. Subfactory Grundfos env&iacute;e su Curriculum e indique en que zona trabjar.</p>
 <div class="error hide"></div>
 
@@ -14,7 +14,8 @@
     </div>
     <div class="trow">
         <label class="label" for="txtCV">* Curriculum</label>
-        <input type="file" name="txtCV" id="txtCV" size="22" class="required" /><br />
+        <input type="file" name="txtCV" id="txtCV" size="22" class="required" />
+        <label class="clear label">&nbsp;</label>
         <span class="legend">Extensi&oacute;n (.doc / .docx / .pdf) 2MB m&aacute;x.</span>
     </div>
     <div class="trow">

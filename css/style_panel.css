@@ -1,0 +1,30 @@
+/*------------------------------------------------------------------------------
+ - ESTILO PARA FORMULARIO "CONTACTO"
+ -----------------------------------------------------------------------------*/
+.form-myaccount {
+    margin-top: 20px;
+}
+.form-myaccount label{
+    width: 205px;
+    font-size: 100%;
+}
+.form-myaccount input{
+    width: 300px;
+}
+
+/*------------------------------------------------------------------------------
+ - ESTILO PARA LA SECCION PRODUCTOS
+ -----------------------------------------------------------------------------*/
+fieldset legend{
+    font-size: 100%;
+}
+fieldset.fieldset-categories{
+    float: left;
+    width: 200px;
+    height: 300px;
+    margin-right: 10px;
+}
+fieldset.fieldset-form{
+    width: 580px;
+    height: 300px;
+}

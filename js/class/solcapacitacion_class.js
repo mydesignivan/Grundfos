@@ -1,5 +1,5 @@
 var Solcap = new (function(){
-alert("kkega");
+
     /* PUBLIC METHODS
      **************************************************************************/
     $(document).ready(function(){
