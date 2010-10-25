@@ -76,14 +76,13 @@ h1.title3{
  - ESTILOS PARA LINK
  -----------------------------------------------------------------------------*/
 a.link-img{
-    color:#A62D38 !important;
-    font-size: 110%;
+    color:#48A5C3 !important;
 }
 a.link-img img{
     position: relative;
     top:3px;
 }
-a.link-img:hover{color:#581B23 !important;}
+a.link-img:hover{color:#646567 !important;}
 
 .link-inherit, .link-inherit:link, .link-inherit:visited, .link-inherit:hover{
     color: inherit;
@@ -155,22 +154,22 @@ button{
 .header-bg1{
     background: url({BASE_URL}images/bg-header1.jpg) no-repeat;
     width: 1360px;
-    height: 368px;
+    height: 405px;
     margin: 0 auto;
     z-index: 0;
 }
 .header-bg2{
     background: url({BASE_URL}images/bg-header2.jpg) no-repeat;
     width: 1360px;
-    height: 157px;
+    height: 194px;
     margin: 0 auto;
     z-index: 0;
 }
 .header1, .header2{
     z-index: 100;
 }
-.header1{margin-top: -368px;}
-.header2{margin-top: -141px;}
+.header1{margin-top: -405px;}
+.header2{margin-top: -178px;}
 .header1 .logo, .header2 .logo{
     float: left;
     display: block;
@@ -244,7 +243,6 @@ button{
 .menu{
     float: left;
     clear: both;
-    background: url({BASE_URL}images/bg-menu.png) no-repeat;
     width: 1360px;
     height: 66px;
 }
@@ -261,7 +259,7 @@ button{
     list-style-type: none;
 }
 .menu ul.sf-menu{
-    margin: 20px 0 0 400px;
+    margin: 20px 0 0 447px;
     position: relative;
 }
 .menu ul.sf-menu >li{

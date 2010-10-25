@@ -2,13 +2,23 @@
 
 <fieldset class="fieldset-categories">
     <legend>Categor&iacute;as</legend>
-    <ul id="treeview" class="filetree"></ul>
+
+    <div class="cont-treeview">
+        <ul id="treeview" class="filetree">
+            <li><span id="id0" class='folder'>Categor&iacute;as</span>
+                <?=$treeview?>
+            </li>
+        </ul>
+    </div>
 
     <div class="clear">
-        <a href="javascript:void(Products.categorie_open('new'))">Nueva Categoria</a>
+        <a href="javascript:void(Products.categorie_new())" class="link-img"><img src="images/icon-new.png" alt="" width="16" height="16" /> Nuevo</a>
+        <a id="linkCatEdit" href="javascript:void(Products.categorie_edit())" class="link-img hide"><img src="images/icon-edit.png" alt="" width="16" height="16" /> Modificar</a>
+        <a id="linkCatDel" href="javascript:void(Products.categorie_delete())" class="link-img hide"><img src="images/icon-delete.png" alt="" width="16" height="16" /> Eliminar</a>
     </div>
 </fieldset>
-<fieldset class="fieldset-form">
+<fieldset id="fieldset-form" class="fieldset-form">
     <legend>Productos</legend>
-    <div id="cont-products"></div>
+    <div id="cont-products" class="cont-products"></div>
+    <div id="busy" class="busy"></div>
 </fieldset>

@@ -23,12 +23,16 @@
 <?php
     //INCLUYE LOS SCRIPT JS
     if( isset($tlp_script) ) echo '<script type="text/javascript" src="'. site_url('load/js'.@$tlp_script).'"></script>'.chr(13);
+    if( isset($tlp_script_special) && is_array($tlp_script_special) ) {
+        foreach( $tlp_script_special as $val ) require('./js/includes/'.$val.'_inc.php');
+    }
 ?>
     <!--[if IE 6]>
     <script type="text/javascript">var IE6UPDATE_OPTIONS={icons_path:"js/plugins/ie6update/ie6update/images/"}</script>
     <script type="text/javascript" src="js/plugins/ie6update/ie6update/ie6update.js"></script>
     <script type="text/javascript" src="js/helpers/DD_belatedPNG.js"></script>
     <![endif]-->
+
 </head>
 <body>
     <div class="header-bg2"></div>

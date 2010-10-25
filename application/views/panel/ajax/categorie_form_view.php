@@ -10,15 +10,16 @@
 </div>
 <?php }?>
 
-<form id="form1" class="form-myaccount" action="<?=site_url('/panel/products/categories_create');?>" method="post" enctype="application/x-www-form-urlencoded">
+<form id="form1" class="form-categories" action="<?=site_url('/panel/products/ajax_categories_create');?>" method="post" enctype="application/x-www-form-urlencoded">
     <div class="trow">
         <label class="label" for="txtCategorie">* Nombre Categor&iacute;a</label>
         <div class="fleft"><input type="text" name="txtCategorie" id="txtCategorie" value="<?=@$info['categorie_name']?>" /></div>
     </div>
     <div class="trow">
-        <label class="label" for="txtCategorie">* Nombre Categor&iacute;a</label>
-        <div class="fleft"><input type="text" name="txtCategorie" id="txtCategorie" value="<?=@$info['categorie_name']?>" /></div>
+        Contenido<br />
+        <textarea rows="10" cols="22" id="txtContent" name="txtContent" />
     </div>
 
     <div class="trow align-center"><button type="submit">Guardar</button></div>
+    <input type="hidden" name="id" value="" />
 </form>

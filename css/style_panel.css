@@ -13,18 +13,68 @@
 }
 
 /*------------------------------------------------------------------------------
+ - ESTILO PARA FORMULARIO "CATEGORIAS"
+ -----------------------------------------------------------------------------*/
+.form-categories {
+}
+.form-categories label{
+    width: 125px;
+    font-size: 100%;
+}
+.form-categories input{
+    width: 300px;
+}
+.form-categories textarea{
+    width: 290px;
+    height: 120px;
+}
+
+/*------------------------------------------------------------------------------
  - ESTILO PARA LA SECCION PRODUCTOS
  -----------------------------------------------------------------------------*/
+fieldset{
+    padding: 5px;
+}
 fieldset legend{
     font-size: 100%;
 }
 fieldset.fieldset-categories{
     float: left;
-    width: 200px;
-    height: 300px;
+    width: 238px;
+    height: 360px;
     margin-right: 10px;
 }
+
 fieldset.fieldset-form{
+    position: relative;
     width: 580px;
-    height: 300px;
+    height: 360px;
+}
+    fieldset.fieldset-form .cont-products{
+        width: 578px;
+        height: 341px;
+        overflow: auto;
+    }
+    fieldset.fieldset-form .busy{
+        display: none;
+        position: absolute;
+        left:0;top:0;
+        width: 578px;
+        height: 304px;
+        background: transparent url({BASE_URL}images/ajax-loader2.gif) no-repeat center;
+        z-index: 1000;
+    }
+
+
+/*------------------------------------------------------------------------------
+ - ESTILO PARA TREEVIEW
+ -----------------------------------------------------------------------------*/
+.cont-treeview {
+    position: relative;
+    width: 229px;
+    height: 308px;
+    margin: 0 auto 5px auto;
+    padding-right: 4px;
+    overflow: auto;
+    border:1px solid #666;
 }
