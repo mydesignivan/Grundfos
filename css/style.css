@@ -431,12 +431,13 @@ table thead{
 table tbody td{
     border: 1px solid #8CCDE0;
 }
-
-/*------------------------------------------------------------------------------
- - ESTILO PARA TABLA "CONTENT"
- -----------------------------------------------------------------------------*/
-.table-contents .cell1{
-    width: 750px;
+    table tbody td input, table td.cell1{
+        margin: 0 !important;
+        padding: 0 !important;
+        text-align: center;
+    }
+table tbody tr.row-even td{
+    background-color: #DBEAEE;
 }
 
 /*------------------------------------------------------------------------------

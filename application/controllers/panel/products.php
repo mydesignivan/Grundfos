@@ -26,7 +26,7 @@ class Products extends Controller {
      **************************************************************************/
     public function index(){
         $data = array_merge($this->_data, array(
-            'tlp_script'          => array('plugins_treeview', 'plugins_validator', 'class_products'),
+            'tlp_script'          => array('plugins_treeview', 'plugins_validator', 'helpers_json', 'class_products'),
             'tlp_script_special'  => array('plugins_tiny_mce'),
             'treeview'            => $this->categories_model->get_treeview()
         ));
@@ -36,15 +36,24 @@ class Products extends Controller {
 
     /* AJAX FUNCTIONS
      **************************************************************************/
-     public function ajax_showform_categorie(){
+     public function ajax_form_categorie(){
          $this->load->view('panel/ajax/categorie_form_view');
      }
      
-     public function ajax_showform_products(){
+     public function ajax_list_products(){
          $data = array(
-             'list' => $this->products_panel_model->get_list($this->uri->segment(3))
+             'List' => $this->products_panel_model->get_list($this->uri->segment(4))
          );
-         $this->load->view('panel/ajax/categorie_products_view', $data);
+         $this->load->view('panel/ajax/products_list_view', $data);
+     }
+     
+     public function ajax_form_products(){
+         $data = array('reference' => $this->categories_model->get_reference($this->uri->segment(4)));
+
+         if( is_numeric($this->uri->segment(5)) ){
+             $data['info'] = $this->products_panel_model->get_info($this->uri->segment(5));
+         }
+         $this->load->view('panel/ajax/products_form_view', $data);
      }
 
      public function ajax_categories_create(){
@@ -54,9 +63,44 @@ class Products extends Controller {
         }
      }
 
+     public function ajax_products_create(){
+        if( $_SERVER['REQUEST_METHOD']=="POST" ){
+            echo($this->products_panel_model->create() ? "ok" : "error");
+            die();
+        }
+     }
+
+     public function ajax_products_edit(){
+        if( $_SERVER['REQUEST_METHOD']=="POST" ){
+            echo($this->products_panel_model->edit() ? "ok" : "error");
+            die();
+        }
+     }
+
      public function ajax_show_treeview(){
         die($this->categories_model->get_treeview());
      }
+
+     public function ajax_upload_products(){
+        if( $_SERVER['REQUEST_METHOD']=="POST" ){
+
+            $this->load->library('superupload');
+
+            $config = array(
+                'path'          => UPLOAD_PATH_PRODUCTS .$this->input->post('reference') .'/.tmp/',
+                'thumb_width'   => IMAGESIZE_WIDTH_THUMB_PRODUCTS,
+                'thumb_height'  => IMAGESIZE_HEIGHT_THUMB_PRODUCTS,
+                'maxsize'       => UPLOAD_MAXSIZE,
+                'filetype'      => UPLOAD_FILETYPE,
+                'resize_image_original' => false,
+                'master_dim'            => 'width',
+                'filename_prefix'       => $this->session->userdata('users_id')."_"
+            );
+            $this->superupload->initialize($config);
+            echo json_encode($this->superupload->upload(key($_FILES)));
+        }
+     }
+
 
 
     /* PRIVATE FUNCTIONS

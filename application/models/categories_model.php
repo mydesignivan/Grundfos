@@ -38,6 +38,12 @@ class Categories_model extends Model {
         return $id;
     }
 
+    public function get_reference($id){
+        $this->db->select('reference');
+        $row = $this->db->get_where(TBL_CATEGORIES, array('categories_id' => $id))->row_array();
+        return $row['reference'];
+    }
+
 
 
     /* PRIVATE FUNCTIONS
