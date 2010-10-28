@@ -1,11 +1,4 @@
 $(function(){
-    var slider = $("#slider");
-    if( slider.length>0 ){
-        slider.easySlider({
-            prevText : '<img src="images/icon-arrow-left.png" alt="Prev" width="35" height="53" />',
-            nextText : '<img src="images/icon-arrow-right.png" alt="Next" width="35" height="53" />'
-        });   
-    }
     var gallery = $('#gallery');
     if( gallery.length>0 ){
         gallery.adGallery({

@@ -39,6 +39,13 @@ class Products extends Controller {
      public function ajax_showform_categorie(){
          $this->load->view('panel/ajax/categorie_form_view');
      }
+     
+     public function ajax_showform_products(){
+         $data = array(
+             'list' => $this->products_panel_model->get_list($this->uri->segment(3))
+         );
+         $this->load->view('panel/ajax/categorie_products_view', $data);
+     }
 
      public function ajax_categories_create(){
         if( $_SERVER['REQUEST_METHOD']=="POST" ){

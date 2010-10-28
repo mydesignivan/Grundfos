@@ -9,11 +9,7 @@ var Products = new (function(){
     /* PUBLIC METHODS
      **************************************************************************/
     $(document).ready(function(){
-        var tree = $("#treeview").treeview({
-            collapsed: false
-        });
-        $('#treeview').find("span.file, span.folder").css('cursor', 'pointer').click(_mark_item);
-        _contNode = tree;
+        _refresh_treeview();
     });
 
     /* PUBLIC METHODS
@@ -23,7 +19,7 @@ var Products = new (function(){
 
          _Loader.show();
          $('#fieldset-form legend').html('Nueva Categor&iacute;a');
-         $('#cont-products').load(get_url('panel/products/ajax_showform_categorie'), function(){
+         $('#cont-products').load(get_url('panel/products/ajax_showform_categorie/'), function(){
              _exec_tiny();
 
             var o = $.extend({}, jQueryValidatorOptDef, {
@@ -35,6 +31,8 @@ var Products = new (function(){
                 }
             });
             $('#form1').validate(o);
+
+            $('#txtParentCat').html('<u>'+$('#id'+_parent_id).text()+'</u>');
 
              _Loader.hide();
          });
@@ -77,7 +75,7 @@ var Products = new (function(){
         $('#linkCatEdit, #linkCatDel').show();
     };
 
-    var _addNode = function(){
+    /*var _addNode = function(){
         var html = "<li class='closed'><span class='folder'>"+$('#txtName').val()+"</span></li>";
 
         if( _contNode.is('li') && _contNode.find('>ul').length==0 ){
@@ -93,7 +91,7 @@ var Products = new (function(){
             add: newSublist
         });
         $("span.file, span.folder", "#example li").css('cursor', 'pointer').click(setClick);
-    };
+    };*/
     
     var _exec_tiny = function(){
         TinyMCE_init.width = '98%';
@@ -119,9 +117,8 @@ var Products = new (function(){
                 $('#treeview ul:first').remove();
                 
                 $.get(get_url('panel/products/ajax_show_treeview'), function(data){
-                    $('#treeview li').append(data).treeview({
-                        collapsed: false
-                    });
+                    $('#treeview li').append(data);
+                    _refresh_treeview();
                     f[0].reset();
                     _Loader.hide();
                 });
@@ -133,6 +130,13 @@ var Products = new (function(){
         });
 
         return false;
+    };
+
+    var _refresh_treeview = function(){
+        var tree = $("#treeview").treeview({
+            collapsed: false
+        });
+        tree.find("span.file, span.folder").css('cursor', 'pointer').click(_mark_item);
     };
 
 
