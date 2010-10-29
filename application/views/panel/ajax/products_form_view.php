@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');?>
 
-<div id="error" class="error hide"><img src="images/icon_error.png" alt="" width="16" height="16" style="position: relative;top:3px;" /> Los datos no pudieron ser guardados.</div>
+<div id="error" class="error hide"></div>
 
 <form id="form1" class="form-products" action="<?=site_url('/panel/products/ajax_products_'. (isset($info) ? 'edit' : 'create'));?>" method="post" enctype="application/x-www-form-urlencoded">
     <div class="trow">
@@ -14,7 +14,7 @@
     <div class="trow">
         <label class="label" for="txtThumb">* Im&aacute;gen</label>
 <?php
-$src = isset($info) ? UPLOAD_PATH_PRODUCTS .$info['categorie_reference'].'/'. @$info['thumb'] : '';
+$src = isset($info) ? UPLOAD_PATH_PRODUCTS . @$info['thumb'] : '';
 ?>
         <div id="cont-image-1" class="span-13 last">
             <img src="<?=$src?>" alt="<?=@$info['thumb']?>" width="<?=@$info['thumb_width']?>" height="<?=@$info['thumb_height']?>" class="ajaxupload-thumb fleft framethumb <?php if( $src=='' ) echo 'hide'?>" />
@@ -43,5 +43,4 @@ $src = isset($info) ? UPLOAD_PATH_PRODUCTS .$info['categorie_reference'].'/'. @$
 
 <form id="ajaxupload-form" action="<?=site_url('/panel/products/ajax_upload_products')?>" method="post" enctype="multipart/form-data" target="ifr" class="hide">
     <iframe name="ifr" id="ifr" src="about:blank" frameborder="1" style="width:800px; height: 100px; border: 1px solid red;"></iframe>
-    <input type="hidden" name="reference" value="<?=$reference?>" />
 </form>

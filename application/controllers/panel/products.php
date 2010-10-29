@@ -37,14 +37,11 @@ class Products extends Controller {
     /* AJAX FUNCTIONS
      **************************************************************************/
      public function ajax_form_categorie(){
-         $this->load->view('panel/ajax/categorie_form_view');
-     }
-     
-     public function ajax_list_products(){
-         $data = array(
-             'List' => $this->products_panel_model->get_list($this->uri->segment(4))
-         );
-         $this->load->view('panel/ajax/products_list_view', $data);
+         $data = array();
+         if( is_numeric($this->uri->segment(4)) ){
+             $data['info'] = $this->categories_model->get_info($this->uri->segment(4));
+         }
+         $this->load->view('panel/ajax/categorie_form_view', $data);
      }
      
      public function ajax_form_products(){
@@ -55,6 +52,13 @@ class Products extends Controller {
          }
          $this->load->view('panel/ajax/products_form_view', $data);
      }
+     
+     public function ajax_list_products(){
+         $data = array(
+             'List' => $this->products_panel_model->get_list($this->uri->segment(4))
+         );
+         $this->load->view('panel/ajax/products_list_view', $data);
+     }
 
      public function ajax_categories_create(){
         if( $_SERVER['REQUEST_METHOD']=="POST" ){
@@ -63,16 +67,39 @@ class Products extends Controller {
         }
      }
 
+     public function ajax_categories_edit(){
+        if( $_SERVER['REQUEST_METHOD']=="POST" ){
+            echo($this->categories_model->edit());
+            die();
+        }
+     }
+
+     public function ajax_categories_del(){
+        if( $_SERVER['REQUEST_METHOD']=="POST" ){
+            echo($this->categories_model->delete($this->uri->segment(4)));
+            die();
+        }
+     }
+
      public function ajax_products_create(){
         if( $_SERVER['REQUEST_METHOD']=="POST" ){
-            echo($this->products_panel_model->create() ? "ok" : "error");
+            echo($this->products_panel_model->create());
             die();
         }
      }
 
      public function ajax_products_edit(){
         if( $_SERVER['REQUEST_METHOD']=="POST" ){
-            echo($this->products_panel_model->edit() ? "ok" : "error");
+            echo($this->products_panel_model->edit());
+            die();
+        }
+     }
+
+     public function ajax_products_del(){
+        if( $_SERVER['REQUEST_METHOD']=="POST" ){
+            $id = $this->uri->segment_array();
+            array_splice($id, 0,3);
+            echo($this->products_panel_model->delete($id) ? "ok" : "error");
             die();
         }
      }
@@ -87,7 +114,7 @@ class Products extends Controller {
             $this->load->library('superupload');
 
             $config = array(
-                'path'          => UPLOAD_PATH_PRODUCTS .$this->input->post('reference') .'/.tmp/',
+                'path'          => UPLOAD_PATH_PRODUCTS.'.tmp/',
                 'thumb_width'   => IMAGESIZE_WIDTH_THUMB_PRODUCTS,
                 'thumb_height'  => IMAGESIZE_HEIGHT_THUMB_PRODUCTS,
                 'maxsize'       => UPLOAD_MAXSIZE,

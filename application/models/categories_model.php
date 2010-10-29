@@ -18,11 +18,12 @@ class Categories_model extends Model {
     }
 
     public function create(){
+        $reference = normalize(trim($this->input->post('txtCategorie')));
         $data = array(
             'codlang'           => 1,
             'parent_id'         => $this->input->post('parent_id'),
             'categorie_name'    => trim($this->input->post('txtCategorie')),
-            'reference'         => normalize(trim($this->input->post('txtCategorie'))),
+            'reference'         => $reference,
             'categorie_content' => $this->input->post('txtContent'),
             'level'             => $this->input->post('parent_id')>0 ? $this->_get_level() : 0,
             'order'             => $this->_get_num_order(TBL_CATEGORIES, array('parent_id'=>$this->input->post('parent_id'))),
@@ -36,6 +37,41 @@ class Categories_model extends Model {
         $this->db->trans_complete(); // COMPLETO LA TRANSACCION
 
         return $id;
+    }
+
+    public function edit(){
+        $reference = normalize(trim($this->input->post('txtCategorie')));
+        $data = array(
+            'codlang'           => 1,
+            'categorie_name'    => trim($this->input->post('txtCategorie')),
+            'reference'         => $reference,
+            'categorie_content' => $this->input->post('txtContent'),
+            'last_modified'     => strtotime(date('d-m-Y'))
+        );
+
+        $this->db->trans_start(); // INICIO TRANSACCION
+        $this->db->where('categories_id', $this->input->post('categories_id'));
+        if( !$this->db->update(TBL_CATEGORIES, $data) ) return false;
+        $this->db->trans_complete(); // COMPLETO LA TRANSACCION
+
+        return true;
+    }
+
+    public function delete($id) {
+        $this->load->model('products_panel_model');
+
+        $where = array('categories_id'=>$id);
+        $row = $this->db->get(TBL_CATEGORIES, $where);
+        $this->db->delete(TBL_CATEGORIES, $where);
+
+        return true;
+    }
+
+    public function get_info($id) {
+        $row = array();
+        $row = $this->db->get_where(TBL_CATEGORIES, array('categories_id'=>$id))->row_array();
+        
+        return $row;
     }
 
     public function get_reference($id){
@@ -92,6 +128,10 @@ class Categories_model extends Model {
         }
 
         return $output;
+    }
+
+    private function _delete(){
+
     }
     
 }

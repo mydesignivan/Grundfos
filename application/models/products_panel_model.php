@@ -19,10 +19,8 @@ class Products_panel_model extends Model {
     }
 
     public function get_info($id) {
-        $row = array();
-        $row = $this->db->get_where(TBL_PRODUCTS, array('products_id'=>$id))->row_array();
-        
-        return $row;
+        $this->db->where('products_id', $id);
+        return $this->db->get_where(TBL_PRODUCTS)->row_array();
     }
 
     public function create() {
@@ -46,20 +44,19 @@ class Products_panel_model extends Model {
          //print_array($data, true);
 
          $this->db->trans_start(); // INICIO TRANSACCION
-         $path = UPLOAD_PATH_PRODUCTS . $this->input->post('categorie_reference')."/";
 
          if( $this->db->insert(TBL_PRODUCTS, $data) ){
              $id = $this->db->insert_id();
 
-             if( !@copy(urldecode($json->image_thumb->href_image_full),  $path.urldecode($json->image_thumb->filename_image)) ) return false;
+             if( !@copy(urldecode($json->image_thumb->href_image_full),  UPLOAD_PATH_PRODUCTS.urldecode($json->image_thumb->filename_image)) ) return 'Error Nº2';
 
-         }else return false;
+         }else return 'Error Nº1';
          $this->db->trans_complete(); // COMPLETO LA TRANSACCION
 
          $this->load->helper('file');
-         delete_files($path.".tmp");
+         delete_files(UPLOAD_PATH_PRODUCTS.".tmp");
 
-         return true;
+         return 'ok';
     }
 
     public function edit() {
@@ -76,35 +73,45 @@ class Products_panel_model extends Model {
             'last_modified'        => strtotime(date('d-m-Y'))
          );
 
-         if( isset($json->image_thumb->filename_image) ){
+         if( $json->image_thumb ){
             $data['thumb'] = $json->image_thumb->filename_image;
             $data['thumb_width'] = $json->image_thumb->thumb_width;
             $data['thumb_height'] = $json->image_thumb->thumb_height;
-            @unlink(urldecode($this->input->post('image_thumb_old')));
          }
-
-         //print_array($data, true);
-
-         $path = UPLOAD_PATH_PRODUCTS . $this->input->post('categorie_reference')."/";
-
-         //print_array($data, true);
+         
+         /*print_array($json);
+         print_array($data, true);*/
 
          $this->db->trans_start(); // INICIO TRANSACCION
 
          $this->db->where('products_id', $this->input->post('products_id'));
          if( $this->db->update(TBL_PRODUCTS, $data) ){
-
-             if( isset($json->image_thumb->filename_image) ){
-                 if( !@copy(urldecode($json->image_thumb->href_image_full),  $path.urldecode($json->image_thumb->filename_image)) ) return false;
+             if( $json->image_thumb ){
+                 if( !@copy(urldecode($json->image_thumb->href_image_full),  UPLOAD_PATH_PRODUCTS.urldecode($json->image_thumb->filename_image)) ) return 'Error Nº2';
+                 else @unlink(urldecode($this->input->post('image_thumb_old')));
              }
-         }else return false;
+         }else return 'Error Nº1';
          
          $this->db->trans_complete(); // COMPLETO LA TRANSACCION
 
          $this->load->helper('file');
-         delete_files($path.".tmp");
+         delete_files(UPLOAD_PATH_PRODUCTS.".tmp");
 
-         return true;
+         return 'ok';
+    }
+
+    public function delete($id){
+        $this->db->select('thumb');
+        if( is_numeric($id) ) $this->db->where_in('products_id', $id);
+        else $this->db->where_in('categorie_reference', $id);
+        $list = $this->db->get(TBL_PRODUCTS)->result_array();
+
+        if( is_numeric($id) ) $this->db->where_in('products_id', $id);
+        else $this->db->where_in('categorie_reference', $id);
+        if( $this->db->delete(TBL_PRODUCTS) ){
+            foreach( $list as $row ) @unlink(UPLOAD_PATH_PRODUCTS . $row['thumb']);
+        }else return false;
+        return true;
     }
 
     /* PRIVATE FUNCTIONS

@@ -1,10 +1,15 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');?>
 
+<div id="error" class="error hide">El producto no ha podido ser eliminado</div>
+
 <div class="trow">
-    <button type="button" id="btnNew">Nuevo</button>
-    <button type="button" id="btnNew">Eliminar Seleccionados</button>
+    <button type="button" onclick="Products.products_new()">Nuevo</button>
+<?php if( count($List)>0 ) {?>
+    <button type="button" onclick="Products.products_del()">Eliminar Seleccionados</button>
+<?php }?>
 </div>
 
+<?php if( count($List)>0 ) {?>
 <table id="tblList" cellpadding="0" cellspacing="0" class="table-products">
     <thead>
         <tr>
@@ -22,7 +27,7 @@
     foreach( $List as $row ) {
         $class = $n%2 ? 'class="row-even"' : '';
 ?>
-        <tr <?=$class?>>
+        <tr id="tr<?=$row['products_id']?>" <?=$class?>>
             <td class="cell1"><input type="checkbox" value="<?=$row['products_id']?>" /></td>
             <td class="cell2"><a href="javascript:void(Products.products_edit(<?=$row['products_id']?>))"><?=$row['product_name']?></a></td>
             <td class="cell3"><?=$row['description']?></td>
@@ -33,3 +38,6 @@
 <?php }?>
     </tbody>
 </table>
+<?php }else{?>
+<div class="align-center"><br /><br /><br /><br /><h4>No hay productos.</h4></div>
+<?php }?>
