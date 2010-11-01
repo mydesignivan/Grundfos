@@ -27,7 +27,7 @@ class Products extends Controller {
     public function index(){
         $data = array_merge($this->_data, array(
             'tlp_script'          => array('plugins_treeview', 'plugins_validator', 'helpers_json', 'class_products'),
-            'tlp_script_special'  => array('plugins_tiny_mce'),
+            'tlp_script_special'  => array('plugins_tiny_mce', 'plugins_jqui_sortable'),
             'treeview'            => $this->categories_model->get_treeview()
         ));
         $this->load->view('template_panel_view', $data);
@@ -76,9 +76,13 @@ class Products extends Controller {
 
      public function ajax_categories_del(){
         if( $_SERVER['REQUEST_METHOD']=="POST" ){
-            echo($this->categories_model->delete($this->uri->segment(4)));
+            echo($this->categories_model->delete($this->uri->segment(4)) ? "ok" : "error");
             die();
         }
+     }
+
+     public function ajax_categories_order(){
+        die($this->categories_model->order() ? "success" : "error");
      }
 
      public function ajax_products_create(){
@@ -102,6 +106,10 @@ class Products extends Controller {
             echo($this->products_panel_model->delete($id) ? "ok" : "error");
             die();
         }
+     }
+
+     public function ajax_products_order(){
+        die($this->products_panel_model->order() ? "success" : "error");
      }
 
      public function ajax_show_treeview(){

@@ -134,6 +134,7 @@ button{
     color: #fff;
     border: 1px solid #57ACC8;
     padding: 0 10px 0 10px;
+    margin-right: 5px;
 }
 .button-vermas{
     display: block;

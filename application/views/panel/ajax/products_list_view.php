@@ -21,7 +21,7 @@
             <td class="cell6">Eliminar</td>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="sortable">
 <?php 
     $n=0;
     foreach( $List as $row ) {

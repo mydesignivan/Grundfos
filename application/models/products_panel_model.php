@@ -106,13 +106,35 @@ class Products_panel_model extends Model {
         else $this->db->where_in('categorie_reference', $id);
         $list = $this->db->get(TBL_PRODUCTS)->result_array();
 
-        if( is_numeric($id) ) $this->db->where_in('products_id', $id);
-        else $this->db->where_in('categorie_reference', $id);
-        if( $this->db->delete(TBL_PRODUCTS) ){
-            foreach( $list as $row ) @unlink(UPLOAD_PATH_PRODUCTS . $row['thumb']);
-        }else return false;
+        if( count($list)>0 ){
+            if( is_numeric($id) ) $this->db->where_in('products_id', $id);
+            else $this->db->where_in('categorie_reference', $id);
+            if( $this->db->delete(TBL_PRODUCTS) ){
+                foreach( $list as $row ) @unlink(UPLOAD_PATH_PRODUCTS . $row['thumb']);
+            }else return false;
+        }
+        
         return true;
     }
+
+    public function order(){
+        $initorder = $this->input->post('initorder');
+        $rows = json_decode($this->input->post('rows'));
+
+        $res = $this->db->query('SELECT `order` FROM '.TBL_PRODUCTS.' WHERE products_id='.$initorder)->row_array();
+        $order = $res['order'];
+
+        //print_array($rows, true);
+        foreach( $rows as $row ){
+            $id = substr($row, 2);
+            $this->db->where('products_id', $id);
+            if( !$this->db->update(TBL_PRODUCTS, array('order' => $order)) ) return false;
+            $order++;
+        }
+
+        return true;
+    }
+
 
     /* PRIVATE FUNCTIONS
      **************************************************************************/

@@ -4,7 +4,7 @@ var Products = new (function(){
      **************************************************************************/
      var _working=false;
      var _parent_id=0;
-     var _categorie_name='Categor&iacute;as';
+     var _categorie_name='';
      var _ajaxupload_output=false;
      var _ajaxupload_div=false;
      var _ajaxupload_working=false;
@@ -33,9 +33,13 @@ var Products = new (function(){
 
      this.categorie_delete = function(){
         if( confirm('¿Confirma la eliminación?\n'+_categorie_name) ){
-            $.post(get_url('panel/products/ajax_cetegories_del/'+_parent_id), function(data){
+            _Loader.show();
+            $.post(get_url('panel/products/ajax_categories_del/'+_parent_id), function(data){
                 if( data!="ok" ) alert("ERROR AJAX:\n\n"+data);
-                //else _show_list();
+                else {
+                    _show_treeview();
+                    _clear();
+                }
             });
         }
         return false;
@@ -124,6 +128,7 @@ var Products = new (function(){
     /* PRIVATE METHODS
      **************************************************************************/
     var _mark_item = function(){
+        if( _working ) return false;
         if( _formchange ){
             if( confirm('¿Desea guardar las modificaciones?') ){
                 $("#form1").submit();
@@ -144,7 +149,21 @@ var Products = new (function(){
 
     var _show_list = function(){
        if( _parent_id>0 ){
-            _show_form('ajax_list_products/'+_parent_id, 'Listado de productos de: '+_categorie_name, function(){});
+            _show_form('ajax_list_products/'+_parent_id, 'Listado de productos de: '+ _get_title_name(), function(){
+                $('#sortable').sortable({
+                    stop : function(){
+                        _working = true;
+                        $('#sortable').sortable( "option", "disabled", true );
+
+                        var initorder = $(this).find('tr:first').attr('id').substr(2);
+
+                        var arr = $(this).sortable("toArray");
+
+                        _set_order('ajax_products_order', arr, initorder, function(){$('#sortable').sortable( "option", "disabled", false )});
+                    },
+                    handle : '.handle'
+                }).disableSelection();
+            });
        }
     };
 
@@ -169,7 +188,7 @@ var Products = new (function(){
         $('#form1').validate(o);
 
         // Muestra la categoria padre
-        $('#txtParentCat').html('<u>'+_categorie_name+'</u>');
+        $('#txtParentCat').html('<u>'+_get_title_name()+'</u>');
 
         // ESTO ES PARA EL UPLOAD SIMPLE
         $('#ajaxupload-form iframe').load(function(){
@@ -224,8 +243,9 @@ var Products = new (function(){
         });
         $('#form1').validate(o);
 
-        $('#txtParentCat').html('<u>'+_categorie_name+'</u>');
+        $('#txtParentCat').html('<u>'+_get_title_name()+'</u>');
         $('#form1').find('input:text, input:file, textarea').bind('change', function(){_formchange=true});
+        _j=0;
     };
 
     var _on_submit_categories = function() {
@@ -234,25 +254,18 @@ var Products = new (function(){
         _Loader.show();
 
         var params = _get_params(f)+'&parent_id='+_parent_id;
-
+        var a = _parent_id;
         $.post(f.attr('action'), params, function(data){
             if( !isNaN(data) ){
-                $('#treeview ul:first').remove();
-
-                $.get(get_url('panel/products/ajax_show_treeview'), function(data){
-                    $('#treeview li').append(data);
-                    _refresh_treeview();
+                _show_treeview(function(){
                     $('#error').hide();$('#success').show();
                     _categorie_name = $('#txtCategorie').val();
+                    _parent_id = a;
                     if( $('#categories_id').val()=='' ){
                         $('#form1 input:text, #form1 textarea').val('');
                         tinyMCE.get('txtContent').setContent('');
                     }
-                    
-                    _Loader.hide();
-                    _formchange=false;
                 });
-
             }else{
                 $('#success').hide();$('#error').show();
                 alert("ERROR AJAX:\n\n"+data);
@@ -312,9 +325,30 @@ var Products = new (function(){
 
     var _refresh_treeview = function(){
         var tree = $("#treeview").treeview({
-            collapsed: false
+            collapsed: true
         });
         tree.find("span.file, span.folder").css('cursor', 'pointer').click(_mark_item);
+        tree.find('.hitarea:first').trigger('click');
+
+        _parent_id=0;
+        _categorie_name = tree.find('span:first').text();
+
+        var a = $('#treeview ul');
+        a.sortable({
+            stop : function(){
+                _working = true;
+                a.sortable( "option", "disabled", true );
+
+                var initorder = $(this).find('li:first').attr('id').substr(2);
+
+                var arr = $(this).sortable("toArray");
+
+                _set_order('ajax_categories_order', arr, initorder, function(){
+                    a.sortable( "option", "disabled", false );
+                });
+            }
+        }).disableSelection();
+
     };
 
     var _get_params = function(f){
@@ -340,6 +374,22 @@ var Products = new (function(){
         tinyMCE.init(TinyMCE_init);
     };
 
+    var _show_treeview = function(callback){
+        $('#treeview ul:first').remove();
+
+        $.get(get_url('panel/products/ajax_show_treeview'), function(data){
+            $('#treeview li').append(data);
+
+            _refresh_treeview();
+            
+            if( typeof(callback)=="function" ) callback();
+
+            _Loader.hide();
+            _formchange=false;
+        });
+
+    };
+
     var _show_form = function(segm, title, callback) {
          _Loader.show();
          $('#fieldset-form legend').html(title);
@@ -348,6 +398,25 @@ var Products = new (function(){
               callback();
               _Loader.hide();
          });
+    };
+
+    var _clear = function(){
+        $('#cont-products').empty();
+        $('#fieldset-form legend').html('Productos');
+    };
+
+    var _set_order = function(func, arr, initorder, callback){
+        $.post('panel/products/'+func, {rows : JSON.encode(arr), initorder : initorder}, function(data){
+            _working = false;
+            if( data!="success" ) alert('ERROR AJAX:\n\n'+data);
+            else {
+                if( typeof(callback)=="function" ) callback();
+            }
+        });
+    };
+
+    var _get_title_name = function(){
+        return _categorie_name.replace(/\s\(\d\)$/, '');
     };
 
 })();

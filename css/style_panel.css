@@ -74,6 +74,7 @@ fieldset.fieldset-form{
     height: 360px;
 }
     fieldset.fieldset-form .cont-products{
+        position: relative;
         width: 669px;
         height: 341px;
         overflow: auto;
@@ -122,3 +123,50 @@ fieldset.fieldset-form{
     width: 73px;
     text-align: center;
 }
+
+/*------------------------------------------------------------------------------
+ - ESTILOS PARA FORMULARIO FIELDSET
+ -----------------------------------------------------------------------------*/
+fieldset.gallery-panel{
+    float:left;
+    width: 618px;
+    height: 200px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border:1px solid #666;
+}
+    fieldset.gallery-panel legend{
+        font-size: 100%;
+        padding: 0 2px 0 2px;
+    }
+    fieldset.gallery-panel .cont{
+        float: left;
+        width: 616px;
+        height: 200px;
+        position: relative;
+        overflow: auto;
+        /*border: 1px solid red;*/
+    }
+
+    fieldset.gallery-panel ul{
+        margin:0;
+        padding:0;
+    }
+        fieldset.gallery-panel ul li{
+            list-style-type: none;
+            display: inline;
+            float:left;
+            width: 130px;
+            height: 90px;
+            margin: 0 8px 8px 0;
+            padding:5px;
+            background-color: #EEF3F6;
+            border: 2px solid #A5A5A5;
+            text-align: center;
+        }
+            fieldset.gallery-panel ul li .d1{
+                clear: both;
+                margin-top: 5px;
+            }
+    .gallery-panel-upload{margin-left: 20px;}

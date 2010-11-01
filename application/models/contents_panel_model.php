@@ -1,5 +1,5 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-class Categories_model extends Model {
+class Contents_panel_model extends Model {
 
     /* CONSTRUCTOR
      **************************************************************************/
@@ -18,25 +18,37 @@ class Categories_model extends Model {
     }
 
     public function create(){
-        $reference = normalize(trim($this->input->post('txtCategorie')));
+        $json = json_decode($this->input->post('json'));
+
+        $reference = normalize(trim($this->input->post('txtTitle')));
         $data = array(
-            'codlang'           => 1,
-            'parent_id'         => $this->input->post('parent_id'),
-            'categorie_name'    => trim($this->input->post('txtCategorie')),
-            'reference'         => $reference,
-            'categorie_content' => $this->input->post('txtContent'),
-            'level'             => $this->input->post('parent_id')>0 ? $this->_get_level() : 0,
-            'order'             => $this->_get_num_order(TBL_CATEGORIES, array('parent_id'=>$this->input->post('parent_id'))),
-            'date_added'        => strtotime(date('d-m-Y')),
-            'last_modified'     => strtotime(date('d-m-Y'))
+            'codlang'        => 1,
+            'parent_id'      => $this->input->post('parent_id'),
+            'title'          => trim($this->input->post('txtTitle')),
+            'reference'      => $reference,
+            'content'        => $this->input->post('txtContent'),
+            'level'          => $this->input->post('parent_id')>0 ? $this->_get_level() : 0,
+            'order'          => $this->_get_num_order(TBL_CONTENTS, array('parent_id'=>$this->input->post('parent_id'))),
+            'date_added'     => strtotime(date('d-m-Y')),
+            'last_modified'  => strtotime(date('d-m-Y'))
         );
 
+        /*print_array($json);
+        print_array($data, true);*/
+
         $this->db->trans_start(); // INICIO TRANSACCION
-        if( !$this->db->insert(TBL_CATEGORIES, $data) ) return false;
-        $id = $this->db->insert_id();
+        if( $this->db->insert(TBL_CONTENTS, $data) ){
+            $id = $this->db->insert_id();
+            if( !$this->_copy_images($json->gallery->images_new, $id) ) return "Error Nº2";
+
+        }else return "Error Nº1";
+
         $this->db->trans_complete(); // COMPLETO LA TRANSACCION
 
-        return $id;
+        $this->load->helper('file');
+        delete_files(UPLOAD_PATH_SIDEBAR.".tmp");
+
+        return true;
     }
 
     public function edit(){
@@ -64,29 +76,23 @@ class Categories_model extends Model {
 
     public function get_info($id) {
         $row = array();
-        $row = $this->db->get_where(TBL_CATEGORIES, array('categories_id'=>$id))->row_array();
+        $row = $this->db->get_where(TBL_CONTENTS, array('content_id'=>$id))->row_array();
         
         return $row;
-    }
-
-    public function get_reference($id){
-        $this->db->select('reference');
-        $row = $this->db->get_where(TBL_CATEGORIES, array('categories_id' => $id))->row_array();
-        return $row['reference'];
     }
 
     public function order(){
         $initorder = $this->input->post('initorder');
         $rows = json_decode($this->input->post('rows'));
 
-        $res = $this->db->query('SELECT `order` FROM '.TBL_CATEGORIES.' WHERE categories_id='.$initorder)->row_array();
+        $res = $this->db->query('SELECT `order` FROM '.TBL_CONTENTS.' WHERE content_id='.$initorder)->row_array();
         $order = $res['order'];
 
         //print_array($rows, true);
         foreach( $rows as $row ){
             $id = substr($row, 2);
-            $this->db->where('categories_id', $id);
-            if( !$this->db->update(TBL_CATEGORIES, array('order' => $order)) ) return false;
+            $this->db->where('content_id', $id);
+            if( !$this->db->update(TBL_CONTENTS, array('order' => $order)) ) return false;
             $order++;
         }
 
@@ -104,34 +110,30 @@ class Categories_model extends Model {
 
     private function _get_level(){
         $this->db->select('level');
-        $row = $this->db->get_where(TBL_CATEGORIES, array('categories_id'=>$this->input->post('parent_id')))->row_array();
+        $row = $this->db->get_where(TBL_CONTENTS, array('content_id'=>$this->input->post('parent_id')))->row_array();
         return $row['level']+1;
     }
 
     private function _get_treeview($parent_id=0){
 
         $this->db->order_by('`order`', 'asc');
-        $query = $this->db->get_where(TBL_CATEGORIES, array('parent_id'=> $parent_id));
+        $query = $this->db->get_where(TBL_CONTENTS, array('parent_id'=> $parent_id));
 
         $output='';
 
         foreach( $query->result_array() as $row ){
 
-            $output.= '<li id="li'. $row['categories_id'] .'">';
+            $output.= '<li id="li'. $row['content_id'] .'">';
 
-            $this->db->from(TBL_CATEGORIES);
-            $this->db->where('parent_id', $row['categories_id']);
+            $this->db->from(TBL_CONTENTS);
+            $this->db->where('parent_id', $row['content_id']);
             $count_child = $this->db->count_all_results();
 
-            $this->db->from(TBL_PRODUCTS);
-            $this->db->where('categorie_reference', $row['reference']);
-            $count_products = $this->db->count_all_results();
-
-            $output.= '<span id="id'.$row['categories_id'].'" class="'. ($count_child==0 ? 'file' : "folder") .'">'.$row['categorie_name'].' ('.$count_products.')</span>';
+            $output.= '<span id="id'.$row['content_id'].'" class="'. ($count_child==0 ? 'file' : "folder") .'">'.$row['title'].'</span>';
 
             if( $count_child>0 ) {
                 $output.= '<ul>';
-                $output.= $this->_get_treeview($row['categories_id']);
+                $output.= $this->_get_treeview($row['content_id']);
                 $output.= '</ul></li>';
             }
             else $output.= '</li>';
@@ -162,5 +164,29 @@ class Categories_model extends Model {
 
         return true;
     }
-    
+
+    private function _copy_images($json, $id){
+        $n=0;
+        foreach( $json as $row ){
+            $n++;
+            $cp1 = @copy(UPLOAD_PATH_SIDEBAR.".tmp/".$row->image_full, UPLOAD_PATH_SIDEBAR . $row->image_full);
+            $cp2 = @copy(UPLOAD_PATH_SIDEBAR.".tmp/".$row->image_thumb, UPLOAD_PATH_SIDEBAR . $row->image_thumb);
+
+            if( $cp1 && $cp2 ){
+                $data = array(
+                    'gallery_id'  => $id,
+                    'image'       => $row->image_full,
+                    'thumb'       => $row->image_thumb,
+                    'width'       => $row->width,
+                    'height'      => $row->height
+                );
+
+                if( !is_numeric($this->input->post('content_id')) ) $data['order'] = $n;
+                if( !$this->db->insert(TBL_GALLERY_CONTENTS, $data) ) return false;
+            }else return false;
+        }
+
+        return true;
+    }
+
 }
