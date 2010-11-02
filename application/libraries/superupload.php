@@ -124,6 +124,8 @@ class SuperUpload{
 
                         $output['thumb_width'] = $sizes_image_thumb[0];
                         $output['thumb_height'] = $sizes_image_thumb[1];
+                        $output['thumb_width_complete'] = $sizes_image_original[0];
+                        $output['thumb_height_complete'] = $sizes_image_original[1];
 
                         // Dimensiona la imagen original   (ORIGINAL)
                         if( $this->_params['resize_image_original'] ){
@@ -138,6 +140,12 @@ class SuperUpload{
                                 $this->CI->image_lib->initialize($config);
 
                                 if( !$this->CI->image_lib->resize() ) $this->_save_error($this->CI->image_lib->display_errors(), $n);
+                                else{
+                                    $size = getimagesize($config['source_image']);
+                                    $output['thumb_width_complete'] = $size[0];
+                                    $output['thumb_height_complete'] = $size[1];
+
+                                }
                             }
                         }
 

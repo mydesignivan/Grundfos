@@ -37,6 +37,7 @@ var Contents = new (function(){
      };
 
      this.prueba = function() {
+
      };
 
 
@@ -45,20 +46,26 @@ var Contents = new (function(){
      **************************************************************************/
     var _mark_item = function(){
         if( _working ) return false;
-        if( _formchange ){
-            if( confirm('¿Desea guardar las modificaciones?') ){
-                $("#form1").submit();
-                return false;
-            }else _formchange=false;
-        }
 
         var t = $(this);
-        $('#treeview span').removeClass('hover');
-        t.addClass('hover');
         _parent_id = t.attr('id').substr(2);
         _content_name = $('#id'+_parent_id).text();
-        $('#linkCatDel').show();
-        _show_content();
+
+        if( _parent_id>0 ){
+            if( _formchange ){
+                if( confirm('¿Desea guardar las modificaciones?') ){
+                    $("#form1").submit();
+                    return false;
+                }else _formchange=false;
+            }
+
+            $('#treeview span').removeClass('hover');
+            t.addClass('hover');
+            $('#linkCatDel').show();
+            _show_content();
+        }else{
+            _clear();
+        }
 
         return false;
     };
@@ -91,7 +98,7 @@ var Contents = new (function(){
             href_remove    : baseURI+'panel/contents/ajax_upload_delete',
             defined_size   : {
                 width  : 130,
-                height : 58
+                height : 90
             },
             callback       : function(){
                 $('a.jq-image').fancybox();
@@ -101,16 +108,18 @@ var Contents = new (function(){
         // Muestra la categoria padre
         $('#txtParentCat').html('<u>'+_content_name+'</u>');
 
-        $('#form1').find('input:text, input:file, textarea').bind('change', function(){_formchange=true});
+        $('#form1').find('input:text, input:file, textarea').bind('keyup', function(){_formchange=true});
         _j=0;
 
         // Set FancyBox
         $('a.jq-image').fancybox();
+
+        $('#cont-btn').show();
     };
 
     var _on_submit_content = function() {
         var f = $('#form1');
-
+        
         _Loader.show();
 
         var params = _get_params(f)+'&parent_id='+_parent_id;
@@ -125,6 +134,7 @@ var Contents = new (function(){
         var a = _parent_id;
         var b = _content_name;
         $.post(f.attr('action'), params, function(data){
+            _Loader.hide();
             if( data=="ok" ){
                 _show_treeview(function(){
                     $('#error').hide();$('#success').show();
@@ -189,14 +199,13 @@ var Contents = new (function(){
                 });
             }
         }).disableSelection();
-
     };
 
     var _get_params = function(f){
         var a = f.serialize().split('&');
         for( var i=0; i<=a.length-1; i++ ){
             if( /^txtContent=/.test(a[i])) {
-                a[i] = "txtContent="+tinyMCE.get('txtContent').getContent();
+                a[i] = "txtContent="+escape(tinyMCE.get('txtContent').getContent());
                 break;
             }
         }
@@ -244,6 +253,7 @@ var Contents = new (function(){
     var _clear = function(){
         $('#cont-products').empty();
         $('#fieldset-form legend').html('Contenidos');
+        $('#cont-btn').hide();
     };
 
     var _set_order = function(func, arr, initorder, callback){

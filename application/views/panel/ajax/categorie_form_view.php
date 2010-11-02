@@ -19,6 +19,5 @@
         <textarea rows="10" cols="22" id="txtContent" name="txtContent"><?=@$info['categorie_content']?></textarea>
     </div>
 
-    <div class="trow align-center"><button type="submit">Guardar</button></div>
     <input type="hidden" name="categories_id" id="categories_id" value="<?=@$info['categories_id']?>" />
 </form>

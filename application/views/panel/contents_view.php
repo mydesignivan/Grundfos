@@ -19,5 +19,6 @@
 <fieldset id="fieldset-form" class="fieldset-form">
     <legend>Contenidos</legend>
     <div id="cont-products" class="cont-products"></div>
+    <div id="cont-btn" class="trow align-center hide"><button type="button" onclick="$('#form1').submit()">Guardar</button></div>
     <div id="busy" class="busy"></div>
 </fieldset>

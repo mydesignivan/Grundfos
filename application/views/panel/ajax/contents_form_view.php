@@ -26,7 +26,7 @@
             <?php if( isset($info) && count($info['gallery'])>0 ){?>
                 <?php foreach( $info['gallery'] as $row ){?>
                         <li>
-                            <a href="<?=UPLOAD_PATH_SIDEBAR.$row['image']?>" class="jq-image" rel="group"><img src="<?=UPLOAD_PATH_SIDEBAR.$row['thumb']?>" alt="<?=$row['thumb']?>" width="130" height="58" /></a>
+                            <a href="<?=UPLOAD_PATH_SIDEBAR.$row['image']?>" class="jq-image" rel="group"><img src="<?=UPLOAD_PATH_SIDEBAR.$row['thumb']?>" alt="<?=$row['thumb']?>" width="130" height="90" /></a>
                             <div class="d1 clear">
                                 <a href="javascript:void(0)" class="link2 fleft jq-removeimg"><img src="images/icon_delete.png" alt="" width="16" height="16" />Quitar</a>
                                 <a href="javascript:void(0)" class="fright handle"><img src="images/icon_arrow_move2.png" alt="" width="16" height="16" /></a>
@@ -60,6 +60,5 @@
         </div>
     </div>
 
-    <div class="trow align-center"><button type="submit">Guardar</button></div>
     <input type="hidden" name="content_id" id="content_id" value="<?=@$info['content_id']?>" />
 </form>

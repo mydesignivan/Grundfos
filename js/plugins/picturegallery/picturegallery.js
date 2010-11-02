@@ -59,18 +59,20 @@ var PictureGallery = new (function(){
             var tagImg = tagA.find('img');
 
             if( li.data('au-newimg') ){
-                var newImg = new Image();
-                newImg.src = tagImg.attr('src');
-
+                var a=li.data('au-data');
+                
                 data.push({
-                    image_full  : _get_filename(tagA.attr('href')),
-                    image_thumb : _get_filename(tagImg.attr('src')),
-                    width       : newImg.width,
-                    height      : newImg.height
+                    image_full       : _get_filename(tagA.attr('href')),
+                    image_thumb      : _get_filename(tagImg.attr('src')),
+                     width           : a.width,
+                     height          : a.height,
+                     width_complete  : a.width_complete,
+                     height_complete : a.height_complete
                 });
             }
         });
-       return data;
+
+        return data;
    };
 
    this.get_images_del = function(){
@@ -98,6 +100,9 @@ var PictureGallery = new (function(){
     var array_images_del = new Array();
     var _form=false;
     var _iframe=false;
+    var _loader=0;
+    var _stop=false;
+    var _temp=false;
 
    /* PRIVATE METHODS
     **************************************************************************/
@@ -138,7 +143,12 @@ var PictureGallery = new (function(){
                 img.attr('width', params.defined_size.width).attr('height', params.defined_size.height);
             }
 
-            var audata = {width : output['thumb_width'], height : output['thumb_height']};
+            var audata = {
+                width           : output['thumb_width'],
+                height          : output['thumb_height'],
+                width_complete  : output['thumb_width_complete'],
+                height_complete : output['thumb_height_complete']
+            };
 
             if( !ul.is(':visible') ){
                 //li.find('a.jq-removeimg').bind('click', _remove_image);

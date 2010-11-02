@@ -50,6 +50,13 @@ class Contents_model extends Model {
             $this->db->order_by('order', 'asc');
             $query = $this->db->get_where(TBL_GALLERY_CONTENTS, array('content_id'=>$content['content_id']));
             if( $query->num_rows>0 ) $content['gallery'] = $query->result_array();
+
+            $content['title'] = $this->_get_title($content['content_id']);
+            if( count($content['title'])>1 ){
+                array_pop($content['title']);
+                $content['title'] = array_reverse($content['title']);
+            }
+            $content['title'] = implode(" &gt; ", $content['title']);
         }
 
         return $content;
@@ -152,6 +159,18 @@ class Contents_model extends Model {
         }
 
         return $output;
+    }
+
+    private function _get_title($id, &$title=array()){
+        $this->db->select('title, parent_id');
+        $row = $this->db->get_where(TBL_CONTENTS, array('content_id'=>$id))->row_array();
+
+        $title[] = $row['title'];
+
+        $childs = $this->db->get_where(TBL_CONTENTS, array('content_id'=>$row['parent_id']))->num_rows;
+        if( $childs>0 ) $this->_get_title($row['parent_id'], $title);
+
+        return $title;
     }
     
 }

@@ -36,7 +36,6 @@ $src = isset($info) ? UPLOAD_PATH_PRODUCTS . @$info['thumb'] : '';
         <textarea rows="10" cols="22" id="txtContent" name="txtContent"><?=@$info['product_content']?></textarea>
     </div>
 
-    <div class="trow align-center"><button type="submit">Guardar</button></div>
     <input type="hidden" name="products_id" id="products_id" value="<?=@$info['products_id']?>" />
     <input type="hidden" name="categorie_reference" value="<?=$reference?>" />
 </form>

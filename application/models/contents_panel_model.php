@@ -151,7 +151,7 @@ class Contents_panel_model extends Model {
     private function _get_treeview($parent_id=0){
 
         $this->db->order_by('`order`', 'asc');
-        $query = $this->db->get_where(TBL_CONTENTS, array('parent_id'=> $parent_id));
+        $query = $this->db->get_where(TBL_CONTENTS, array('parent_id'=> $parent_id, 'hide'=>0));
 
         $output='';
 
@@ -161,6 +161,7 @@ class Contents_panel_model extends Model {
 
             $this->db->from(TBL_CONTENTS);
             $this->db->where('parent_id', $row['content_id']);
+            $this->db->where('hide', 0);
             $count_child = $this->db->count_all_results();
 
             $output.= '<span id="id'.$row['content_id'].'" class="'. ($count_child==0 ? 'file' : "folder") .'">'.$row['title'].'</span>';
@@ -185,8 +186,8 @@ class Contents_panel_model extends Model {
                 $result = $this->db->get_where(TBL_GALLERY_CONTENTS, array('content_id'=>$row['content_id']))->result_array();
                 if( $this->db->delete(TBL_GALLERY_CONTENTS, array('content_id'=>$row['content_id'])) ) {
                     foreach( $result as $row ){
-                        @unlink(TBL_GALLERY_CONTENTS . $row['thumb']);
-                        @unlink(TBL_GALLERY_CONTENTS . $row['image']);
+                        @unlink(UPLOAD_PATH_SIDEBAR . $row['thumb']);
+                        @unlink(UPLOAD_PATH_SIDEBAR . $row['image']);
                     }
                 }else return false;
                 
@@ -217,8 +218,8 @@ class Contents_panel_model extends Model {
                     'content_id'  => $id,
                     'image'       => $row->image_full,
                     'thumb'       => $row->image_thumb,
-                    'width'       => $row->width,
-                    'height'      => $row->height
+                    'width'       => $row->width_complete,
+                    'height'      => $row->height_complete
                 );
 
                 if( !is_numeric($this->input->post('content_id')) ) $data['order'] = $n;
