@@ -103,6 +103,9 @@ var Contents = new (function(){
 
         $('#form1').find('input:text, input:file, textarea').bind('change', function(){_formchange=true});
         _j=0;
+
+        // Set FancyBox
+        $('a.jq-image').fancybox();
     };
 
     var _on_submit_content = function() {
@@ -120,6 +123,7 @@ var Contents = new (function(){
         params+='&json='+JSON.encode(data);
 
         var a = _parent_id;
+        var b = _content_name;
         $.post(f.attr('action'), params, function(data){
             if( data=="ok" ){
                 _show_treeview(function(){
@@ -129,9 +133,8 @@ var Contents = new (function(){
                         _parent_id = a;
                         $('#form1 input:text, #form1 textarea').val('');
                         tinyMCE.get('txtContent').setContent('');
-                    }else{
-                        
-                        _content_name = $('#txtTitle').val();
+                    }else{                        
+                        _content_name = b;
                     }
                 });
             }else{
@@ -139,6 +142,7 @@ var Contents = new (function(){
                 alert("ERROR AJAX:\n\n"+data);
                 _working=false;
             }
+             $('#cont-products').scrollTop(0);
         });
 
         return false;

@@ -1,5 +1,4 @@
-AddHandler x-httpd-php5 .php .phtml
-
+AddHandler application/x-httpd-php5 .php5
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	RewriteCond %{REQUEST_FILENAME} !-f

@@ -53,7 +53,8 @@ class Contents extends Controller {
 
      public function ajax_edit(){
         if( $_SERVER['REQUEST_METHOD']=="POST" ){
-            echo($this->contents_panel_model->edit() ? "ok" : "error");
+            $res = $this->contents_panel_model->edit();
+            echo($res ? "ok" : $res);
             die();
         }
      }

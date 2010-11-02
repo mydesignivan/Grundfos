@@ -45,6 +45,7 @@ class Contents_panel_model extends Model {
 
         $this->db->trans_complete(); // COMPLETO LA TRANSACCION
 
+        //Borra archivos temporales
         $this->load->helper('file');
         delete_files(UPLOAD_PATH_SIDEBAR.".tmp");
 
@@ -52,32 +53,65 @@ class Contents_panel_model extends Model {
     }
 
     public function edit(){
-        $reference = normalize(trim($this->input->post('txtCategorie')));
+        $json = json_decode($this->input->post('json'));
+
+        $reference = normalize(trim($this->input->post('txtTitle')));
         $data = array(
             'codlang'           => 1,
-            'categorie_name'    => trim($this->input->post('txtCategorie')),
+            'title'             => trim($this->input->post('txtTitle')),
             'reference'         => $reference,
-            'categorie_content' => $this->input->post('txtContent'),
+            'content'           => $this->input->post('txtContent'),
             'last_modified'     => strtotime(date('d-m-Y'))
         );
 
+        /*print_array($json);
+        print_array($data, true);*/
+
         $this->db->trans_start(); // INICIO TRANSACCION
-        $this->db->where('categories_id', $this->input->post('categories_id'));
-        if( !$this->db->update(TBL_CATEGORIES, $data) ) return false;
+        $this->db->where('content_id', $this->input->post('content_id'));
+        if( $this->db->update(TBL_CONTENTS, $data) ){
+
+            $gallery = $json->gallery;
+
+            if( count($json->gallery->images_new)>0 ){
+                if( !$this->_copy_images($gallery->images_new, $this->input->post('content_id')) ) return "Error Nº2";
+            }
+
+            // Elimina las imagenes quitadas
+             if( count($gallery->images_del)>0 ){
+                foreach( $gallery->images_del as $row ){
+
+                    if( $this->db->delete(TBL_GALLERY_CONTENTS, array('image'=>$row->image_full)) ){
+                        @unlink(UPLOAD_PATH_SIDEBAR . $row->image_full);
+                        @unlink(UPLOAD_PATH_SIDEBAR . $row->image_thumb);
+                    }else "Error Nº3";
+                }
+             }
+
+            // Reordena los thumbs
+            foreach( $gallery->images_order as $row ){
+                $this->db->where('image', $row->image_full);
+                $this->db->update(TBL_GALLERY_CONTENTS, array('order' => $row->order));
+            }
+
+        }else return "Error Nº1";
         $this->db->trans_complete(); // COMPLETO LA TRANSACCION
 
+        //Borra archivos temporales
+        $this->load->helper('file');
+        delete_files(UPLOAD_PATH_SIDEBAR.".tmp");
+        
         return true;
     }
 
     public function delete($id) {
-        $this->load->model('products_panel_model');
-        return $this->_delete(array(array('categories_id'=>$id)));
+        return $this->_delete(array(array('content_id'=>$id)));
     }
 
     public function get_info($id) {
         $row = array();
         $row = $this->db->get_where(TBL_CONTENTS, array('content_id'=>$id))->row_array();
-        
+        $row['gallery'] = $this->db->get_where(TBL_GALLERY_CONTENTS, array('content_id'=>$id))->result_array();
         return $row;
     }
 
@@ -146,16 +180,22 @@ class Contents_panel_model extends Model {
     private function _delete($arr){
         foreach( $arr as $row ){
 
-            $info = $this->db->get_where(TBL_CATEGORIES, array('categories_id'=>$row['categories_id']))->row_array();
-
             $this->db->trans_start(); // INICIO TRANSACCION
-            if( !$this->products_panel_model->delete($info['reference']) ) return false;
-            if( !$this->db->delete(TBL_CATEGORIES, array('categories_id'=>$row['categories_id'])) ) return false;
+            if( $this->db->delete(TBL_CONTENTS, array('content_id'=>$row['content_id'])) ) {
+                $result = $this->db->get_where(TBL_GALLERY_CONTENTS, array('content_id'=>$row['content_id']))->result_array();
+                if( $this->db->delete(TBL_GALLERY_CONTENTS, array('content_id'=>$row['content_id'])) ) {
+                    foreach( $result as $row ){
+                        @unlink(TBL_GALLERY_CONTENTS . $row['thumb']);
+                        @unlink(TBL_GALLERY_CONTENTS . $row['image']);
+                    }
+                }else return false;
+                
+            }else return false;
 
             $this->db->trans_complete(); // COMPLETO LA TRANSACCION
 
-            $this->db->select('categories_id');
-            $query = $this->db->get_where(TBL_CATEGORIES, array('parent_id'=>$row['categories_id']));
+            $this->db->select('content_id');
+            $query = $this->db->get_where(TBL_CONTENTS, array('parent_id'=>$row['content_id']));
             if( $query->num_rows>0 ) {
                 if( !$this->_delete($query->result_array()) ) return false;
             }
@@ -174,7 +214,7 @@ class Contents_panel_model extends Model {
 
             if( $cp1 && $cp2 ){
                 $data = array(
-                    'gallery_id'  => $id,
+                    'content_id'  => $id,
                     'image'       => $row->image_full,
                     'thumb'       => $row->image_thumb,
                     'width'       => $row->width,
