@@ -133,6 +133,7 @@ var Products = new (function(){
         var t = $(this);
         _parent_id = t.attr('id').substr(2);
         _categorie_name = $('#id'+_parent_id).text();
+        _ajaxupload_output = false;
 
         if( _parent_id>0 ){
             if( _formchange ){
@@ -304,6 +305,7 @@ var Products = new (function(){
             _Loader.hide();
             if( data=="ok" ){
                 _formchange=false;
+                _ajaxupload_output = false;
                 _show_list();
             }else {
                 var html = 'Se produjo un error en el servidor. ';
@@ -366,7 +368,7 @@ var Products = new (function(){
         var a = f.serialize().split('&');
         for( var i=0; i<=a.length-1; i++ ){
             if( /^txtContent=/.test(a[i])) {
-                a[i] = "txtContent="+tinyMCE.get('txtContent').getContent();
+                a[i] = "txtContent="+escape(tinyMCE.get('txtContent').getContent());
                 break;
             }
         }
