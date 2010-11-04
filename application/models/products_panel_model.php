@@ -46,8 +46,6 @@ class Products_panel_model extends Model {
          $this->db->trans_start(); // INICIO TRANSACCION
 
          if( $this->db->insert(TBL_PRODUCTS, $data) ){
-             $id = $this->db->insert_id();
-
              if( !@copy(urldecode($json->image_thumb->href_image_full),  UPLOAD_PATH_PRODUCTS.urldecode($json->image_thumb->filename_image)) ) return 'Error Nº2';
 
          }else return 'Error Nº1';

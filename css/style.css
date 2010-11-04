@@ -137,10 +137,12 @@ button{
     margin-right: 5px;
 }
 .button-vermas{
-    display: block;
+    position: absolute;
     background: transparent url({BASE_URL}images/button-small.png) no-repeat;
     width: 82px;
     height: 29px;
+    left:270px;
+    top:148px;
     padding-top: 7px;
     border: none;
     font-size: 80%;
@@ -229,7 +231,7 @@ button{
     }
     .banner img.image{
         float: right;
-        margin: -79px 21px;
+        margin: -76px 21px;
         /*border: 1px solid red;*/
     }
     .banner .button-vermas{
@@ -580,6 +582,11 @@ table tbody tr.row-even td{
         font-style: italic;
         text-align: center;
     }
+
+.product-col-last{
+    margin-right: 0;
+    background: none;
+}
     
 /*------------------------------------------------------------------------------
  - ESTILO PARA LOGIN

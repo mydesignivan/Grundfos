@@ -13,7 +13,9 @@ class Productos extends Controller {
             'tlp_meta_description' => META_DESCRIPTION_PRODUCTOS,
             'tlp_meta_keywords'    => META_KEYWORDS_PRODUCTOS,
             'tlp_script'           => array('plugins_easyslider'),
-            'listMenu'             => $this->contents_model->get_menu()
+            'listMenu'             => $this->contents_model->get_menu(),
+            'data_banner'          => $this->contents_model->get_list_banner(),
+            'content_footer'       => $this->contents_model->get_footer()
         );
     }
 

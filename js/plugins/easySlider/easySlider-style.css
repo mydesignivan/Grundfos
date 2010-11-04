@@ -8,6 +8,7 @@
     list-style:none;
 }
 #slider, #slider li{
+    position: relative;
     width:675px;
     height:195px;
     overflow:hidden;

@@ -170,3 +170,24 @@ fieldset.gallery-panel{
                 margin-top: 5px;
             }
     .gallery-panel-upload{margin-left: 20px;}
+
+/*------------------------------------------------------------------------------
+ - ESTILOS GALERIA DE IMAGEN DEL BANNER
+ -----------------------------------------------------------------------------*/
+.gallery-banner{
+    float: left;
+    position: relative;
+    width: 490px;
+    height: 150px;
+    border: 2px solid #666;
+    overflow: auto;
+    padding: 5px;
+}
+    .gallery-banner .thumb{
+        float: left;
+        width: 141px;
+        height: 127px;
+        padding: 5px;
+        margin: 0 5px 10px 0;
+        border: 1px solid #ccc;
+    }

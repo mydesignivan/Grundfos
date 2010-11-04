@@ -136,6 +136,26 @@ class Products extends Controller {
         }
      }
 
+     public function ajax_upload_banner(){
+        if( $_SERVER['REQUEST_METHOD']=="POST" ){
+
+            $this->load->library('superupload');
+
+            $config = array(
+                'path'          => UPLOAD_PATH_BANNER.'.tmp/',
+                'thumb_width'   => IMAGESIZE_WIDTH_THUMB_BANNER,
+                'thumb_height'  => IMAGESIZE_HEIGHT_THUMB_BANNER,
+                'maxsize'       => UPLOAD_MAXSIZE,
+                'filetype'      => UPLOAD_FILETYPE,
+                'resize_image_original' => false,
+                'master_dim'            => 'width',
+                'filename_prefix'       => $this->session->userdata('users_id')."_"
+            );
+            $this->superupload->initialize($config);
+            echo json_encode($this->superupload->upload(key($_FILES)));
+        }
+     }
+
 
 
     /* PRIVATE FUNCTIONS

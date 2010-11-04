@@ -7,11 +7,13 @@
 
 <?php
     $n=0;
+    $j=0;
     foreach( $info['listProducts'] as $row ){
         $n++;
+        $j++;
         $css="";
-        if( $n==3 ) {
-            $css="last";
+        if( $n==3 || $j==count($info['listProducts']) ) {
+            $css=" product-col-last";
             $n=0;
         }
 ?>

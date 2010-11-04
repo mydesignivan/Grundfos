@@ -82,6 +82,21 @@ class Contents_model extends Model {
         return $query->result_array();
     }
 
+    public function get_list_banner(){
+        $this->db->distinct();
+        $this->db->select('banner_thumb, banner_thumb_width, banner_thumb_height, categorie_content, categorie_name,'.TBL_CATEGORIES.'.reference');
+        $this->db->join(TBL_PRODUCTS, TBL_CATEGORIES.'.reference = '.TBL_PRODUCTS.'.categorie_reference');
+        $this->db->order_by(TBL_CATEGORIES.'.`order`', 'asc');
+        return $this->db->get_where(TBL_CATEGORIES, array('banner'=>1))->result_array();
+    }
+
+    public function get_footer(){
+        $this->db->select('content');
+        $row = $this->db->get_where(TBL_CONTENTS, array('content_id'=>15))->row_array();
+        return $row['content'];
+    }
+
+
     /* PRIVATE FUNCTIONS
      **************************************************************************/
     private function _get_menu($parent_id=0, $reference_parent=''){

@@ -9,7 +9,9 @@ class Contacto extends Controller {
         $this->load->model('contents_model');
         $this->load->model('lists_model');
         $this->_data=array(
-            'listMenu'    => $this->contents_model->get_menu()
+            'listMenu'       => $this->contents_model->get_menu(),
+            'data_banner'    => $this->contents_model->get_list_banner(),
+            'content_footer' => $this->contents_model->get_footer()
         );
     }
 

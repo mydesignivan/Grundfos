@@ -130,16 +130,21 @@ define('UPLOAD_MAXSIZE', 2048); //Expresado en Kylobytes
 
 define('UPLOAD_PATH_PRODUCTS', './uploads/products/');
 define('UPLOAD_PATH_SIDEBAR', './uploads/sidebar/');
+define('UPLOAD_PATH_BANNER', './uploads/banner/');
 define('UPLOAD_PATH_CV', './uploads/cv/');
 
 define('IMAGESIZE_WIDTH_THUMB_PRODUCTS', 141);
 define('IMAGESIZE_HEIGHT_THUMB_PRODUCTS', 108);
 define('IMAGESIZE_WIDTH_FULL_PRODUCTS', 320);
 define('IMAGESIZE_HEIGHT_FULL_PRODUCTS', 260);
+
 define('IMAGESIZE_WIDTH_THUMB_SIDEBAR', 150);
 define('IMAGESIZE_HEIGHT_THUMB_SIDEBAR', 100);
 define('IMAGESIZE_WIDTH_FULL_SIDEBAR', 320);
 define('IMAGESIZE_HEIGHT_FULL_SIDEBAR', 260);
+
+define('IMAGESIZE_WIDTH_THUMB_BANNER', 234);
+define('IMAGESIZE_HEIGHT_THUMB_BANNER', 175);
 
 
 /*

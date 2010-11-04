@@ -10,7 +10,9 @@ class Index extends Controller {
         $this->load->model('lists_model');
         $this->load->helpers('form');
         $this->_data=array(
-            'listMenu'  =>  $this->contents_model->get_menu()
+            'listMenu'       => $this->contents_model->get_menu(),
+            'data_banner'    => $this->contents_model->get_list_banner(),
+            'content_footer' => $this->contents_model->get_footer()
         );
     }
 

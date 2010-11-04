@@ -9,7 +9,7 @@ var Products = new (function(){
      var _ajaxupload_div=false;
      var _ajaxupload_working=false;
      var _formchange=false;
-     var _j=0;
+     var _j=0;     
 
     /* PUBLIC METHODS
      **************************************************************************/
@@ -19,9 +19,11 @@ var Products = new (function(){
 
     /* PUBLIC METHODS
      **************************************************************************/
-     this.categorie_new = function(){
+     this.categorie_new = function(a){
          if( _working ) return false;
-         _show_form('ajax_form_categorie', 'Nueva Categor&iacute;a', _callback_categories);
+         var fn = 'ajax_form_categorie';
+         if( a ) fn+='/'
+         _show_form(fn, 'Nueva Categor&iacute;a', _callback_categories);
          return false;
      };
 
@@ -32,6 +34,11 @@ var Products = new (function(){
      };
 
      this.categorie_delete = function(){
+         if( _parent_id==0 ){
+             alert("Seleccione una categoría.")
+             return false;
+         }
+
         if( confirm('¿Confirma la eliminación?\n'+_get_title_name()) ){
             _Loader.show();
             $.post(get_url('panel/products/ajax_categories_del/'+_parent_id), function(data){
@@ -200,82 +207,71 @@ var Products = new (function(){
         // Muestra la categoria padre
         $('#txtParentCat').html('<u>'+_get_title_name()+'</u>');
 
-        // ESTO ES PARA EL UPLOAD SIMPLE
-        $('#ajaxupload-form iframe').load(function(){
-            if( this.src=="about:blank" ) return false;
-
-            var content = this.contentDocument || this.contentWindow.document;
-                content = content.body.innerHTML;
-
-            _ajaxupload_working=false;
-            _ajaxupload_div.find('button')[0].disabled=false;
-            _ajaxupload_div.find('.ajaxupload-load').hide();
-            _ajaxupload_div.find('.valid-error, .ajaxupload-error').hide();
-
-            var result;
-            try{
-                eval('result = '+content);
-            }catch(e){
-                alert('ERROR:\n\n'+content);
-                return false;
-            }
-
-            if( result['status']=="success" ) {
-                _ajaxupload_div.find('.ajaxupload-error').hide();
-                var output = result['output'][0];
-
-                _ajaxupload_div.find('.ajaxupload-thumb').attr('src', output['href_image_full'])
-                                      .attr('alt', output['filename_image'])
-                                      .attr('width', output['thumb_width'])
-                                      .attr('height', output['thumb_height'])
-                                      .show();
-
-                _ajaxupload_output = output;
-            }
-            else _ajaxupload_div.find('.ajaxupload-error').html(result['error'][0]['message']).show();
-
-            return false;
-        });
-        //-----
+        _set_upload();
         _set_params();
     };
 
     var _callback_categories = function(){
         _exec_tiny();
 
-        var o = $.extend({}, jQueryValidatorOptDef, {
+        _validoptions = $.extend({}, jQueryValidatorOptDef, {
             rules : {
                 txtCategorie  : 'required'
             },
             submitHandler : _on_submit_categories,
             invalidHandler : function(){}
         });
-        $('#form1').validate(o);
+        $('#form1').validate(_validoptions);
         $('#txtParentCat').html('<u>'+_get_title_name()+'</u>');
+
+        $('#optBannerShowYes').click(function(){
+            $('#divContBanner').show();
+            var a = $('#cont-products');
+            a.scrollTop(a.height());
+        });
+        $('#optBannerShowNo').click(function(){
+            $('#divContBanner').hide();
+        });
+
+        _set_upload();
         _set_params();
     };
 
     var _on_submit_categories = function() {
         var f = $('#form1');
 
+        if( $('#optBannerShowYes')[0].checked ){
+            if( !$('#cont-image-1 .ajaxupload-thumb').is(':visible') ){
+                $('#cont-image-1 .ajaxupload-error').html('Este campo es obligatorio.').show();
+                $('#txtBannerThumb').focus();
+                return false;
+            }
+        }
+
         _Loader.show();
 
-        var params = _get_params(f)+'&parent_id='+_parent_id;
+        var params = _get_params(f)+'&parent_id='+_parent_id+'&json='+JSON.encode({image_thumb : _ajaxupload_output});
         var a = _parent_id;
         var b = _categorie_name;
         $.post(f.attr('action'), params, function(data){
             _Loader.hide();
-            if( !isNaN(data) ){
+            if( data=="ok" ){
                 _show_treeview(function(){
                     $('#error').hide();$('#success').show();
-                    if( $('#categories_id').val() ){
-                        $('#form1 input:text, #form1 textarea').val('');
-                        tinyMCE.get('txtContent').setContent('');
+                    if( !$('#categories_id').val() ){
                         _categorie_name = $('#txtCategorie').val();
                         _parent_id = a;
+                        $('#form1 input:text, #form1 textarea').val('');
+                        tinyMCE.get('txtContent').setContent('');
+                        $('#optBannerShowNo')[0].checked=true;
+                        $('#divContBanner, #cont-image-1 .ajaxupload-thumb').hide();
                     }else{
                         _categorie_name = b;
+                        var img = $('#cont-image-1 .ajaxupload-thumb');
+                        img.attr('src', img.attr('src').replace('.tmp/', ''));
+                        $('#image_thumb_old').attr('value', img.attr('src'));
                     }
+                    _ajaxupload_output = false;
                 });
             }else{
                 $('#success').hide();$('#error').show();
@@ -437,6 +433,44 @@ var Products = new (function(){
         _j=0;
         $('#form1').find('input:text, input:file, textarea').bind('keyup', function(){_formchange=true});
         $('#cont-btn').show();
+    };
+
+    var _set_upload = function(){
+        $('#ajaxupload-form iframe').load(function(){
+            if( this.src=="about:blank" ) return false;
+
+            var content = this.contentDocument || this.contentWindow.document;
+                content = content.body.innerHTML;
+
+            _ajaxupload_working=false;
+            _ajaxupload_div.find('button')[0].disabled=false;
+            _ajaxupload_div.find('.ajaxupload-load').hide();
+            _ajaxupload_div.find('.valid-error, .ajaxupload-error').hide();
+
+            var result;
+            try{
+                eval('result = '+content);
+            }catch(e){
+                alert('ERROR:\n\n'+content);
+                return false;
+            }
+
+            if( result['status']=="success" ) {
+                _ajaxupload_div.find('.ajaxupload-error').hide();
+                var output = result['output'][0];
+
+                _ajaxupload_div.find('.ajaxupload-thumb').attr('src', output['href_image_full'])
+                                      .attr('alt', output['filename_image'])
+                                      .attr('width', output['thumb_width'])
+                                      .attr('height', output['thumb_height'])
+                                      .show();
+
+                _ajaxupload_output = output;
+            }
+            else _ajaxupload_div.find('.ajaxupload-error').html(result['error'][0]['message']).show();
+
+            return false;
+        });
     }
 
 })();

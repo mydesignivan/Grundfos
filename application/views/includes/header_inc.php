@@ -18,78 +18,14 @@
 <div class="banner">
     <div id="slider">
         <ul>
+    <?php foreach( $data_banner as $row ){?>
             <li>
-                <h1 class="title2">Aumento de presi&oacute;n</h1>
-                <p class="text">Modelos: línea CR – CRN- CRT- CM – CHN – CHI –CHIE - Hidros – Grupos de presión Nb – Nq-dn - CRE</p>
-                <img src="images/banner/aumentodepresion-producto-slider.png" alt="" width="132" height="175" class="image" />
-                <a href="<?=site_url('productos/aumento-de-presion')?>" class="button-vermas">Ver mas</a>
+                <h1 class="title2"><?=$row['categorie_name']?></h1>
+                <p class="text"><?=strip_tags($row['categorie_content'])?></p>
+                <img src="<?=UPLOAD_PATH_BANNER . $row['banner_thumb']?>" alt="<?=$row['banner_thumb']?>" width="<?=$row['banner_thumb_width']?>" height="<?=$row['banner_thumb_height']?>" class="image" />
+                <a href="<?=site_url('productos/'.$row['reference'])?>" class="button-vermas">Ver mas</a>
             </li>
-            <li>
-                <h1 class="title2">Achique pluvial y residual</h1>
-                <p class="text">Modelos: KP /AP – DW.</p>
-                <img src="images/banner/achique-pluvialyresidual-slider.png" alt="" width="208" height="151" class="image" />
-                <a href="<?=site_url('productos/achique-pluvial-y-residual')?>" class="button-vermas">Ver mas</a>
-            </li>
-            <li>
-                <h1 class="title2">Aguas subterraneas</h1>
-                <p class="text">Modelos: SP A, SP, SP-G  - SP- SPN-SPG -SQ – SQE -SQ Flex – MS – MMS - MP1 / SPE-NE </p>
-                <img src="images/banner/aguassubterraneas-slider.png" alt="" width="177" height="99" class="image" />
-                <a href="<?=site_url('productos/aguas-subterraneas')?>" class="button-vermas">Ver mas</a>
-            </li>
-            <li>
-                <h1 class="title2">Calefaccion refrigeraci&oacute;n</h1>
-                <p class="text">Modelos: UP / UPS / UPSD /UPN / UPB / UPE/ TP / TPD / TPE /CLM/ CDM</p>
-                <img src="images/banner/calefaccion-refrigeracion.png" alt="" width="183" height="162" class="image" />
-                <a href="<?=site_url('productos/calefaccion-refrigeracion')?>" class="button-vermas">Ver mas</a>
-            </li>
-            <li>
-                <h1 class="title2">Dosificaci&oacute;n</h1>
-                <p class="text">Modelos: DMI – DME – DMS – Sistemas de control y desinfecci&oacute;n</p>
-                <img src="images/banner/dosificacion-productos-slider.png" alt="" width="234" height="127" class="image" />
-                <a href="<?=site_url('productos/dosificacion')?>" class="button-vermas">Ver mas</a>
-            </li>
-            <li>
-                <h1 class="title2">Energ&iacute;a renovable</h1>
-                <p class="text">Modelos: SQ Flex solar – e&oacute;lico </p>
-                <img src="images/banner/energia-renovable-slider.png" alt="" width="203" height="164" class="image" />
-                <a href="<?=site_url('productos/energia-renovable')?>" class="button-vermas">Ver mas</a>
-            </li>
-            <li>
-                <h1 class="title2">Equipos contra incendios</h1>
-                <p class="text">Modelos: bombas según norma NFPA20</p>
-                <img src="images/banner/equipos-contra-incendios-slider.png" alt="" width="186" height="126" class="image" />
-                <a href="<?=site_url('productos/equipos-contra-incendio')?>" class="button-vermas">Ver mas</a>
-            </li>
-            <li>
-                <h1 class="title2">Productos DAB - Bombas perif&eacute;ricas</h1>
-                <p class="text">KPA - KPF - KPS – KP</p>
-                <img src="images/banner/productos-dab-slider.png" alt="" width="168" height="141" class="image" />
-                <a href="<?=site_url('productos/productos-dab')?>" class="button-vermas">Ver mas</a>
-            </li>
-            <li>
-                <h1 class="title2">Protecciones</h1>
-                <p class="text">Modelos: MP204 – LIQ TEC – MP100 – Control R100</p>
-                <img src="images/banner/protecciones-slider.png" alt="" width="208" height="135" class="image" />
-                <a href="<?=site_url('productos/protecciones')?>" class="button-vermas">Ver mas</a>
-            </li>
-            <li>
-                <h1 class="title2">Sanitarias lobulares</h1>
-                <p class="text">Modelos: euro hygia contra maxa maxana sipla  Y Novalobe</p>
-                <img src="images/banner/sanitarias-lobulares-slider.png" alt="" width="183" height="164" class="image" />
-                <a href="<?=site_url('productos/bombas-sanitarias-y-lobulares')?>" class="button-vermas">Ver mas</a>
-            </li>
-            <li>
-                <h1 class="title2">Tratamiento efluentes</h1>
-                <p class="text">Modelos: euro hygia contra maxa maxana sipla  Y Novalobe</p>
-                <img src="images/banner/tratamiento-efluentes-slider.png" alt="" width="152" height="168" class="image" />
-                <a href="<?=site_url('productos/tratamiento-de-efluentes')?>" class="button-vermas">Ver mas</a>
-            </li>
-            <li>
-                <h1 class="title2">Uso domestico</h1>
-                <p class="text">Modelos: UPA – MQ – CM</p>
-                <img src="images/banner/uso-domestico-slider.png" alt="" width="211" height="155" class="image" />
-                <a href="<?=site_url('productos/uso-domestico')?>" class="button-vermas">Ver mas</a>
-            </li>
+    <?php }?>
         </ul>
     </div>
 </div>
