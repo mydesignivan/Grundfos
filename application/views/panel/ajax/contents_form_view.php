@@ -13,7 +13,7 @@
         <div class="fleft"><input type="text" name="txtTitle" id="txtTitle" value="<?=@$info['title']?>" /></div>
     </div>
     <div class="trow">
-        * Contenido<br />
+        * Contenido<div class="clear"></div>
         <textarea rows="10" cols="22" id="txtContent" name="txtContent"><?=@$info['content']?></textarea>
     </div>
 

@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 04-11-2010 a las 18:32:28
--- Versión del servidor: 5.1.37
--- Versión de PHP: 5.2.10-2ubuntu6.5
+-- Tiempo de generación: 22-11-2010 a las 23:14:22
+-- Versión del servidor: 5.1.49
+-- Versión de PHP: 5.3.3-1ubuntu9.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `date_added` char(10) NOT NULL,
   `last_modified` char(10) NOT NULL,
   PRIMARY KEY (`categories_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Volcar la base de datos para la tabla `categories`
@@ -83,7 +83,17 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('0a2116956d453eef0772706b429f157b', '127.0.0.1', 'Mozilla/5.0 (X11; U; Linux i686; es-AR; rv:1.9.2.1', 1288905371, 'a:8:{s:8:"users_id";s:1:"3";s:8:"username";s:8:"mydesign";s:13:"email_contact";s:20:"ivan@mydesign.com.ar";s:12:"email_solcap";s:20:"ivan@mydesign.com.ar";s:8:"email_cv";s:20:"ivan@mydesign.com.ar";s:10:"date_added";s:19:"2010-08-23 19:09:30";s:13:"last_modified";s:19:"2010-10-22 09:59:50";s:9:"logged_in";s:1:"1";}');
+('478ebe28b45e0fbcca81c66320775bad', '127.0.0.1', 'Mozilla/5.0 (X11; U; Linux x86_64; es-AR; rv:1.9.2', 1290088376, ''),
+('42842f6fa53e13e42a65fe9ef01cefbb', '127.0.0.1', 'Mozilla/5.0 (X11; U; Linux x86_64; es-AR; rv:1.9.2', 1289262157, ''),
+('945cb2d661914ef7b106576db4b33bb0', '127.0.0.1', 'Mozilla/5.0 (X11; U; Linux x86_64; es-AR; rv:1.9.2', 1289509943, ''),
+('0cc28f0ef3d09bab32d9c042e6ce0f1b', '127.0.0.1', 'Mozilla/5.0 (X11; U; Linux x86_64; es-AR; rv:1.9.2', 1289567200, ''),
+('e1e799e389f170103227c93f2ac64753', '127.0.0.1', 'Mozilla/5.0 (X11; U; Linux x86_64; es-AR; rv:1.9.2', 1289605440, ''),
+('2dd2a3f54d214a0ce7e929fd95c0d05b', '127.0.0.1', 'Mozilla/5.0 (X11; U; Linux x86_64; es-AR; rv:1.9.2', 1288967308, ''),
+('474d3c7ddf21c804f06ad9144921c9a4', '127.0.0.1', 'Mozilla/5.0 (X11; U; Linux x86_64; es-AR; rv:1.9.2', 1288964800, 'a:8:{s:8:"users_id";s:1:"3";s:8:"username";s:8:"mydesign";s:13:"email_contact";s:20:"ivan@mydesign.com.ar";s:12:"email_solcap";s:20:"ivan@mydesign.com.ar";s:8:"email_cv";s:20:"ivan@mydesign.com.ar";s:10:"date_added";s:19:"2010-08-23 19:09:30";s:13:"last_modified";s:19:"2010-10-22 09:59:50";s:9:"logged_in";s:1:"1";}'),
+('ec27e4da920a0044297190957ac8bffa', '127.0.0.1', 'Mozilla/5.0 (X11; U; Linux x86_64; es-AR; rv:1.9.2', 1288989262, 'a:8:{s:8:"users_id";s:1:"3";s:8:"username";s:8:"mydesign";s:13:"email_contact";s:20:"ivan@mydesign.com.ar";s:12:"email_solcap";s:20:"ivan@mydesign.com.ar";s:8:"email_cv";s:20:"ivan@mydesign.com.ar";s:10:"date_added";s:19:"2010-08-23 19:09:30";s:13:"last_modified";s:19:"2010-10-22 09:59:50";s:9:"logged_in";s:1:"1";}'),
+('18b2aa89ed61451c1cc2c5a1633c856f', '127.0.0.1', 'Mozilla/5.0 (X11; U; Linux x86_64; es-AR; rv:1.9.2', 1288971240, ''),
+('1c83301569c84dbd7d8dc6f9c24325d6', '127.0.0.1', 'Mozilla/5.0 (X11; U; Linux x86_64; es-AR; rv:1.9.2', 1289223784, ''),
+('af4fe269601b85672cee5347d2cb558b', '127.0.0.1', 'Mozilla/5.0 (X11; U; Linux x86_64; es-AR; rv:1.9.2', 1288980184, '');
 
 -- --------------------------------------------------------
 
@@ -4799,6 +4809,28 @@ INSERT INTO `products` (`products_id`, `categorie_reference`, `codlang`, `produc
 (7, 'aguas-subterraneas', 1, 'MP1 / SPE-NE', 'Bombas para el medio ambiente.', 'mp1--spe-ne', '3_12888802334cd2c069863f0__mp1.jpg', 141, 108, '<img src="/trabajos/grundfos.git/uploads/kcfinder/image/Productos/Aguas%20Subterraneas/mp1-cuadro.jpg" alt="" width="160" height="140" /><br /><strong>Datos t&eacute;cnicos</strong><br />Caudal, Q: m&aacute;x. 2.4 m3/h<br />Altura, H: m&aacute;x. 95 m<br />Temp. l&iacute;quido: 0&deg;C a  35&deg;C<br /><br /><strong>Aplicaciones</strong><br />Las bombas son adecuadas para<br />- Toma de muestras.<br /><br /><strong>Caracter&iacute;sticas y ventajas</strong><br />- Dise&ntilde;o compacto<br />- Entra en perforaciones de 50 mm.<br /><br />', 18, '1288839600', '1288839600'),
 (8, 'aumento-de-presion', 1, 'CR, CRN, alta presión', 'Bombas centrífugas multicelulares', 'cr--crn--alta-presion', '3_12888808684cd2c2e4e37e0__cr-crn-altapresion.jpg', 141, 108, '<img src="/trabajos/grundfos.git/uploads/kcfinder/image/Productos/Aumento%20de%20presion/cr-crn-altapresion-cuadro.jpg" alt="" width="160" height="140" /><br /><br /><strong>Datos t&eacute;cnicos</strong><br />Caudal, Q: m&aacute;x. 120 m3/H<br />Altura, H: m&aacute;x. 480 m<br />Temp. l&iacute;quido: -30&deg;C a  120&deg;C<br />Presi&oacute;n sistema: m&aacute;x. 50 bar<br /><br /><strong>Aplicaciones</strong><br />Las bombas son adecuadas para el trasiego de l&iacute;quidos en:<br />- Sistemas de lavado<br />- Sistemas de tratamiento de agua<br />- Plantas industriales<br />- Sistemas de alimentaci&oacute;n de caldera.<br /><br /><strong>Caracter&iacute;sticas y ventajas</strong><br />- Fiabilidad<br />- Altas presiones<br />- Mantenimiento f&aacute;cil<br />- Peque&ntilde;as dimensiones<br />- Adecuado para l&iacute;quidos ligeramente agresivos<br />- Soluci&oacute;n de bombeo &uacute;nica permitiendo alta presi&oacute;n.<br /><br /><strong>Opcional</strong><br />- Protecci&oacute;n contra marcha en seco y protecci&oacute;n del motor mediante LiqTec.<br />', 1, '1288839600', '1288839600'),
 (9, 'aumento-de-presion', 1, 'CRT', 'Bombas centrífugas multicelulares', 'crt', '3_12888820894cd2c7a984ba5__crt.jpg', 141, 108, '<img src="/trabajos/grundfos.git/uploads/kcfinder/image/Productos/Aumento%20de%20presion/crt-cuadro.jpg" alt="" width="160" height="140" /><br /> <strong>Datos t&eacute;cnicos</strong> Caudal, Q: m&aacute;x. 22 m3/H<br /> Altura, H: m&aacute;x. 250 m<br /> Temp. l&iacute;quido: -20&deg;C a  120&deg;C<br /> Presi&oacute;n sistema: m&aacute;x. 25 bar<br /><br /> <strong>Aplicaciones</strong> Las bombas son adecuadas para el trasiego de l&iacute;quidos en:<br /> - Sistemas de aguas de procesos<br /> - Sistemas de lavado y limpieza<br /> - Sistemas con agua de mar<br /> - Bombeo de &aacute;cidos y &aacute;lcalis<br /> - Sistemas de ultra filtraci&oacute;n<br /> - Sistemas de &oacute;smosis inversa<br /> - Instalaciones de nataci&oacute;n<br /><br /> <strong>Caracter&iacute;sticas y ventajas</strong><br /> - Alta resistencia a la corrosi&oacute;n<br /> - Fiabilidad<br /> - Alto rendimiento<br /> - Mantenimiento f&aacute;cil<br /> - Peque&ntilde;as dimensiones. <br /><br /> <strong>Opcional</strong><br /> - Protecci&oacute;n contra marcha en seco y protecci&oacute;n del motor mediante LiqTec.', 3, '1288839600', '1288839600');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `prueba`
+--
+
+DROP TABLE IF EXISTS `prueba`;
+CREATE TABLE IF NOT EXISTS `prueba` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Volcar la base de datos para la tabla `prueba`
+--
+
+INSERT INTO `prueba` (`id`, `name`) VALUES
+(1, 'asdasd prueba asdasd'),
+(2, 'asdasd marcelo asdasd'),
+(3, 'asdasd juan asdasd');
 
 -- --------------------------------------------------------
 

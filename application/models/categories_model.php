@@ -119,6 +119,7 @@ class Categories_model extends Model {
         $row = $this->db->get_where(TBL_CATEGORIES, array('categories_id'=>$id))->row_array();
 
         $this->db->select('thumb, thumb_width, thumb_height');
+        $this->db->order_by('order', 'asc');
         $row['bannergallery'] = $this->db->get_where(TBL_PRODUCTS, array('categorie_reference'=>$row['reference']))->result_array();
 
         return $row;

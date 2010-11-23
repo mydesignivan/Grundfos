@@ -120,7 +120,6 @@ class Contents_model extends Model {
             $seg = $this->uri->segment(1);
             $class = $seg==$row['reference'] && $row['parent_id']==0 ? ' class="current"' : '';
             $output.= '<a href="'.$href.'"'.$class.'>'.$row['title'].'</a>';
-            if( $row['parent_id']==0 ) $output.='<div class="line"></div>';
 
             if( $count_child>0 ) {
                 $output.= '<ul class="hide">';

@@ -262,7 +262,7 @@ button{
     list-style-type: none;
 }
 .menu ul.sf-menu{
-    margin: 20px 0 0 447px;
+    margin: 20px 0 0 402px;
     position: relative;
 }
 .menu ul.sf-menu >li{
@@ -270,6 +270,8 @@ button{
     display: inline;
     float: left;
     margin-right: 2px;
+    padding-right: 3px;
+    background: url({BASE_URL}images/separador-menu.png) no-repeat right top;
 }
 .menu ul.sf-menu li a{
     display: block;
@@ -282,15 +284,10 @@ button{
 .menu ul.sf-menu >li a{
     float: left;
 }
+.menu ul.sf-menu >li.outline{background: none;}
 .menu ul.sf-menu li a:hover, .menu ul.sf-menu li >a.current{
     background-color: #0081AB;
     visibility: inherit; /* fixes IE7 'sticky bug' */
-}
-.menu ul.sf-menu >li .line{
-    background: url({BASE_URL}images/separador-menu.png) no-repeat;
-    width: 1px;
-    height: 33px;
-    margin-right: -2px;
 }
 .menu ul.sf-menu .sf-sub-indicator {
     /*float: right;*/

@@ -87,7 +87,7 @@ var Contents = new (function(){
         });
         $('#form1').validate(o);
 
-        // Esto es para la galeria de imagen
+        //-------- Esto es para la galeria de imagen --------//
         PictureGallery.initializer({
             sel_input      : '#txtUploadFile',
             sel_button     : '#btnUpload',
@@ -105,14 +105,24 @@ var Contents = new (function(){
             }
         });
 
+        $("#gallery-image").sortable({
+            stop : function(){
+                $('a.jq-image').fancybox();
+            },
+            revert: true,
+            handle : '.handle'
+        }).disableSelection();
+        
+        // Set FancyBox
+        $('a.jq-image').fancybox();
+        //----- END UPLOAD GALLERY -----//
+
+
         // Muestra la categoria padre
         $('#txtParentCat').html('<u>'+_content_name+'</u>');
 
         $('#form1').find('input:text, input:file, textarea').bind('keyup', function(){_formchange=true});
         _j=0;
-
-        // Set FancyBox
-        $('a.jq-image').fancybox();
 
         $('#cont-btn').show();
     };

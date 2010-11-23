@@ -156,12 +156,20 @@ class Index extends Controller {
                      'reference'        => 'servicios'
                  );
              break;
+             case 'testimoniales':
+                 return array(
+                     'title'            => TITLE_TESTIMONIALES,
+                     'meta_description' => META_DESCRIPTION_TESTIMONIALES,
+                     'meta_keywords'    => META_KEYWORDS_TESTIMONIALES,
+                     'reference'        => 'testimoniales'
+                 );
+             break;
              case 'donde-estamos':
                  return array(
                      'title'            => TITLE_DONDESTAMOS,
                      'meta_description' => META_DESCRIPTION_DONDESTAMOS,
                      'meta_keywords'    => META_KEYWORDS_DONDESTAMOS,
-                     'reference'        => 'Donde estamos'
+                     'reference'        => 'donde-estamos'
                  );
              break;
          }

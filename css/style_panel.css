@@ -5,7 +5,7 @@
 
 
 /*------------------------------------------------------------------------------
- - ESTILO PARA FORMULARIO "CONTACTO"
+ - ESTILO PARA FORMULARIO "MI CUENTA"
  -----------------------------------------------------------------------------*/
 .form-myaccount {
     margin-top: 20px;
@@ -125,7 +125,7 @@ fieldset.fieldset-form{
 }
 
 /*------------------------------------------------------------------------------
- - ESTILOS PARA FORMULARIO FIELDSET
+ - ESTILOS PARA GALERIA IMAGEN
  -----------------------------------------------------------------------------*/
 fieldset.gallery-panel{
     float:left;

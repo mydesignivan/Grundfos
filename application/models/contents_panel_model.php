@@ -77,14 +77,14 @@ class Contents_panel_model extends Model {
                 if( !$this->_copy_images($gallery->images_new, $this->input->post('content_id')) ) return "Error Nº2";
             }
 
-            // Elimina las imagenes quitadas
+             // Elimina las imagenes quitadas
              if( count($gallery->images_del)>0 ){
                 foreach( $gallery->images_del as $row ){
 
-                    if( $this->db->delete(TBL_GALLERY_CONTENTS, array('image'=>$row->image_full)) ){
-                        @unlink(UPLOAD_PATH_SIDEBAR . $row->image_full);
-                        @unlink(UPLOAD_PATH_SIDEBAR . $row->image_thumb);
-                    }else "Error Nº3";
+                    if( $this->db->delete(TBL_GALLERY_CONTENTS, array('image' => urldecode($row->image_full))) ){
+                        @unlink(UPLOAD_PATH_SIDEBAR . urldecode($row->image_full));
+                        @unlink(UPLOAD_PATH_SIDEBAR . urldecode($row->image_thumb));
+                    }else return "Error Nº3";
                 }
              }
 
@@ -111,6 +111,7 @@ class Contents_panel_model extends Model {
     public function get_info($id) {
         $row = array();
         $row = $this->db->get_where(TBL_CONTENTS, array('content_id'=>$id))->row_array();
+        $this->db->order_by('order', 'asc');
         $row['gallery'] = $this->db->get_where(TBL_GALLERY_CONTENTS, array('content_id'=>$id))->result_array();
         return $row;
     }
