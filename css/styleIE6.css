@@ -1,0 +1,59 @@
+h1.title2{
+    padding: 0 0 23px 45px;
+    margin: 10px 0 0 20px;
+}
+
+
+/*------------------------------------------------------------------------------
+ - ESTILO QUE ESTAN EN EL "HEADER"
+ -----------------------------------------------------------------------------*/
+
+.header1 .logo{margin-top: 15px;}
+.header2 .logo{margin-top: 0;}
+
+/* MENU
+ -----------------------------------------------------------------------------*/
+.header1 .menu{
+    margin: -16px 0 20px -100px;
+}
+.header2 .menu{
+    margin: -15px 0 20px -100px;
+}
+.menu ul.sf-menu .sf-sub-indicator {
+    width: 10px;
+    height: 10px;
+}
+
+.header1 .cont-search, .header2 .cont-search{
+    margin: 40px -100px 0 0;
+    position: relative;
+}
+
+/* BANNER
+ -----------------------------------------------------------------------------*/
+    .banner p.text{
+        margin-left: 32px;
+    }
+    .banner img.image{
+        margin: -59px 21px;
+    }
+
+/*------------------------------------------------------------------------------
+- ESTILO PARA FORMULARIO "CONTACTO"
+ -----------------------------------------------------------------------------*/
+.form-contact input,
+.form-contact select{
+  background-color: #C8E6EE !important;
+  border:2px solid #75BBD2 !important;
+}
+
+/*------------------------------------------------------------------------------
+ - ESTILO PARA FORMULARIO "CV"
+ -----------------------------------------------------------------------------*/
+.form-cv input{
+  background-color: #C8E6EE;
+  border:2px solid #75BBD2;
+}
+.form-cv .top{
+    font-size: 0;
+ }
