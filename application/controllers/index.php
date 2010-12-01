@@ -34,7 +34,7 @@ class Index extends Controller {
         if( isset($content['gallery']) && count($content['gallery'])>1 ){
             $tlp_script[] = 'plugins_adgallery';
         }
-        if( strpos($content['content'], '{solicitecapacitacion}') ){
+        if( strpos($content['content'], '{widget}') ){
             $tlp_script = array_merge($tlp_script, array('plugins_easyslider', 'plugins_validator','plugins_formatnumber', 'class_solcapacitacion'));
             $cboCountry =  array('listCountry' => $this->lists_model->get_country(array(''=>'Seleccione un pa&iacute;s')));
             $this->_data = array_merge($this->_data, $cboCountry);

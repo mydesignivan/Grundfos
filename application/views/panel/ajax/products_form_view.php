@@ -14,10 +14,10 @@
     <div class="trow">
         <label class="label" for="txtThumb">* Im&aacute;gen</label>
 <?php
-$src = isset($info) ? UPLOAD_PATH_PRODUCTS . @$info['thumb'] : '';
+$src = @$info['thumb']!='' ? UPLOAD_PATH_PRODUCTS . @$info['thumb'] : '';
 ?>
         <div id="cont-image-1" class="span-13 last">
-            <img src="<?=$src?>" alt="<?=@$info['thumb']?>" width="<?=@$info['thumb_width']?>" height="<?=@$info['thumb_height']?>" class="ajaxupload-thumb fleft framethumb <?php if( $src=='' ) echo 'hide'?>" />
+            <img src="<?=$src?>" alt="<?=@$info['thumb']?>" width="<?=@$info['thumb_width']==0 ? '' : $info['thumb_width']?>" height="<?=@$info['thumb_height']==0 ? '' : $info['thumb_height']?>" class="ajaxupload-thumb fleft framethumb <?php if( $src=='' ) echo 'hide'?>" />
             <div class="clear span-13 last">
                 <input type="file" id="txtThumb" name="txtThumb" class="ajaxupload-input" size="20" />&nbsp;
                 <button type="button" onclick="Products.upload('#cont-image-1');">Subir</button>
@@ -28,7 +28,7 @@ $src = isset($info) ? UPLOAD_PATH_PRODUCTS . @$info['thumb'] : '';
         <input type="hidden" name="image_thumb_old" value="<?=$src?>" />
     </div>
     <div class="trow">
-        <label class="label" for="txtDescription">* Breve Descripci&oacute;n</label>
+        <label class="label" for="txtDescription">Breve Descripci&oacute;n</label>
         <div class="fleft"><textarea rows="10" cols="22" id="txtDescription" name="txtDescription"><?=@$info['description']?></textarea></div>
     </div>
     <div class="trow">

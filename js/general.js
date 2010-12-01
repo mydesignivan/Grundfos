@@ -1,16 +1,15 @@
 $(function(){
-    var gallery = $('#gallery');
-    if( gallery.length>0 ){
-        gallery.adGallery({
+    var a;
+    if( (a=$('#gallery')).length>0 ){
+        a.adGallery({
             width : 300,
             display_next_and_prev : false,
             loader_image: 'images/loader.gif',
             effect : 'fade'
         });
     }
-    var slider = $("#slider");
-    if( slider.length>0 ){
-        slider.easySlider({
+    if( (a=$("#slider")).length>0 ){
+        a.easySlider({
             prevText : '<img src="images/icon-arrow-left.png" alt="Prev" width="35" height="53" />',
             nextText : '<img src="images/icon-arrow-right.png" alt="Next" width="35" height="53" />'
         });
@@ -24,7 +23,7 @@ var CV = {
         div.modal({
             opacity  : '50',
             persist  : true,
-            position : ['15%',],
+            position : ['0',],
             onOpen   : CV._on_open,
             onClose  : CV._on_close
         });
@@ -34,7 +33,7 @@ var CV = {
         dialog.data.show();
 
         dialog.overlay.fadeIn('slow', function () {
-            $.get(get_url('index/ajax_show_formcv'), function(data){
+            $.get(get_url('ajax/show_formcv'), function(data){
                 dialog.data.find('.middle').html(data);
                 dialog.container.animate({height : dialog.data.height()+'px'}, 500);
                 $('#btnCancel').click(function(){$.modal.close();});

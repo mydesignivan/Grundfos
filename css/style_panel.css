@@ -70,21 +70,21 @@ fieldset.fieldset-categories{
 
 fieldset.fieldset-form{
     position: relative;
+    float: left;
     width: 670px;
-    height: 440px;
+    height: auto;
 }
     fieldset.fieldset-form .cont-products{
         position: relative;
         width: 669px;
-        height: 388px;
-        overflow: auto;
+        height: auto;
     }
     fieldset.fieldset-form .busy{
-        display: none;
+        display: block;
         position: absolute;
         left:0;top:0;
-        width: 669px;
-        height: 415px;
+        width: 671px;
+        height: 100%;
         background: transparent url({BASE_URL}images/ajax-loader2.gif) no-repeat center;
         z-index: 1000;
     }
@@ -106,6 +106,9 @@ fieldset.fieldset-form{
 /*------------------------------------------------------------------------------
  - ESTILO PARA TABLA "PRODUCTOS"
  -----------------------------------------------------------------------------*/
+.table-products{
+    clear: both;
+}
 .table-products .cell1{
     width: 8px;
 }

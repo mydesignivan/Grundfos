@@ -44,13 +44,14 @@ class Categories_model extends Model {
         /*print_array($json);
         print_array($data, true);*/
 
+        $this->db->trans_off();
         $this->db->trans_start(); // INICIO TRANSACCION
         if( $this->db->insert(TBL_CATEGORIES, $data) ){
             if( isset($json->image_thumb->href_image_full) ){
-                if( !@copy(urldecode($json->image_thumb->href_image_full),  UPLOAD_PATH_BANNER.urldecode($json->image_thumb->filename_image)) ) return 'Error Nº2';
+                if( !@copy(urldecode($json->image_thumb->href_image_full),  UPLOAD_PATH_BANNER.urldecode($json->image_thumb->filename_image)) ) return $this->_set_error('Error Nº2');
             }
 
-        }else return "Error Nº1";
+        }else return $this->_set_error("Error Nº1");
         $id = $this->db->insert_id();
         $this->db->trans_complete(); // COMPLETO LA TRANSACCION
 
@@ -91,15 +92,16 @@ class Categories_model extends Model {
         }
 
 
+        $this->db->trans_off();
         $this->db->trans_start(); // INICIO TRANSACCION
         $this->db->where('categories_id', $this->input->post('categories_id'));
         if( $this->db->update(TBL_CATEGORIES, $data) ) {
             if( isset($json->image_thumb->href_image_full) ){
-                 if( !@copy(urldecode($json->image_thumb->href_image_full),  UPLOAD_PATH_BANNER.urldecode($json->image_thumb->filename_image)) ) return 'Error Nº2';
+                 if( !@copy(urldecode($json->image_thumb->href_image_full),  UPLOAD_PATH_BANNER.urldecode($json->image_thumb->filename_image)) ) return $this->_set_error('Error Nº2');
                  else @unlink(urldecode($this->input->post('image_thumb_old')));
             }
 
-        }else return "Error Nº1";
+        }else return $this->_set_error("Error Nº1");
         $this->db->trans_complete(); // COMPLETO LA TRANSACCION
 
          $this->load->helper('file');
@@ -110,7 +112,11 @@ class Categories_model extends Model {
 
     public function delete($id) {
         $this->load->model('products_panel_model');
-        return $this->_delete(array(array('categories_id'=>$id)));
+        if( !$this->_delete(array(array('categories_id'=>$id))) ){
+            $this->db->trans_rollback();
+            return false;
+        }
+        return true;
     }
 
     public function get_info($id) {
@@ -202,6 +208,7 @@ class Categories_model extends Model {
 
             $info = $this->db->get_where(TBL_CATEGORIES, array('categories_id'=>$row['categories_id']))->row_array();
 
+            $this->db->trans_off();
             $this->db->trans_start(); // INICIO TRANSACCION
             if( !$this->products_panel_model->delete($info['reference']) ) return false;
             if( !$this->db->delete(TBL_CATEGORIES, array('categories_id'=>$row['categories_id'])) ) return false;
@@ -218,6 +225,11 @@ class Categories_model extends Model {
         }
 
         return true;
+    }
+
+    private function _set_error($err){
+        $this->db->trans_rollback();
+        return $err;
     }
     
 }

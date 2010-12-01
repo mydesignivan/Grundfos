@@ -3,22 +3,29 @@
 <div class="contents">
 <?php
 if( count($info['listProducts'])>0 ){
-    $n=0;
+    $n=0;$i=0;
     $titlecatold="";
-    $css="";
-    foreach( $info['listProducts'] as $row ){
+
+    for( $i=0; $i<count($info['listProducts']); $i++ ){
+        $row = $info['listProducts'][$i];
+        $css="";
+    ?>
+
+    <?php if( $titlecatold != $row['categorie_name'] ) {
+            $n=0;
+    ?>
+        <h1 class="title clear"><?=$row['categorie_name']?></h1>
+        <p><?=$row['categorie_content']?></p>
+        <br />
+    <?php }?>
+
+
+<?php
         $n++;
-        if( $n==count($info['listProducts']) ) {
+        if( $n==5 || $i==count($info['listProducts'])-1 || ($n>1 && $info['listProducts'][$i+1]['categorie_name']!=$titlecatold) ) {
             $css=" product-col-last";
         }
 ?>
-
-<?php if( $titlecatold != $row['categorie_name'] ) {?>
-    <div class="clear"></div>
-    <h1 class="title"><?=$row['categorie_name']?></h1>
-    <p><?=$row['categorie_content']?></p>
-    <br />
-<?php }?>
 
     <div class="product-col<?=$css?>">
         <img src="<?=UPLOAD_PATH_PRODUCTS .$row['thumb']?>" alt="<?=$row['thumb']?>" width="<?=$row['thumb_width']?>" height="<?=$row['thumb_height']?>" class="framethumb" />
@@ -27,7 +34,12 @@ if( count($info['listProducts'])>0 ){
         <a href="<?=site_url('/productos/leermas/'.$row['reference'])?>">Leer m&aacute;s</a>
     </div>
 
-<?php 
+<?php
+        if( $n==5 ) {
+            $n=0;
+            echo '<div class="clear"></div>';
+        }
+
 $titlecatold = $row['categorie_name'];
 }
 

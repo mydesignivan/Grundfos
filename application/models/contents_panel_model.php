@@ -36,12 +36,13 @@ class Contents_panel_model extends Model {
         /*print_array($json);
         print_array($data, true);*/
 
+        $this->db->trans_off();
         $this->db->trans_start(); // INICIO TRANSACCION
         if( $this->db->insert(TBL_CONTENTS, $data) ){
             $id = $this->db->insert_id();
-            if( !$this->_copy_images($json->gallery->images_new, $id) ) return "Error Nº2";
+            if( !$this->_copy_images($json->gallery->images_new, $id) ) return $this->_set_error("Error Nº2");
 
-        }else return "Error Nº1";
+        }else return $this->_set_error("Error Nº1");
 
         $this->db->trans_complete(); // COMPLETO LA TRANSACCION
 
@@ -67,6 +68,7 @@ class Contents_panel_model extends Model {
         /*print_array($json);
         print_array($data, true);*/
 
+        $this->db->trans_off();
         $this->db->trans_start(); // INICIO TRANSACCION
         $this->db->where('content_id', $this->input->post('content_id'));
         if( $this->db->update(TBL_CONTENTS, $data) ){
@@ -74,7 +76,7 @@ class Contents_panel_model extends Model {
             $gallery = $json->gallery;
 
             if( count($json->gallery->images_new)>0 ){
-                if( !$this->_copy_images($gallery->images_new, $this->input->post('content_id')) ) return "Error Nº2";
+                if( !$this->_copy_images($gallery->images_new, $this->input->post('content_id')) ) return $this->_set_error("Error Nº2");
             }
 
              // Elimina las imagenes quitadas
@@ -84,7 +86,7 @@ class Contents_panel_model extends Model {
                     if( $this->db->delete(TBL_GALLERY_CONTENTS, array('image' => urldecode($row->image_full))) ){
                         @unlink(UPLOAD_PATH_SIDEBAR . urldecode($row->image_full));
                         @unlink(UPLOAD_PATH_SIDEBAR . urldecode($row->image_thumb));
-                    }else return "Error Nº3";
+                    }else return $this->_set_error("Error Nº3");
                 }
              }
 
@@ -94,7 +96,7 @@ class Contents_panel_model extends Model {
                 $this->db->update(TBL_GALLERY_CONTENTS, array('order' => $row->order));
             }
 
-        }else return "Error Nº1";
+        }else return $this->_set_error("Error Nº1");
         $this->db->trans_complete(); // COMPLETO LA TRANSACCION
 
         //Borra archivos temporales
@@ -229,6 +231,11 @@ class Contents_panel_model extends Model {
         }
 
         return true;
+    }
+
+    private function _set_error($err){
+        $this->db->trans_rollback();
+        return $err;
     }
 
 }

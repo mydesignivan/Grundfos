@@ -3,7 +3,7 @@
 <p>Para trabajar o representar a Bottino Hnos. Subfactory Grundfos env&iacute;e su Curriculum e indique en que zona trabjar.</p>
 <div class="error hide"></div>
 
-<form id="form-contact" action="<?=site_url('/index/ajax_send_formcv/')?>" method="post" enctype="multipart/form-data" target="iframeUpload">
+<form id="form-contact" action="<?=site_url('/ajax/send_formcv/')?>" method="post" enctype="multipart/form-data" target="iframeUpload">
     <div class="trow">
         <label class="label" for="txtName">* Nombre</label>
         <input type="text" name="txtName" id="txtName" class="required" />

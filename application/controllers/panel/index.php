@@ -8,7 +8,8 @@ class Index extends Controller {
         $this->load->library("simplelogin");
         $this->load->model('contents_model');
         $this->_data=array(
-            'listMenu'  =>  $this->contents_model->get_menu()
+            'listMenu'  =>  $this->contents_model->get_menu(),
+            'content_footer' => $this->contents_model->get_footer()
         );
     }
 

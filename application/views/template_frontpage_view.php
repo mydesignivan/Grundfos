@@ -18,7 +18,7 @@
 ?>
     <!--[if lt IE 8]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"/><![endif]-->
     <!--[if IE 6]>
-    <link href="css/style_ie6.css" rel="stylesheet" type="text/css" />
+    <link href="css/styleIE6.css" rel="stylesheet" type="text/css" />
     <![endif]-->
     <!--[if IE 7]>
     <link href="css/styleIE7.css" rel="stylesheet" type="text/css" />

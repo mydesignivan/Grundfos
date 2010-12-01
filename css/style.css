@@ -33,6 +33,7 @@ h1.title3{
     background: url({BASE_URL}images/banda-trabaje-con-nosotros.png) no-repeat bottom left;
     padding-bottom: 8px;
     margin: 10px 0 10px 0;
+    text-align: left;
 }
 
 .color1{color: #48A5C3 !important}
@@ -264,8 +265,9 @@ button{
 .menu ul.sf-menu{
     margin: 20px 0 0 402px;
     position: relative;
+    z-index: 1000;
 }
-.menu ul.sf-menu >li{
+.menu ul.sf-menu li{
     position: relative;
     display: inline;
     float: left;
@@ -275,17 +277,15 @@ button{
 }
 .menu ul.sf-menu li a{
     display: block;
+    float: left;
     color: #fff;
     font-size: 100%;
     font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
     padding: 2px 20px 2px 20px;
     text-align: center;
 }
-.menu ul.sf-menu >li a{
-    float: left;
-}
-.menu ul.sf-menu >li.outline{background: none;}
-.menu ul.sf-menu li a:hover, .menu ul.sf-menu li >a.current{
+.menu ul.sf-menu li.outline{background: none;}
+.menu ul.sf-menu li a:hover, .menu ul.sf-menu li a.current{
     background-color: #0081AB;
     visibility: inherit; /* fixes IE7 'sticky bug' */
 }
@@ -314,14 +314,15 @@ button{
     top: 0;
 }
 .menu ul.sf-menu ul li{
-    position: relative;
     display: list-item;
-    float: left;
     width: 230px;
+    margin: 0;
+    padding: 0;
     border-bottom: 1px dashed #fff;
     background-color: #0E3753;
 }
 .menu ul.sf-menu ul li a{
+    float: none;
     width: 190px;
     text-align: left;
 }
@@ -470,7 +471,7 @@ table tbody tr.row-even td{
 }
 
 /*------------------------------------------------------------------------------
- - ESTILO PARA FORMULARIO "CONTACTO"
+ - ESTILO PARA FORMULARIO "CV"
  -----------------------------------------------------------------------------*/
 .form-cv{
     color:#5D94A8;
@@ -517,7 +518,9 @@ table tbody tr.row-even td{
     position: relative;
     top:5px;
 }
-
+.form-cv .middle p{
+    text-align: left;
+}
 /*------------------------------------------------------------------------------
  - ESTILO PARA FORMULARIO "SOLICITE CAPACITACION"
  -----------------------------------------------------------------------------*/
@@ -556,9 +559,9 @@ table tbody tr.row-even td{
     position: relative;
     background: url({BASE_URL}images/separador-product.png) no-repeat right top;
     width: 160px;
-    height: 260px;
+    height: auto;
     padding-right: 10px;
-    margin-right: 20px;
+    margin: 0 20px 20px 0;
 }
     .product-col h3{
         color:#42B4CC;
@@ -567,9 +570,7 @@ table tbody tr.row-even td{
         margin-top: 8px;
     }
     .product-col a{
-        position: absolute;
-        left: 66px;
-        top:210px;
+        float:left;
         width: 80px;
         height: 22px;
         background-color: #074A87;
@@ -578,6 +579,7 @@ table tbody tr.row-even td{
         display: block;
         font-style: italic;
         text-align: center;
+        margin-top: 2px;
     }
 
 .product-col-last{

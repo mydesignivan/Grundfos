@@ -45,6 +45,8 @@ class SuperUpload{
             'image_width'     => @$params['image_width'], //Obligatorio
             'image_height'    => @$params['image_height'], //Obligatorio
             'master_dim'      => !isset($params['master_dim']) ? 'auto' : $params['master_dim'],  // auto, width, height
+            'thumb_maintain_ratio'  => !isset($params['thumb_maintain_ratio']) ? true : $params['thumb_maintain_ratio'],  // true / false
+            'image_maintain_ratio'  => !isset($params['image_maintain_ratio']) ? true : $params['image_maintain_ratio'],  // true / false
             'maxsize'         => !isset($params['maxsize']) ? 2048 : $params['maxsize'],
             'filetype'        => !isset($params['filetype']) ? 'gif|jpg|png' : $params['filetype'],
             'error_uploaded'  => !isset($params['error_uploaded']) ? 'El archivo no ha podido llegar al servidor' : $params['error_uploaded'],
@@ -99,6 +101,7 @@ class SuperUpload{
                     $config['wm_vrt_alignment'] = $this->_params['watermark_options']['vrt_alignment'];
                     $config['wm_hor_alignment'] = $this->_params['watermark_options']['hor_alignment'];
                     $config['wm_opacity'] = $this->_params['watermark_options']['opacity'];
+                    $config['maintain_ratio'] = $this->_params['thumb_maintain_ratio'];
                     $this->CI->image_lib->initialize($config);
                     if( !$this->CI->image_lib->watermark() ) $this->_show_error($this->CI->image_lib->display_errors());
                 }
@@ -114,6 +117,7 @@ class SuperUpload{
                     $config['width'] = $this->_params['thumb_width'];
                     $config['height'] = $this->_params['thumb_height'];
                     $config['master_dim'] = $this->_params['master_dim'];
+                    $config['maintain_ratio'] = $this->_params['image_maintain_ratio'];
 
                     $this->CI->image_lib->clear();
                     $this->CI->image_lib->initialize($config);
@@ -124,8 +128,6 @@ class SuperUpload{
 
                         $output['thumb_width'] = $sizes_image_thumb[0];
                         $output['thumb_height'] = $sizes_image_thumb[1];
-                        $output['thumb_width_complete'] = $sizes_image_original[0];
-                        $output['thumb_height_complete'] = $sizes_image_original[1];
 
                         // Dimensiona la imagen original   (ORIGINAL)
                         if( $this->_params['resize_image_original'] ){
@@ -140,12 +142,6 @@ class SuperUpload{
                                 $this->CI->image_lib->initialize($config);
 
                                 if( !$this->CI->image_lib->resize() ) $this->_save_error($this->CI->image_lib->display_errors(), $n);
-                                else{
-                                    $size = getimagesize($config['source_image']);
-                                    $output['thumb_width_complete'] = $size[0];
-                                    $output['thumb_height_complete'] = $size[1];
-
-                                }
                             }
                         }
 
@@ -154,7 +150,9 @@ class SuperUpload{
                 }else{
                     $output['thumb_width'] = $sizes_image_original[0];
                     $output['thumb_height'] = $sizes_image_original[1];
-                    //rename($this->_params['path'] . $filename, $this->_params['path'] . $filename_thumb);
+                    if( $this->_params['image_width']!='' && $this->_params['image_height']!='' ){
+                        copy($this->_params['path'] . $filename, $this->_params['path'] . $filename_thumb);
+                    }
                 }
 
             }else $this->_save_error($resultValid, $n);

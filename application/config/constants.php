@@ -71,7 +71,7 @@ $msg = '
     <b>Nombre:</b> {name}<br />
     <b>Direcci&oacute;n:</b> {address}<br />
     <b>Ciudad:</b> {city}<br />
-    <b>C&oacute;digo Postal:</b> {postcode}<br />fax
+    <b>C&oacute;digo Postal:</b> {postcode}<br />
     <b>Pa&iacute;s:</b> {country}<br />
     <b>Provincia:</b> {state}<br />
     <b>E-Mail:</b> {email}<br />
@@ -93,7 +93,7 @@ $msg = '
     <b>Nombre:</b> {name}<br />
     <b>Direcci&oacute;n:</b> {address}<br />
     <b>Ciudad:</b> {city}<br />
-    <b>C&oacute;digo Postal:</b> {postcode}<br />fax
+    <b>C&oacute;digo Postal:</b> {postcode}<br />
     <b>Pa&iacute;s:</b> {country}<br />
     <b>Provincia:</b> {state}<br />
     <b>E-Mail:</b> {email}<br />
@@ -113,7 +113,7 @@ define('EMAIL_SOLCAP_MESSAGE', $msg);
 $msg = '
     <b>Nombre:</b> {name}<br />
     <b>E-Mail:</b> {email}<br />
-    <b>Comentario:</b> {email}<br />
+    <b>Comentario:</b><br />
     {comment}
 ';
 define('EMAIL_CV_SUBJECT', 'Grundfos - Curriculum Vitae');

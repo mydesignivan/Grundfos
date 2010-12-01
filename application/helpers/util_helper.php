@@ -77,7 +77,7 @@ function get_filename($text){
     return uniqid(time()) ."__". $text;
 }
 
-function extract_var(&$TheStr, $sLeft, $sRight){
+/*function extract_var(&$TheStr, $sLeft, $sRight){
     $out = array();
     do{
         $pleft = strpos($TheStr, $sLeft, 0);
@@ -91,6 +91,26 @@ function extract_var(&$TheStr, $sLeft, $sRight){
         }
     }while($pleft !== false);
 
+    return $out;
+}*/
+
+function extract_var(&$str, $left, $right, $del=false){
+    $out = array();
+    $pos2=0;
+    $tmpstr=$str;
+
+    while( ($pos1=strpos($str, $left, $pos2))!== false ){
+        if( ($pos2=strpos($str, $right, $pos1))!== false ){
+            $val = substr($str,  $pos1+strlen($left), $pos2-$pos1-strlen($right)+1);
+            $tag = $left . $val . $right;
+            $out[] = array(
+                'val' => $val,
+                'tag' => $tag
+            );
+            if( $del ) $tmpstr = str_replace($tag, '', $tmpstr);
+        }
+    }
+    $str = $tmpstr;
     return $out;
 }
 

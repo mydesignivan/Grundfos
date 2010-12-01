@@ -7,14 +7,12 @@
 
 <?php
     $n=0;
-    $j=0;
-    foreach( $info['listProducts'] as $row ){
+    for( $i=0; $i<count($info['listProducts']); $i++ ){
+        $row = $info['listProducts'][$i];
         $n++;
-        $j++;
         $css="";
-        if( $n==3 || $j==count($info['listProducts']) ) {
+        if( $n==3 || $i==count($info['listProducts'])-1 ) {
             $css=" product-col-last";
-            $n=0;
         }
 ?>
     <div class="product-col<?=$css?>">
@@ -23,6 +21,11 @@
         <p><?=$row['description']?></p>
         <a href="<?=site_url('/productos/leermas/'.$row['reference'])?>">Leer m&aacute;s</a>
     </div>
-    <?php }?>
+    <?php
+        if( $n==3 ) {
+            $n=0;
+            echo '<div class="clear"></div>';
+        }
+    }?>
 
 </div>

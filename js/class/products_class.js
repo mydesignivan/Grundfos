@@ -8,8 +8,10 @@ var Products = new (function(){
      var _ajaxupload_output=false;
      var _ajaxupload_div=false;
      var _ajaxupload_working=false;
+     var _ajaxupload_del=false;
+     var _ajaxupload_remove=false;
      var _formchange=false;
-     var _j=0;     
+     var _j=0;
 
     /* PUBLIC METHODS
      **************************************************************************/
@@ -80,12 +82,29 @@ var Products = new (function(){
 
         if( confirm('¿Confirma la eliminación?\n'+txt) ){
             $.post(get_url('panel/products/ajax_products_del/'+id), function(data){
-                if( data!="ok" ) $('#error').show();
+                if( data!="ok" ) {
+                    alert(data);
+                    $('#error').show();
+                }
                 else _show_list();
             });
         }
         return false;
-     }
+     };
+
+     this.remove_image = function(me){
+        _ajaxupload_output=false;
+        _ajaxupload_del=true;
+        $('#cont-image-1 .ajaxupload-thumb').attr({
+            src : '',
+            alt : '',
+            width : '',
+            height : ''
+        }).hide();
+        $(me).hide();
+        $('#cont-image-1 .ajaxupload-input').val('');
+        return false;
+     };
 
      this.mark_items_all = function() {
         $('#tblList tbody input:checkbox').each(function(){
@@ -123,6 +142,7 @@ var Products = new (function(){
 
         _ajaxupload_working=true;
         _ajaxupload_div = me;
+        _ajaxupload_remove = me.find('.ajaxupload-remove');
         return false;
      };
 
@@ -191,7 +211,6 @@ var Products = new (function(){
         // Configura el Validador
         var rules = {
             txtName         : 'required',
-            txtDescription  : 'required',
             txtContent      : 'tinymce_required'
         };
 
@@ -287,15 +306,15 @@ var Products = new (function(){
     var _on_submit_products = function() {
         var f = $('#form1');
 
-        if( $('#products_id').val()=='' && !_ajaxupload_output ){
+        /*if( $('#products_id').val()=='' && !_ajaxupload_output ){
             $('#cont-image-1 .ajaxupload-error').html('Este campo es obligatorio.').show();
             $('#txtThumb').focus();
             return false;
-        }
+        }*/
 
         _Loader.show();
 
-        var params = _get_params(f)+'&json='+JSON.encode({image_thumb : _ajaxupload_output});
+        var params = _get_params(f)+'&json='+JSON.encode({image_thumb : _ajaxupload_output, image_del : _ajaxupload_del});
         
         $.post(f.attr('action'), params, function(data){
             _Loader.hide();
@@ -466,6 +485,7 @@ var Products = new (function(){
                                       .show();
 
                 _ajaxupload_output = output;
+                if( typeof(_ajaxupload_remove)=="object" ) _ajaxupload_remove.show();
             }
             else _ajaxupload_div.find('.ajaxupload-error').html(result['error'][0]['message']).show();
 

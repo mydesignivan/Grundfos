@@ -9,6 +9,7 @@ var PictureGallery = new (function(){
            sel_ajaxloader : '',
            sel_gallery    : '',
            sel_msgerror   : '',
+           sel_inputitle  : '',
            action         : '',
            href_remove    : '',
            defined_size   : false,
@@ -23,6 +24,8 @@ var PictureGallery = new (function(){
        $('body').append(_form);
 
        $(params.sel_gallery+' li a.jq-removeimg').bind('click', _remove_image);
+       $(params.sel_gallery+' li input.pg-title').keyup(function(){$(this).data('edit', true)});
+
   };
 
   /* PUBLIC METHODS
@@ -46,6 +49,7 @@ var PictureGallery = new (function(){
             _form.find(':file').remove();
             input.prependTo(_form);
             parent.prepend(inputclone);
+            _inputitle = $(params.sel_inputitle);
             _form.submit();
         }
         return false;
@@ -62,12 +66,13 @@ var PictureGallery = new (function(){
                 var a=li.data('au-data');
                 
                 data.push({
-                    image_full       : _get_filename(tagA.attr('href')),
-                    image_thumb      : _get_filename(tagImg.attr('src')),
-                     width           : a.width,
-                     height          : a.height,
-                     width_complete  : a.width_complete,
-                     height_complete : a.height_complete
+                    image_full      : _get_filename(tagA.attr('href')),
+                    image_thumb     : _get_filename(tagImg.attr('src')),
+                    width           : a.width,
+                    height          : a.height,
+                    width_complete  : a.width_complete,
+                    height_complete : a.height_complete,
+                    title           : a.title
                 });
             }
         });
@@ -93,6 +98,21 @@ var PictureGallery = new (function(){
         return data;
    };
 
+   this.get_images_edit = function(){
+       var data = new Array();
+       $(params.sel_gallery+' li').each(function(){
+           var t=$(this);
+           var i=t.find('input.pg-title');
+           if( i.data('edit') ){
+               data.push({
+                   title      : i.val(),
+                   image_full : _get_filename(t.find('a.jq-image').attr('href'))
+               })
+           }
+       });
+       return data;
+   };
+
 
    /* PRIVATE PROPERTIES
     **************************************************************************/
@@ -100,9 +120,7 @@ var PictureGallery = new (function(){
     var array_images_del = new Array();
     var _form=false;
     var _iframe=false;
-    var _loader=0;
-    var _stop=false;
-    var _temp=false;
+    var _inputitle=false;
 
    /* PRIVATE METHODS
     **************************************************************************/
@@ -133,7 +151,7 @@ var PictureGallery = new (function(){
 
             var output = data['output'][0];
 
-            li.find('a.jq-image').attr('href', output['href_image_full']);
+            li.find('a.jq-image').attr('href', output['href_image_full']).attr('title', _inputitle.val());
             var img = li.find('img:first');
                 img.attr('src', output['href_image_thumb']);
 
@@ -147,7 +165,8 @@ var PictureGallery = new (function(){
                 width           : output['thumb_width'],
                 height          : output['thumb_height'],
                 width_complete  : output['thumb_width_complete'],
-                height_complete : output['thumb_height_complete']
+                height_complete : output['thumb_height_complete'],
+                title           : _inputitle.val()
             };
 
             if( !ul.is(':visible') ){
@@ -161,6 +180,8 @@ var PictureGallery = new (function(){
                 ul.find('li:last').data('au-data', audata);
                 ul.find('li:last').data('au-newimg', true);
             }
+            ul.find('li:last input.pg-title').val(_inputitle.val());
+            _inputitle.val('');
 
             $(params.sel_input).val('');
             $(params.sel_button)[0].disabled=false;

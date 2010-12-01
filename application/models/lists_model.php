@@ -27,5 +27,11 @@ class lists_model extends Model {
             return $data;
         }
     }
+    
+    public function get_country_name($id){
+        $this->db->select('name');
+        $row = $this->db->get_where(TBL_LIST_STATES, array('country_id'=>$id))->row_array();
+        return $row['name'];
+    }
 
 }
