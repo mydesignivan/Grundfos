@@ -245,8 +245,7 @@ var Products = new (function(){
 
         $('#optBannerShowYes').click(function(){
             $('#divContBanner').show();
-            var a = $('#cont-products');
-            a.scrollTop(a.height());
+            $(document).scrollTop(0);
         });
         $('#optBannerShowNo').click(function(){
             $('#divContBanner').hide();
@@ -297,7 +296,7 @@ var Products = new (function(){
                 alert("ERROR AJAX:\n\n"+data);
                 _working=false;
             }
-            $('#cont-products').scrollTop(0);
+            $(document).scrollTop(0);
         });
 
         return false;
@@ -329,7 +328,7 @@ var Products = new (function(){
                 }else html+=data;
                 $('#error').html(html).show();
             }
-            $('#cont-products').scrollTop(0);
+             $(document).scrollTop(0);
         });
 
         return false;
@@ -422,7 +421,7 @@ var Products = new (function(){
          _Loader.show();
          $('#fieldset-form legend').html(title);
          $('#cont-products').load(get_url('panel/products/'+segm), function(){
-             $('#cont-products').scrollTop(0);             
+             $(document).scrollTop(0);
               callback();
               _Loader.hide();
          });
