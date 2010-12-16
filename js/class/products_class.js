@@ -24,7 +24,7 @@ var Products = new (function(){
      this.categorie_new = function(a){
          if( _working ) return false;
          var fn = 'ajax_form_categorie';
-         if( a ) fn+='/'
+         if( a ) fn+='/';
          _show_form(fn, 'Nueva Categor&iacute;a', _callback_categories);
          return false;
      };
@@ -37,7 +37,7 @@ var Products = new (function(){
 
      this.categorie_delete = function(){
          if( _parent_id==0 ){
-             alert("Seleccione una categoría.")
+             alert("Seleccione una categoría.");
              return false;
          }
 
@@ -77,7 +77,7 @@ var Products = new (function(){
             });
             if( id.length==0 ) return false;
             id = id.join('/');
-            txt = a.join(', ')
+            txt = a.join(', ');
         }else txt = $('#tr'+id).find('td.cell2').text();
 
         if( confirm('¿Confirma la eliminación?\n'+txt) ){
@@ -397,7 +397,7 @@ var Products = new (function(){
         TinyMCE_init.handle_node_change_callback = function(){
             _j++;
             if( _j>1 ) _formchange=true;
-        }
+        };
         tinyMCE.init(TinyMCE_init);
     };
 

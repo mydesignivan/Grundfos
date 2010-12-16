@@ -19,7 +19,7 @@ class Index extends Controller {
 
     /* PUBLIC FUNCTIONS
      **************************************************************************/
-    public function index(){        
+    public function index(){
         if( $this->session->userdata('logged_in') ) {
             redirect('/panel/myaccount/');
         }else{

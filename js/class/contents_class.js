@@ -230,7 +230,7 @@ var Contents = new (function(){
         TinyMCE_init.handle_node_change_callback = function(){
             _j++;
             if( _j>1 ) _formchange=true;
-        }
+        };
         tinyMCE.init(TinyMCE_init);
     };
 

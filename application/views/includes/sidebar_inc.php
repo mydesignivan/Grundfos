@@ -14,7 +14,7 @@
     <?php }?>
     </ul>
 <?php }?>
-
+<br />
 <?php if( isset($content['gallery']) ){
 if( count($content['gallery'])>1 ){?>
 

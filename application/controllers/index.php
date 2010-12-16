@@ -81,7 +81,7 @@ class Index extends Controller {
 
             //$datauser = $this->users_model->get_info(array('username'=>'mydesignadmin'));
             $datauser = $this->users_model->get_info(array('username'=>'admin'));
-            $to = $datauser['email'];
+            $to = $datauser['email_solcap'];
 
             $this->email->from($this->input->post('txtEmail'), $this->input->post('txtName'));
             $this->email->to($to);
@@ -94,40 +94,9 @@ class Index extends Controller {
         }
     }
 
-
     /* AJAX FUNCTIONS
      **************************************************************************/
-    public function ajax_show_formcv(){
-        $this->load->view('frontpage/ajax/cv_view');
-    }
-    public function ajax_send_formcv(){
-        if( $_SERVER['REQUEST_METHOD']=="POST" ){
-            $file = $_FILES['txtCV'];
-            
-            if( is_uploaded_file($file['tmp_name']) ){
-                $filename = UPLOAD_PATH_CV . get_filename($file['name']);
-                if( move_uploaded_file($file['tmp_name'], $filename) ){
-                    chmod($filename, 0777);
-                    
-                    $message = EMAIL_CV_MESSAGE;
-                    $message = str_replace('{name}', $this->input->post('txtName'), $message);
-                    $message = str_replace('{email}', $this->input->post('txtEmail'), $message);
-                    $message = str_replace('{comment}', nl2br($this->input->post('txtComment')), $message);
-
-                    $this->load->library('email');
-                    $this->email->from($this->input->post('txtEmail'), $this->input->post('txtName'));
-                    $this->email->to(EMAIL_CV_TO);
-                    $this->email->subject(EMAIL_CV_SUBJECT);
-                    $this->email->message($message);
-                    $this->email->attach($filename);
-                    echo $this->email->send() ? "send" : "notsend";
-                }
-            }else echo "notupload";
-        }
-        die();
-    }
-
-
+    
     /* PRIVATE FUNCTIONS
      **************************************************************************/
     private function _get_params($ref){

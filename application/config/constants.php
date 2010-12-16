@@ -78,7 +78,7 @@ $msg = '
     <b>Telefono:</b> {phone}<br />
     <b>Fax:</b> {fax}<br />
     <b>Tema:</b> {theme}
-    <hr color="#666666" />{message}
+    <b>Mensaje:</b><br />{message}
 ';
 define('EMAIL_CONTACT_SUBJECT', 'Formulario de Contacto');
 define('EMAIL_CONTACT_MESSAGE', $msg);
@@ -100,7 +100,7 @@ $msg = '
     <b>Telefono:</b> {phone}<br />
     <b>Fax:</b> {fax}<br />
     <b>Tema:</b> {theme}
-    <hr color="#666666" />{message}
+    <b>Mensaje:</b><br />{message}
 ';
 define('EMAIL_SOLCAP_SUBJECT', 'Solicitud de capacitación');
 define('EMAIL_SOLCAP_MESSAGE', $msg);
@@ -117,7 +117,6 @@ $msg = '
     {comment}
 ';
 define('EMAIL_CV_SUBJECT', 'Grundfos - Curriculum Vitae');
-define('EMAIL_CV_TO', 'iwmattoni@gmail.com');
 define('EMAIL_CV_MESSAGE', $msg);
 
 /*

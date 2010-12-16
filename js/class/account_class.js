@@ -35,7 +35,7 @@ var Account = new (function(){
          me.disabled=true;
          $.post(get_url('contacto/ajax_show_states'), 'country_id='+me.value, function(data){
              me.disabled=false;
-             $('#cboState').parent().parent().show()
+             $('#cboState').parent().parent().show();
              $('#cboState').html(data);
          });
      };
