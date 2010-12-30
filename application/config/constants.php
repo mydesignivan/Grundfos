@@ -66,58 +66,55 @@ define('ERR_UPLOAD_FILETYPE', 'El tipo de archivo es incompatible.');
 | EMAIL FORM CONTACTO
 |--------------------------------------------------------------------------
 */
-$msg = '
-    <b>Compa&ntilde;&iacute;a:</b> {company}<br />
-    <b>Nombre:</b> {name}<br />
-    <b>Direcci&oacute;n:</b> {address}<br />
-    <b>Ciudad:</b> {city}<br />
-    <b>C&oacute;digo Postal:</b> {postcode}<br />
-    <b>Pa&iacute;s:</b> {country}<br />
-    <b>Provincia:</b> {state}<br />
-    <b>E-Mail:</b> {email}<br />
-    <b>Telefono:</b> {phone}<br />
-    <b>Fax:</b> {fax}<br />
-    <b>Tema:</b> {theme}
-    <b>Mensaje:</b><br />{message}
-';
-define('EMAIL_CONTACT_SUBJECT', 'Formulario de Contacto');
-define('EMAIL_CONTACT_MESSAGE', $msg);
+define('EMAIL_CONTACT_SUBJECT', 'Subfactory Grundfos - Formulario de Contacto');
+define('EMAIL_CONTACT_MESSAGE', json_encode(array(
+    '<b>Compa&ntilde;&iacute;a:</b> {txtCompany}<br />',
+    '<b>Nombre:</b> {txtName}<br />',
+    '<b>Direcci&oacute;n:</b> {txtAddress}<br />',
+    '<b>Ciudad:</b> {txtCity}<br />',
+    '<b>C&oacute;digo Postal:</b> {txtPC}<br />',
+    '<b>Pa&iacute;s:</b> {country}<br />',
+    '<b>Provincia:</b> {cboState}<br />',
+    '<b>E-Mail:</b> {txtEmail}<br />',
+    '<b>Telefono:</b> {txtPhoneCode}-{txtPhoneNum}<br />',
+    '<b>Fax:</b> {txtFaxCode}-{txtFaxNum}<br />',
+    '<b>Tema:</b> {txtTheme}<br />',
+    '<b>Mensaje:</b><br />{txtMessage}'
+)));
 
 /*
 |--------------------------------------------------------------------------
 | EMAIL FORM SOLICITE CAPACITACION
 |--------------------------------------------------------------------------
 */
-$msg = '
-    <b>Compa&ntilde;&iacute;a:</b> {company}<br />
-    <b>Nombre:</b> {name}<br />
-    <b>Direcci&oacute;n:</b> {address}<br />
-    <b>Ciudad:</b> {city}<br />
-    <b>C&oacute;digo Postal:</b> {postcode}<br />
-    <b>Pa&iacute;s:</b> {country}<br />
-    <b>Provincia:</b> {state}<br />
-    <b>E-Mail:</b> {email}<br />
-    <b>Telefono:</b> {phone}<br />
-    <b>Fax:</b> {fax}<br />
-    <b>Tema:</b> {theme}
-    <b>Mensaje:</b><br />{message}
-';
 define('EMAIL_SOLCAP_SUBJECT', 'Solicitud de capacitación');
-define('EMAIL_SOLCAP_MESSAGE', $msg);
+define('EMAIL_SOLCAP_MESSAGE', json_encode(array(
+    '<b>Compa&ntilde;&iacute;a:</b> {txtCompany}<br />',
+    '<b>Nombre:</b> {txtName}<br />',
+    '<b>Direcci&oacute;n:</b> {txtAddress}<br />',
+    '<b>Ciudad:</b> {txtCity}<br />',
+    '<b>C&oacute;digo Postal:</b> {txtPC}<br />',
+    '<b>Pa&iacute;s:</b> {country}<br />',
+    '<b>Provincia:</b> {cboState}<br />',
+    '<b>E-Mail:</b> {txtEmail}<br />',
+    '<b>Telefono:</b> {txtPhoneCode}-{txtPhoneNum}<br />',
+    '<b>Fax:</b> {txtFaxCode}-{txtFaxNum}<br />',
+    '<b>Tema:</b> {txtTheme}<br />',
+    '<b>Mensaje:</b><br />{txtMessage}'
+)));
 
 /*
 |--------------------------------------------------------------------------
 | EMAIL FORM CV
 |--------------------------------------------------------------------------
 */
-$msg = '
-    <b>Nombre:</b> {name}<br />
-    <b>E-Mail:</b> {email}<br />
-    <b>Comentario:</b><br />
-    {comment}
-';
 define('EMAIL_CV_SUBJECT', 'Grundfos - Curriculum Vitae');
-define('EMAIL_CV_MESSAGE', $msg);
+define('EMAIL_CV_MESSAGE', json_encode(array(
+    '<b>Nombre:</b> {txtName}<br />',
+    '<b>E-Mail:</b> {txtEmail}<br />',
+    '<b>Comentario:</b><br />',
+    '{txtComment}'
+)));
 
 /*
 |--------------------------------------------------------------------------
@@ -153,13 +150,13 @@ define('IMAGESIZE_HEIGHT_THUMB_BANNER', 175);
 */
 define('TITLE_GLOBAL', 'Bottino Hnos Subfactory Grundfos'); // Titulo para todas las secciones
 define('TITLE_INDEX', '');
-define('TITLE_EMPRESA', ' - Empresa');
-define('TITLE_PRODUCTOS', ' - Productos');
-define('TITLE_SERVICIOS', ' - Servicios');
-define('TITLE_TESTIMONIALES', ' - Testimoniales');
-define('TITLE_CONTACTO', ' - Contacto');
-define('TITLE_DONDESTAMOS', ' Donde Estamos');
-define('TITLE_NOTICIAS', ' Noticias');
+define('TITLE_EMPRESA', 'Bottino Hnos Subfactory Grundfos - Empresa');
+define('TITLE_PRODUCTOS', 'Bottino Hnos Subfactory Grundfos - Productos');
+define('TITLE_SERVICIOS', ' Bottino Hnos Subfactory Grundfos- Servicios');
+define('TITLE_TESTIMONIALES', 'Bottino Hnos Subfactory Grundfos - Testimoniales');
+define('TITLE_CONTACTO', 'Bottino Hnos Subfactory Grundfos - Contacto');
+define('TITLE_DONDESTAMOS', 'Bottino Hnos Subfactory Grundfos - Donde Estamos');
+define('TITLE_NOTICIAS', 'Bottino Hnos Subfactory Grundfos - Noticias');
 
 
 

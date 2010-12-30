@@ -13,7 +13,7 @@ class Ajax extends Controller {
     /* PUBLIC FUNCTIONS
      **************************************************************************/
     public function show_formcv(){
-        $this->load->view('frontpage/ajax/cv_view');
+        $this->load->view('front/ajax/cv_view');
     }
     
     public function send_formcv(){
@@ -26,10 +26,11 @@ class Ajax extends Controller {
                 if( move_uploaded_file($file['tmp_name'], $filename) ){
                     chmod($filename, 0777);
                     
-                    $message = EMAIL_CV_MESSAGE;
-                    $message = str_replace('{name}', $this->input->post('txtName'), $message);
-                    $message = str_replace('{email}', $this->input->post('txtEmail'), $message);
-                    $message = str_replace('{comment}', nl2br($this->input->post('txtComment')), $message);
+                    $config = array();
+                    $config['nl2br'] = 'txtComment';
+                    $config['default'] = '---';
+
+                    $message = set_message(json_decode(EMAIL_CV_MESSAGE), $config);
 
                     $datauser = $this->users_model->get_info(array('username'=>'admin'));
                     $to = $datauser['email_cv'];

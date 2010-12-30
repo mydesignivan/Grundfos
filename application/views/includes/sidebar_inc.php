@@ -15,6 +15,7 @@
     </ul>
 <?php }?>
 <br />
+<?=$content['content_sidebar']."<br />"?>
 <?php if( isset($content['gallery']) ){
 if( count($content['gallery'])>1 ){?>
 

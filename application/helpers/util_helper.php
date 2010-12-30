@@ -101,7 +101,7 @@ function extract_var(&$str, $left, $right, $del=false){
 
     while( ($pos1=strpos($str, $left, $pos2))!== false ){
         if( ($pos2=strpos($str, $right, $pos1))!== false ){
-            $val = substr($str,  $pos1+strlen($left), $pos2-$pos1-strlen($right)+1);
+            $val = trim(substr($str,  $pos1+strlen($left), $pos2-$pos1-strlen($left)));
             $tag = $left . $val . $right;
             $out[] = array(
                 'val' => $val,
@@ -111,6 +111,48 @@ function extract_var(&$str, $left, $right, $del=false){
         }
     }
     $str = $tmpstr;
+    return $out;
+}
+
+function set_message($body, $_config=null){
+    $config = array();
+    $config['nl2br'] = !isset($_config['nl2br']) ? null : $_config['nl2br'];
+    $config['default'] = !isset($_config['default']) ? null : $_config['default'];
+    $config['data'] = !isset($_config['data']) ? null : $_config['data'];
+
+    $out = '';
+    $ci =& get_instance();
+
+    foreach( $body as $line ){
+        if( preg_match("/\{.*\}/", $line)!==FALSE ){
+            $arrFields = extract_var($line, '{', '}');
+            $j=0;
+            foreach( $arrFields as $var ){
+                //echo $var['val'].'<br>';
+
+                if( is_array($config['data']) && isset($config['data'][$var['val']]) ){
+                    $val = $config['data'][$var['val']];
+                }else{
+                    $val = $ci->input->post($var['val']);
+                }
+
+                if( $val!=false ){
+                    $j++;
+                    if( $config['nl2br']!=null ){
+                        if( is_string($config['nl2br']) ) $config['nl2br'] = array($config['nl2br']);
+                        if( array_search($var['val'], $config['nl2br'])!==FALSE ) $val = nl2br($val);
+                    }
+                    $line = str_replace($var['tag'], $val, $line);
+                }else{
+                    if( is_string($config['default']) ) {
+                        $j=1;
+                        $line = str_replace($var['tag'], $config['default'], $line);
+                    }
+                }
+            }
+            if( $j!=0 ) $out.=$line;
+        }
+    }
     return $out;
 }
 

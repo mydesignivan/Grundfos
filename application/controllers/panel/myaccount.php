@@ -1,34 +1,26 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-class Myaccount extends Controller {
+class Myaccount extends MY_Controller {
 
     /* CONSTRUCTOR
      **************************************************************************/
     function __construct(){
-        parent::Controller();
+        parent::MY_Controller();
 
-        if( !$this->session->userdata('logged_in') ) redirect($this->config->item('base_url'));
+        if( !$this->session->userdata('logged_in') ) redirect('panel');
         
         $this->load->model("users_model");
-
-        $this->_data = array(
-            'tlp_section'        =>  'panel/myaccount_view.php',
-            'tlp_title'          =>  TITLE_INDEX,
-            'tlp_title_section'  => "Mi Cuenta"
-        );
     }
-
-    /* PRIVATE PROPERTIES
-     **************************************************************************/
-    private $_data;
 
     /* PUBLIC FUNCTIONS
      **************************************************************************/
     public function index(){
-        $data = array_merge($this->_data, array(
-            'tlp_script'    =>  array('plugins_validator', 'class_myaccount'),
+        $this->assets->add_js_group('plugins_validate');
+        $this->assets->add_js('class/myaccount');
+        $this->_render('panel/myaccount_view', array(
+            'tlp_section'   =>  'panel/myaccount_view.php',
+            'tlp_title'     =>  TITLE_INDEX,
             'info'          =>  $this->users_model->get_info(array('username'=>$this->session->userdata('username')))
-        ));
-        $this->load->view('template_panel_view', $data);
+        ), 'panel_view');
     }
 
     public function save(){
@@ -42,10 +34,10 @@ class Myaccount extends Controller {
     /* AJAX FUNCTIONS
      **************************************************************************/
     public function ajax_check_pass(){
-        if( $_SERVER['REQUEST_METHOD']=="POST" && $_POST['txtPassOld'] ){
+        if( $_SERVER['REQUEST_METHOD']=="POST" && $this->input->post('txtPassOld') ){
             $this->load->library('encpss');
             $res = $this->users_model->get_info(array('username'=>$this->session->userdata('username')));
-            echo json_encode($this->encpss->decode($res['password'])==trim($_POST['txtPassOld']));
+            echo json_encode($this->encpss->decode($res['password'])==trim($this->input->post('txtPassOld')));
         }
     }
 

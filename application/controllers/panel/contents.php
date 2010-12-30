@@ -1,35 +1,29 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-class Contents extends Controller {
+class Contents extends MY_Controller {
 
     /* CONSTRUCTOR
      **************************************************************************/
     function __construct(){
-        parent::Controller();
+        parent::MY_Controller();
 
-        if( !$this->session->userdata('logged_in') ) redirect($this->config->item('base_url'));
+        if( !$this->session->userdata('logged_in') ) redirect('panel');
         
         $this->load->model("contents_panel_model");
-
-        $this->_data = array(
-            'tlp_section'        =>  'panel/contents_view.php',
-            'tlp_title'          =>  TITLE_INDEX,
-            'tlp_title_section'  => "Contenidos"
-        );
     }
-
-    /* PRIVATE PROPERTIES
-     **************************************************************************/
-    private $_data;
 
     /* PUBLIC FUNCTIONS
      **************************************************************************/
     public function index(){
-        $data = array_merge($this->_data, array(
-            'tlp_script'          => array('plugins_treeview', 'plugins_validator', 'plugins_picturegallery', 'plugins_fancybox', 'helpers_json', 'class_contents'),
-            'tlp_script_special'  => array('plugins_tiny_mce', 'plugins_jqui_sortable'),
+        $this->assets->add_js_group(array('plugins_treeview', 'plugins_validate', 'plugins_fancybox', 'helpers_json'));
+        $this->assets->add_js(array('plugins/picturegallery/picturegallery', 'class/contents'));
+        $this->assets->add_js_group(array('plugins_tiny_mce'), false);
+        $this->assets->add_js('plugins/jquery-ui.sortable/jquery-ui-1.8.2.custom.min', false);
+
+        $this->_render('panel/contents_view', array(
+            'tlp_title'           => TITLE_INDEX,
+            'tlp_title_section'   => "Contenidos",
             'treeview'            => $this->contents_panel_model->get_treeview()
-        ));
-        $this->load->view('template_panel_view', $data);
+        ), 'panel_view');
     }
 
 
@@ -40,7 +34,7 @@ class Contents extends Controller {
          if( is_numeric($this->uri->segment(4)) ){
              $data['info'] = $this->contents_panel_model->get_info($this->uri->segment(4));
          }
-         $this->load->view('panel/ajax/contents_form_view', $data);
+         $this->_render('panel/ajax/contents_form_view', $data, 'ajax_view');
      }
      
      public function ajax_create(){
@@ -98,8 +92,8 @@ class Contents extends Controller {
 
     public function ajax_upload_delete(){
         if( $_SERVER['REQUEST_METHOD']=="POST" ){
-            @unlink($_POST['au_filename_image']);
-            @unlink($_POST['au_filename_thumb']);
+            @unlink($this->input->post('au_filename_image'));
+            @unlink($this->input->post('au_filename_thumb'));
             die("ok");
         }
     }

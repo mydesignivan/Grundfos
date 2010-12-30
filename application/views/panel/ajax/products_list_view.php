@@ -31,9 +31,9 @@
             <td class="cell1"><input type="checkbox" value="<?=$row['products_id']?>" /></td>
             <td class="cell2"><a href="javascript:void(Products.products_edit(<?=$row['products_id']?>))"><?=$row['product_name']?></a></td>
             <td class="cell3"><?=$row['description']?></td>
-            <td class="cell4"><a href="javascript:void(0)" class="handle"><img src="images/icon_arrow_move.png" alt="" width="16" alt="16" /></a></td>
-            <td class="cell5"><a href="javascript:void(Products.products_edit(<?=$row['products_id']?>))"><img src="images/icon_edit.png" alt="" width="16" alt="16" /><span>Modificar</span></a></td>
-            <td class="cell6"><a href="javascript:void(Products.products_del(<?=$row['products_id']?>))"><img src="images/icon_delete.png" alt="" width="16" alt="16" /><span>Eliminar</span></a></td>
+            <td class="cell4"><a href="javascript:void(0)" class="handle"><img src="public/images/icon_arrow_move.png" alt="" width="16" alt="16" /></a></td>
+            <td class="cell5"><a href="javascript:void(Products.products_edit(<?=$row['products_id']?>))"><img src="public/images/icon_edit.png" alt="" width="16" alt="16" /><span>Modificar</span></a></td>
+            <td class="cell6"><a href="javascript:void(Products.products_del(<?=$row['products_id']?>))"><img src="public/images/icon_delete.png" alt="" width="16" alt="16" /><span>Eliminar</span></a></td>
         </tr>
 <?php }?>
     </tbody>

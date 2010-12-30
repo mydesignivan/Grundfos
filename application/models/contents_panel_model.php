@@ -27,6 +27,7 @@ class Contents_panel_model extends Model {
             'title'          => trim($this->input->post('txtTitle')),
             'reference'      => $reference,
             'content'        => $this->input->post('txtContent'),
+            'content_sidebar' => $this->input->post('txtContentSidebar'),
             'level'          => $this->input->post('parent_id')>0 ? $this->_get_level() : 0,
             'order'          => $this->_get_num_order(TBL_CONTENTS, array('parent_id'=>$this->input->post('parent_id'))),
             'date_added'     => strtotime(date('d-m-Y')),
@@ -62,6 +63,7 @@ class Contents_panel_model extends Model {
             'title'             => trim($this->input->post('txtTitle')),
             'reference'         => $reference,
             'content'           => $this->input->post('txtContent'),
+            'content_sidebar' => $this->input->post('txtContentSidebar'),
             'last_modified'     => strtotime(date('d-m-Y'))
         );
 
@@ -122,9 +124,10 @@ class Contents_panel_model extends Model {
         $initorder = $this->input->post('initorder');
         $rows = json_decode($this->input->post('rows'));
 
-        $res = $this->db->query('SELECT `order` FROM '.TBL_CONTENTS.' WHERE content_id='.$initorder)->row_array();
+        $this->db->select('order');
+        $res = $this->db->get_where(TBL_CONTENTS, array('content_id'=>$initorder))->row_array();
         $order = $res['order'];
-
+        
         //print_array($rows, true);
         foreach( $rows as $row ){
             $id = substr($row, 2);
@@ -221,8 +224,8 @@ class Contents_panel_model extends Model {
                     'content_id'  => $id,
                     'image'       => $row->image_full,
                     'thumb'       => $row->image_thumb,
-                    'width'       => $row->width_complete,
-                    'height'      => $row->height_complete
+                    'width'       => $row->width,
+                    'height'      => $row->height
                 );
 
                 if( !is_numeric($this->input->post('content_id')) ) $data['order'] = $n;

@@ -1,24 +1,15 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-class Index extends Controller {
+class Index extends MY_Controller {
 
     /* CONSTRUCTOR
      **************************************************************************/
     function __construct(){
-        parent::Controller();
+        parent::MY_Controller();
 
         $this->load->model('contents_model');
         $this->load->model('lists_model');
         $this->load->helpers('form');
-        $this->_data=array(
-            'listMenu'       => $this->contents_model->get_menu(),
-            'data_banner'    => $this->contents_model->get_list_banner(),
-            'content_footer' => $this->contents_model->get_footer()
-        );
     }
-
-    /* PRIVATE PROPERTIES
-     **************************************************************************/
-    private $_data;
 
     /* PUBLIC FUNCTIONS
      **************************************************************************/
@@ -27,30 +18,36 @@ class Index extends Controller {
         $params = $this->_get_params($ref);
         $content = $this->contents_model->get_content($ref=="" ? "home" : null);
 
-        $tlp_script=array();
+        $j=2;
         if( $ref=="" || $ref=="home" || $ref=="servicios" || $ref=="testimoniales" || $ref=="contacto" || $ref=="donde-estamos" ){
-            $tlp_script[] = 'plugins_easyslider';
+            $j=1;
         }
         if( isset($content['gallery']) && count($content['gallery'])>1 ){
-            $tlp_script[] = 'plugins_adgallery';
+            $this->assets->add_js_group(array('plugins_adgallery'));
         }
         if( strpos($content['content'], '{widget}') ){
-            $tlp_script = array_merge($tlp_script, array('plugins_easyslider', 'plugins_validator','plugins_formatnumber', 'class_solcapacitacion'));
-            $cboCountry =  array('listCountry' => $this->lists_model->get_country(array(''=>'Seleccione un pa&iacute;s')));
-            $this->_data = array_merge($this->_data, $cboCountry);
+            $j=1;
+            $this->assets->add_js_group(array('plugins_validate'));
+            $this->assets->add_js(array('plugins/formatnumber/formatnumber.min', 'class/solcapacitacion'));
+            $this->_data = array('listCountry' => $this->lists_model->get_country(array(''=>'Seleccione un pa&iacute;s')));
         }
 
-        if( count($tlp_script)>0 ) $this->_data['tlp_script'] = $tlp_script;
+        if( $j==1 ){
+            $this->assets->add_css(array('plugins_easyslider'));
+            $this->assets->add_js(array('plugins/easySlider/easySlider.packed'));
+        }
 
-        $data = array_merge($this->_data, array(
+        $this->_render('front/contents_view', array_merge($this->_data, array(
+            'listMenu'             => $this->contents_model->get_menu(),
+            'data_banner'          => $this->contents_model->get_list_banner(),
+            'content_footer'       => $this->contents_model->get_footer(),
+            'class_num_header'     => $j,
             'tlp_title'            => $params['title'],
             'tlp_meta_description' => $params['meta_description'],
             'tlp_meta_keywords'    => $params['meta_keywords'],
-            'tlp_section'          => 'frontpage/contents_view.php',
             'reference'            => $params['reference'],
             'content'              => $content
-        ));
-        $this->load->view('template_frontpage_view', $data);
+        )));
     }
 
     public function send_formcapacitacion(){
@@ -58,24 +55,12 @@ class Index extends Controller {
             $this->load->library('email');
             $this->load->model('users_model');
 
-            $phone = $this->input->post('txtPhoneNum');
-            if( $this->input->post('txtPhoneCode')!='' ) $phone = $this->input->post('txtPhoneCode')." - ".$phone;
-            $fax = $this->input->post('txtFaxNum');
-            if( $this->input->post('txtFaxCode')!='' ) $fax = $this->input->post('txtFaxCode')." - ".$fax;
+            $config = array();
+            $config['nl2br'] = 'txtMessage';
+            $config['default'] = '---';
+            $config['data'] = array('country' => $this->lists_model->get_country_name($this->input->post('cboCountry')));
 
-            $message = EMAIL_SOLCAP_MESSAGE;
-            $message = str_replace('{company}', $this->input->post('txtCompany'), $message);
-            $message = str_replace('{name}', $this->input->post('txtName'), $message);
-            $message = str_replace('{address}', $this->input->post('txtAddress'), $message);
-            $message = str_replace('{city}', $this->input->post('txtCity'), $message);
-            $message = str_replace('{postcode}', $this->input->post('txtPC'), $message);
-            $message = str_replace('{country}', $this->input->post('cboCountry'), $message);
-            $message = str_replace('{state}', $this->input->post('cboState'), $message);
-            $message = str_replace('{email}', $this->input->post('txtEmail'), $message);
-            $message = str_replace('{phone}', $phone, $message);
-            $message = str_replace('{fax}', $fax, $message);
-            $message = str_replace('{theme}', $this->input->post('txtTheme'), $message);
-            $message = str_replace('{message}', nl2br($this->input->post('txtMessage')), $message);
+            $message = set_message(json_decode(EMAIL_SOLCAP_MESSAGE), $config);
 
             //die($message);
 

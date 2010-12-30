@@ -1,5 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');?>
-<a href="<?=$this->config->item('base_uri')?>" class="logo"><img src="images/logo.png" alt="www.grundfos.com.ar" width="325" height="103" /></a>
+<a href="<?=$this->config->item('base_uri')?>" class="logo"><img src="public/images/logo.png" alt="www.grundfos.com.ar" width="325" height="103" /></a>
 
 <div class="span-11 fright last">
     &nbsp;

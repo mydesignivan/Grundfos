@@ -12,8 +12,8 @@
     </div>
 
     <div class="clear">
-        <a href="javascript:void(Contents.content_new())" class="link-img"><img src="images/icon-new.png" alt="" width="16" height="16" /> Nuevo</a>
-        <a id="linkCatDel" href="javascript:void(Contents.content_delete())" class="link-img hide"><img src="images/icon-delete.png" alt="" width="16" height="16" /> Eliminar</a>
+        <a href="javascript:void(Contents.content_new())" class="link-img"><img src="public/images/icon-new.png" alt="" width="16" height="16" /> Nuevo</a>
+        <a id="linkCatDel" href="javascript:void(Contents.content_delete())" class="link-img hide"><img src="public/images/icon-delete.png" alt="" width="16" height="16" /> Eliminar</a>
     </div>
 </fieldset>
 <fieldset id="fieldset-form" class="fieldset-form">
